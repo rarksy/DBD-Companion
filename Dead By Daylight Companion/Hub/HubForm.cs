@@ -123,7 +123,7 @@ namespace Dead_By_Daylight_Companion {
         }
 
         private void Github_Click(object sender, EventArgs e) {
-            Process.Start("")
+            Process.Start("");
         }
 
         //END GITHUB
