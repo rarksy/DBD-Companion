@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,9 +16,10 @@ namespace Dead_By_Daylight_Companion {
         public HubForm() {
             InitializeComponent();
         }
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")] public extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")] public extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
         //TITLE BAR
-        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")] private extern static void ReleaseCapture();
-        [DllImport("user32.DLL", EntryPoint = "SendMessage")] private extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
         private void TitlePanel_MouseDown(object sender, MouseEventArgs e) {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
@@ -67,7 +69,9 @@ namespace Dead_By_Daylight_Companion {
         }
 
         private void ShowConfigEditor_Click(object sender, EventArgs e) {
-
+            var t = new Thread(() => Application.Run(new Config_Editor.Config_Editor()));
+            t.Start();
+            this.Close();
         }
 
         private void ShowConfigEditor_Paint(object sender, PaintEventArgs e) {
@@ -87,7 +91,9 @@ namespace Dead_By_Daylight_Companion {
         }
 
         private void ShowHookCounter_Click(object sender, EventArgs e) {
-
+            var t = new Thread(() => Application.Run(new Hook_Counter.Hook_Counter()));
+            t.Start();
+            this.Close();
         }
 
         private void ShowHookCounter_Paint(object sender, PaintEventArgs e) {
@@ -109,7 +115,7 @@ namespace Dead_By_Daylight_Companion {
         }
 
         private void Discord_Click(object sender, EventArgs e) {
-
+            Process.Start("https://discord.gg/vKjjS8yazu");
         }
         //END DISCORD
         
@@ -123,7 +129,7 @@ namespace Dead_By_Daylight_Companion {
         }
 
         private void Github_Click(object sender, EventArgs e) {
-            Process.Start("");
+            Process.Start("https://github.com/rarksy/DBD-Companion");
         }
 
         //END GITHUB

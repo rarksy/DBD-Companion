@@ -138,7 +138,7 @@
             // 
             this.CreditLabel.Font = new System.Drawing.Font("Tahoma", 11.75F);
             this.CreditLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
-            this.CreditLabel.Location = new System.Drawing.Point(340, 229);
+            this.CreditLabel.Location = new System.Drawing.Point(-1, 10);
             this.CreditLabel.Name = "CreditLabel";
             this.CreditLabel.Size = new System.Drawing.Size(141, 27);
             this.CreditLabel.TabIndex = 7;
@@ -170,6 +170,7 @@
             this.SocialPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(3)))), ((int)(((byte)(4)))));
             this.SocialPanel.Controls.Add(this.Github);
             this.SocialPanel.Controls.Add(this.Discord);
+            this.SocialPanel.Controls.Add(this.CreditLabel);
             this.SocialPanel.Location = new System.Drawing.Point(136, 252);
             this.SocialPanel.Name = "SocialPanel";
             this.SocialPanel.Size = new System.Drawing.Size(341, 40);
@@ -213,7 +214,6 @@
             this.ClientSize = new System.Drawing.Size(477, 292);
             this.Controls.Add(this.SocialPanel);
             this.Controls.Add(this.HubPanel);
-            this.Controls.Add(this.CreditLabel);
             this.Controls.Add(this.TitleBarPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "HubForm";

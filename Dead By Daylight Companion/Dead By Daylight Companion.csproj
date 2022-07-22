@@ -46,6 +46,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config Editor\Config Editor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Config Editor\Config Editor.Designer.cs">
+      <DependentUpon>Config Editor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Config Editor\helper\FUNCS.cs" />
+    <Compile Include="Config Editor\helper\INI.cs" />
+    <Compile Include="Hook Counter\Hook Counter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Hook Counter\Hook Counter.Designer.cs">
+      <DependentUpon>Hook Counter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Hub\HubForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +68,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Config Editor\Config Editor.resx">
+      <DependentUpon>Config Editor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Hook Counter\Hook Counter.resx">
+      <DependentUpon>Hook Counter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Hub\HubForm.resx">
       <DependentUpon>HubForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -79,9 +99,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Config Editor\" />
-    <Folder Include="Hook Counter\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
