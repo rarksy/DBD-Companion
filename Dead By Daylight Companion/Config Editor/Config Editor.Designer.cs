@@ -26,9 +26,8 @@
             this.components = new System.ComponentModel.Container();
             this.TitleBarPanel = new System.Windows.Forms.Panel();
             this.BackToHub = new System.Windows.Forms.Button();
-            this.UpdateLabel = new System.Windows.Forms.Label();
-            this.MinimizeButton = new System.Windows.Forms.Label();
-            this.ExitButton = new System.Windows.Forms.Label();
+            this.MinimizeConfigEditor = new System.Windows.Forms.Label();
+            this.ExitConfigEditor = new System.Windows.Forms.Label();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.MiscPanel = new System.Windows.Forms.Panel();
             this.AmbientOcclusionButton = new System.Windows.Forms.Button();
@@ -88,9 +87,8 @@
             this.TitleBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.TitleBarPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TitleBarPanel.Controls.Add(this.BackToHub);
-            this.TitleBarPanel.Controls.Add(this.UpdateLabel);
-            this.TitleBarPanel.Controls.Add(this.MinimizeButton);
-            this.TitleBarPanel.Controls.Add(this.ExitButton);
+            this.TitleBarPanel.Controls.Add(this.MinimizeConfigEditor);
+            this.TitleBarPanel.Controls.Add(this.ExitConfigEditor);
             this.TitleBarPanel.Controls.Add(this.TitleLabel);
             this.TitleBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TitleBarPanel.Location = new System.Drawing.Point(0, 0);
@@ -113,55 +111,50 @@
             this.BackToHub.ForeColor = System.Drawing.Color.Silver;
             this.BackToHub.Location = new System.Drawing.Point(0, 0);
             this.BackToHub.Name = "BackToHub";
-            this.BackToHub.Size = new System.Drawing.Size(120, 30);
+            this.BackToHub.Size = new System.Drawing.Size(102, 30);
             this.BackToHub.TabIndex = 11;
-            this.BackToHub.Text = "<-- Back To Hub";
+            this.BackToHub.Text = "← Back To Hub";
             this.BackToHub.UseVisualStyleBackColor = false;
             this.BackToHub.Click += new System.EventHandler(this.BackToHub_Click);
             // 
-            // UpdateLabel
+            // MinimizeConfigEditor
             // 
-            this.UpdateLabel.AutoSize = true;
-            this.UpdateLabel.Font = new System.Drawing.Font("Ebrima", 9F, System.Drawing.FontStyle.Bold);
-            this.UpdateLabel.ForeColor = System.Drawing.Color.Green;
-            this.UpdateLabel.Location = new System.Drawing.Point(820, 8);
-            this.UpdateLabel.Name = "UpdateLabel";
-            this.UpdateLabel.Size = new System.Drawing.Size(125, 15);
-            this.UpdateLabel.TabIndex = 10;
-            this.UpdateLabel.Text = "Click Here To Update";
+            this.MinimizeConfigEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MinimizeConfigEditor.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold);
+            this.MinimizeConfigEditor.ForeColor = System.Drawing.Color.Silver;
+            this.MinimizeConfigEditor.Location = new System.Drawing.Point(954, 3);
+            this.MinimizeConfigEditor.Name = "MinimizeConfigEditor";
+            this.MinimizeConfigEditor.Size = new System.Drawing.Size(20, 23);
+            this.MinimizeConfigEditor.TabIndex = 1;
+            this.MinimizeConfigEditor.Text = "_";
+            this.MinimizeConfigEditor.Click += new System.EventHandler(this.MinimizeButton_Click);
+            this.MinimizeConfigEditor.MouseEnter += new System.EventHandler(this.MinimizeButton_MouseEnter);
+            this.MinimizeConfigEditor.MouseLeave += new System.EventHandler(this.MinimizeButton_MouseLeave);
             // 
-            // MinimizeButton
+            // ExitConfigEditor
             // 
-            this.MinimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MinimizeButton.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold);
-            this.MinimizeButton.ForeColor = System.Drawing.Color.Silver;
-            this.MinimizeButton.Location = new System.Drawing.Point(954, 3);
-            this.MinimizeButton.Name = "MinimizeButton";
-            this.MinimizeButton.Size = new System.Drawing.Size(20, 23);
-            this.MinimizeButton.TabIndex = 1;
-            this.MinimizeButton.Text = "_";
-            // 
-            // ExitButton
-            // 
-            this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ExitButton.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExitButton.ForeColor = System.Drawing.Color.Silver;
-            this.ExitButton.Location = new System.Drawing.Point(978, 7);
-            this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(18, 18);
-            this.ExitButton.TabIndex = 1;
-            this.ExitButton.Text = "X";
+            this.ExitConfigEditor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ExitConfigEditor.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExitConfigEditor.ForeColor = System.Drawing.Color.Silver;
+            this.ExitConfigEditor.Location = new System.Drawing.Point(978, 7);
+            this.ExitConfigEditor.Name = "ExitConfigEditor";
+            this.ExitConfigEditor.Size = new System.Drawing.Size(18, 18);
+            this.ExitConfigEditor.TabIndex = 1;
+            this.ExitConfigEditor.Text = "X";
+            this.ExitConfigEditor.Click += new System.EventHandler(this.ExitButton_Click);
+            this.ExitConfigEditor.MouseEnter += new System.EventHandler(this.ExitButton_MouseEnter);
+            this.ExitConfigEditor.MouseLeave += new System.EventHandler(this.ExitButton_MouseLeave);
             // 
             // TitleLabel
             // 
             this.TitleLabel.AutoSize = true;
             this.TitleLabel.Font = new System.Drawing.Font("Fira Sans Medium", 12F);
             this.TitleLabel.ForeColor = System.Drawing.Color.Silver;
-            this.TitleLabel.Location = new System.Drawing.Point(126, 5);
+            this.TitleLabel.Location = new System.Drawing.Point(422, 7);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(317, 19);
+            this.TitleLabel.Size = new System.Drawing.Size(102, 19);
             this.TitleLabel.TabIndex = 1;
-            this.TitleLabel.Text = "Dead By Daylight Config Editor (By Rarksy)";
+            this.TitleLabel.Text = "Config Editor";
             this.TitleLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitleLabel_MouseDown);
             this.TitleLabel.MouseEnter += new System.EventHandler(this.TitleLabel_MouseEnter);
             // 
@@ -843,6 +836,7 @@
             this.Name = "Config_Editor";
             this.Opacity = 0.97D;
             this.Text = "Config_Editor";
+            this.Activated += new System.EventHandler(this.Config_Editor_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Config_Editor_FormClosing);
             this.Load += new System.EventHandler(this.Config_Editor_Load);
             this.TitleBarPanel.ResumeLayout(false);
@@ -862,9 +856,8 @@
         #endregion
 
         private System.Windows.Forms.Panel TitleBarPanel;
-        private System.Windows.Forms.Label UpdateLabel;
-        private System.Windows.Forms.Label MinimizeButton;
-        private System.Windows.Forms.Label ExitButton;
+        private System.Windows.Forms.Label MinimizeConfigEditor;
+        private System.Windows.Forms.Label ExitConfigEditor;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Panel MiscPanel;
         private System.Windows.Forms.Button AmbientOcclusionButton;

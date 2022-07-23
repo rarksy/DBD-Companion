@@ -26,38 +26,66 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HubForm));
             this.TitleBarPanel = new System.Windows.Forms.Panel();
-            this.HubTitle = new System.Windows.Forms.Label();
             this.MinimizeHub = new System.Windows.Forms.Label();
             this.ExitHub = new System.Windows.Forms.Label();
+            this.HubTitle = new System.Windows.Forms.Label();
             this.ShowHookCounter = new System.Windows.Forms.PictureBox();
             this.ShowConfigEditor = new System.Windows.Forms.PictureBox();
             this.CreditLabel = new System.Windows.Forms.Label();
             this.HubPanel = new System.Windows.Forms.Panel();
             this.HubToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.SocialPanel = new System.Windows.Forms.Panel();
             this.Discord = new System.Windows.Forms.PictureBox();
             this.Github = new System.Windows.Forms.PictureBox();
+            this.SocialPanel = new System.Windows.Forms.Panel();
             this.TitleBarPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ShowHookCounter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ShowConfigEditor)).BeginInit();
             this.HubPanel.SuspendLayout();
-            this.SocialPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Discord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Github)).BeginInit();
+            this.SocialPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // TitleBarPanel
             // 
-            this.TitleBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(13)))), ((int)(((byte)(14)))));
-            this.TitleBarPanel.Controls.Add(this.HubTitle);
+            this.TitleBarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.TitleBarPanel.Controls.Add(this.MinimizeHub);
             this.TitleBarPanel.Controls.Add(this.ExitHub);
+            this.TitleBarPanel.Controls.Add(this.HubTitle);
             this.TitleBarPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TitleBarPanel.Location = new System.Drawing.Point(0, 0);
             this.TitleBarPanel.Name = "TitleBarPanel";
             this.TitleBarPanel.Size = new System.Drawing.Size(477, 27);
             this.TitleBarPanel.TabIndex = 0;
             this.TitleBarPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitlePanel_MouseDown);
+            // 
+            // MinimizeHub
+            // 
+            this.MinimizeHub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MinimizeHub.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold);
+            this.MinimizeHub.ForeColor = System.Drawing.Color.Silver;
+            this.MinimizeHub.Location = new System.Drawing.Point(431, 0);
+            this.MinimizeHub.Name = "MinimizeHub";
+            this.MinimizeHub.Size = new System.Drawing.Size(20, 23);
+            this.MinimizeHub.TabIndex = 4;
+            this.MinimizeHub.Text = "_";
+            this.MinimizeHub.Click += new System.EventHandler(this.MinimizeHub_Click);
+            this.MinimizeHub.MouseEnter += new System.EventHandler(this.MinimizeHub_MouseEnter);
+            this.MinimizeHub.MouseLeave += new System.EventHandler(this.MinimizeHub_MouseLeave);
+            // 
+            // ExitHub
+            // 
+            this.ExitHub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ExitHub.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExitHub.ForeColor = System.Drawing.Color.Silver;
+            this.ExitHub.Location = new System.Drawing.Point(452, 4);
+            this.ExitHub.Name = "ExitHub";
+            this.ExitHub.Size = new System.Drawing.Size(18, 18);
+            this.ExitHub.TabIndex = 5;
+            this.ExitHub.Text = "X";
+            this.ExitHub.Click += new System.EventHandler(this.ExitHub_Click);
+            this.ExitHub.MouseEnter += new System.EventHandler(this.ExitHub_MouseEnter);
+            this.ExitHub.MouseLeave += new System.EventHandler(this.ExitHub_MouseLeave);
             // 
             // HubTitle
             // 
@@ -72,37 +100,9 @@
             this.HubTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.HubTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.HubTitle_MouseDown);
             // 
-            // MinimizeHub
-            // 
-            this.MinimizeHub.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MinimizeHub.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
-            this.MinimizeHub.Location = new System.Drawing.Point(430, -3);
-            this.MinimizeHub.Name = "MinimizeHub";
-            this.MinimizeHub.Size = new System.Drawing.Size(19, 28);
-            this.MinimizeHub.TabIndex = 2;
-            this.MinimizeHub.Text = "_";
-            this.MinimizeHub.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.MinimizeHub.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MinimizeHub_MouseDown);
-            this.MinimizeHub.MouseEnter += new System.EventHandler(this.MinimizeHub_MouseEnter);
-            this.MinimizeHub.MouseLeave += new System.EventHandler(this.MinimizeHub_MouseLeave);
-            // 
-            // ExitHub
-            // 
-            this.ExitHub.Dock = System.Windows.Forms.DockStyle.Right;
-            this.ExitHub.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExitHub.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
-            this.ExitHub.Location = new System.Drawing.Point(453, 0);
-            this.ExitHub.Name = "ExitHub";
-            this.ExitHub.Size = new System.Drawing.Size(24, 27);
-            this.ExitHub.TabIndex = 1;
-            this.ExitHub.Text = "X";
-            this.ExitHub.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ExitHub_MouseDown);
-            this.ExitHub.MouseEnter += new System.EventHandler(this.ExitHub_MouseEnter);
-            this.ExitHub.MouseLeave += new System.EventHandler(this.ExitHub_MouseLeave);
-            // 
             // ShowHookCounter
             // 
-            this.ShowHookCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(13)))), ((int)(((byte)(14)))));
+            this.ShowHookCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ShowHookCounter.Dock = System.Windows.Forms.DockStyle.Top;
             this.ShowHookCounter.Image = ((System.Drawing.Image)(resources.GetObject("ShowHookCounter.Image")));
             this.ShowHookCounter.Location = new System.Drawing.Point(0, 0);
@@ -119,7 +119,7 @@
             // 
             // ShowConfigEditor
             // 
-            this.ShowConfigEditor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(13)))), ((int)(((byte)(14)))));
+            this.ShowConfigEditor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ShowConfigEditor.Dock = System.Windows.Forms.DockStyle.Top;
             this.ShowConfigEditor.Image = ((System.Drawing.Image)(resources.GetObject("ShowConfigEditor.Image")));
             this.ShowConfigEditor.Location = new System.Drawing.Point(0, 51);
@@ -147,7 +147,7 @@
             // 
             // HubPanel
             // 
-            this.HubPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(3)))), ((int)(((byte)(4)))));
+            this.HubPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.HubPanel.Controls.Add(this.ShowConfigEditor);
             this.HubPanel.Controls.Add(this.ShowHookCounter);
             this.HubPanel.Dock = System.Windows.Forms.DockStyle.Left;
@@ -165,20 +165,9 @@
             this.HubToolTip.InitialDelay = 10;
             this.HubToolTip.ReshowDelay = 2;
             // 
-            // SocialPanel
-            // 
-            this.SocialPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(3)))), ((int)(((byte)(4)))));
-            this.SocialPanel.Controls.Add(this.Github);
-            this.SocialPanel.Controls.Add(this.Discord);
-            this.SocialPanel.Controls.Add(this.CreditLabel);
-            this.SocialPanel.Location = new System.Drawing.Point(136, 252);
-            this.SocialPanel.Name = "SocialPanel";
-            this.SocialPanel.Size = new System.Drawing.Size(341, 40);
-            this.SocialPanel.TabIndex = 9;
-            // 
             // Discord
             // 
-            this.Discord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(13)))), ((int)(((byte)(14)))));
+            this.Discord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.Discord.Image = ((System.Drawing.Image)(resources.GetObject("Discord.Image")));
             this.Discord.Location = new System.Drawing.Point(296, 0);
             this.Discord.Name = "Discord";
@@ -193,7 +182,7 @@
             // 
             // Github
             // 
-            this.Github.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(13)))), ((int)(((byte)(14)))));
+            this.Github.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.Github.Image = ((System.Drawing.Image)(resources.GetObject("Github.Image")));
             this.Github.Location = new System.Drawing.Point(255, 2);
             this.Github.Name = "Github";
@@ -206,11 +195,22 @@
             this.Github.MouseEnter += new System.EventHandler(this.Github_MouseEnter);
             this.Github.MouseLeave += new System.EventHandler(this.Github_MouseLeave);
             // 
+            // SocialPanel
+            // 
+            this.SocialPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.SocialPanel.Controls.Add(this.Github);
+            this.SocialPanel.Controls.Add(this.Discord);
+            this.SocialPanel.Controls.Add(this.CreditLabel);
+            this.SocialPanel.Location = new System.Drawing.Point(136, 252);
+            this.SocialPanel.Name = "SocialPanel";
+            this.SocialPanel.Size = new System.Drawing.Size(341, 40);
+            this.SocialPanel.TabIndex = 9;
+            // 
             // HubForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(3)))), ((int)(((byte)(4)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.ClientSize = new System.Drawing.Size(477, 292);
             this.Controls.Add(this.SocialPanel);
             this.Controls.Add(this.HubPanel);
@@ -225,9 +225,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.ShowHookCounter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ShowConfigEditor)).EndInit();
             this.HubPanel.ResumeLayout(false);
-            this.SocialPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Discord)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Github)).EndInit();
+            this.SocialPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -235,8 +235,6 @@
         #endregion
 
         private System.Windows.Forms.Panel TitleBarPanel;
-        private System.Windows.Forms.Label ExitHub;
-        private System.Windows.Forms.Label MinimizeHub;
         private System.Windows.Forms.Label HubTitle;
         private System.Windows.Forms.PictureBox ShowHookCounter;
         private System.Windows.Forms.PictureBox ShowConfigEditor;
@@ -246,6 +244,8 @@
         private System.Windows.Forms.Panel SocialPanel;
         private System.Windows.Forms.PictureBox Discord;
         private System.Windows.Forms.PictureBox Github;
+        private System.Windows.Forms.Label MinimizeHub;
+        private System.Windows.Forms.Label ExitHub;
     }
 }
 

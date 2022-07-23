@@ -15,8 +15,6 @@ using System.Windows.Forms;
 
 namespace Dead_By_Daylight_Companion.Config_Editor {
     public partial class Config_Editor : Form {
-        static readonly string url = "https://raw.githubusercontent.com/rarksy/DBDConfigEditor/master/ver.ce2";
-        static readonly decimal ver = 2.3m;
         public static string sPathToUse = string.Empty;
         static helper.FUNCS func = new helper.FUNCS();
 
@@ -48,13 +46,6 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
         }
 
         private void Config_Editor_Load(object sender, EventArgs e) {
-            using (WebClient client = new WebClient()) {
-                client.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.NoCacheNoStore);
-                string str = client.DownloadString(url);
-                if (ver.ToString().Contains(str))
-                    UpdateLabel.Show();
-                else UpdateLabel.Hide();
-            }
             if (Directory.Exists($@"C:\Users\{Environment.UserName}\Appdata\Local\Dead By Daylight Companion\Config Editor")) {
                 if (File.Exists($@"C:\Users\{Environment.UserName}\Appdata\Local\Dead By Daylight Companion\Config Editor\custompath.companion")) {
                     string sPath = File.ReadAllText($@"C:\Users\{Environment.UserName}\Appdata\Local\Dead By Daylight Companion\Config Editor\custompath.companion");
@@ -468,6 +459,39 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
 
         private void ChangeConfigPathButton_Click(object sender, EventArgs e) {
             SelectConfigLocation();
+        }
+
+        private void MinimizeButton_Click(object sender, EventArgs e) {
+            for (int i = this.Width; i >= 0; i--) {
+                this.Width -= 10;
+                this.Height -= 10;
+            }
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void MinimizeButton_MouseEnter(object sender, EventArgs e) {
+            MinimizeConfigEditor.ForeColor = Color.Red;
+        }
+
+        private void MinimizeButton_MouseLeave(object sender, EventArgs e) {
+            MinimizeConfigEditor.ForeColor = Color.Silver;
+        }
+
+        private void ExitButton_Click(object sender, EventArgs e) {
+            Environment.Exit(0);
+        }
+
+        private void ExitButton_MouseEnter(object sender, EventArgs e) {
+            ExitConfigEditor.ForeColor = Color.Red;
+        }
+
+        private void ExitButton_MouseLeave(object sender, EventArgs e) {
+            ExitConfigEditor.ForeColor = Color.Silver;
+        }
+
+        private void Config_Editor_Activated(object sender, EventArgs e) {
+            this.Width = 1000; 
+            this.Height = 620;
         }
     }
 }

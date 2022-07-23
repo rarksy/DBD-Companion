@@ -26,11 +26,11 @@ namespace Dead_By_Daylight_Companion {
         }
 
         private void ExitHub_MouseEnter(object sender, EventArgs e) {
-            ExitHub.BackColor = Color.FromArgb(107, 13, 14);
+            ExitHub.ForeColor = Color.Red;
         }
 
         private void ExitHub_MouseLeave(object sender, EventArgs e) {
-            ExitHub.BackColor = Color.FromArgb(87, 13, 14);
+            ExitHub.ForeColor = Color.Silver;
         }
 
         private void ExitHub_MouseDown(object sender, MouseEventArgs e) {
@@ -38,18 +38,11 @@ namespace Dead_By_Daylight_Companion {
         }
 
         private void MinimizeHub_MouseEnter(object sender, EventArgs e) {
-            MinimizeHub.BackColor = Color.FromArgb(107, 13, 14);
+            MinimizeHub.ForeColor = Color.Red;
         }
 
         private void MinimizeHub_MouseLeave(object sender, EventArgs e) {
-            MinimizeHub.BackColor = Color.FromArgb(87, 13, 14);
-        }
-
-        private void MinimizeHub_MouseDown(object sender, MouseEventArgs e) {
-            for (int i = this.Height; i >= 0; i--) {
-                this.Height -= 3;
-            }
-            this.WindowState = FormWindowState.Minimized;
+            MinimizeHub.ForeColor = Color.Silver;
         }
         private void HubTitle_MouseDown(object sender, MouseEventArgs e) {
             TitlePanel_MouseDown(sender, e);
@@ -61,11 +54,11 @@ namespace Dead_By_Daylight_Companion {
         //END TITLE BAR
 
         private void ShowConfigEditor_MouseEnter(object sender, EventArgs e) {
-            ShowConfigEditor.BackColor = Color.FromArgb(107, 13, 14);
+            ShowConfigEditor.BackColor = Color.FromArgb(60,0,0);
         }
 
         private void ShowConfigEditor_MouseLeave(object sender, EventArgs e) {
-            ShowConfigEditor.BackColor = Color.FromArgb(87, 13, 14);
+            ShowConfigEditor.BackColor = Color.FromArgb(40,0,0);
         }
 
         private void ShowConfigEditor_Click(object sender, EventArgs e) {
@@ -83,11 +76,11 @@ namespace Dead_By_Daylight_Companion {
         //HOOK COUNTER
 
         private void ShowHookCounter_MouseEnter(object sender, EventArgs e) {
-            ShowHookCounter.BackColor = Color.FromArgb(107, 13, 14);
+            ShowHookCounter.BackColor = Color.FromArgb(60,0,0);
         }
 
         private void ShowHookCounter_MouseLeave(object sender, EventArgs e) {
-            ShowHookCounter.BackColor = Color.FromArgb(87, 13, 14);
+            ShowHookCounter.BackColor = Color.FromArgb(40,0,0);
         }
 
         private void ShowHookCounter_Click(object sender, EventArgs e) {
@@ -100,18 +93,18 @@ namespace Dead_By_Daylight_Companion {
             ControlPaint.DrawBorder(e.Graphics, this.HubPanel.ClientRectangle, Color.FromArgb(117, 43, 44), ButtonBorderStyle.Solid);
         }
         //END HOOK COUNTER
-
+        
         //FORM
         private void HubForm_Load(object sender, EventArgs e) {
-
+            
         }
         //DISCORD
         private void Discord_MouseEnter(object sender, EventArgs e) {
-            Discord.BackColor = Color.FromArgb(107, 13, 14);
+            Discord.BackColor = Color.FromArgb(60,0,0);
         }
 
         private void Discord_MouseLeave(object sender, EventArgs e) {
-            Discord.BackColor = Color.FromArgb(87, 13, 14);
+            Discord.BackColor = Color.FromArgb(40,0,0);
         }
 
         private void Discord_Click(object sender, EventArgs e) {
@@ -121,11 +114,11 @@ namespace Dead_By_Daylight_Companion {
         
         //GITHUB
         private void Github_MouseEnter(object sender, EventArgs e) {
-            Github.BackColor = Color.FromArgb(107, 13, 14);
+            Github.BackColor = Color.FromArgb(60,0,0);
         }
 
         private void Github_MouseLeave(object sender, EventArgs e) {
-            Github.BackColor = Color.FromArgb(87, 13, 14);
+            Github.BackColor = Color.FromArgb(40,0,0);
         }
 
         private void Github_Click(object sender, EventArgs e) {
@@ -133,5 +126,17 @@ namespace Dead_By_Daylight_Companion {
         }
 
         //END GITHUB
+
+        private void MinimizeHub_Click(object sender, EventArgs e) {
+            for (int i = this.Width; i >= 0; i--) {
+                this.Width -= 10;
+                this.Height -= 10;
+            }
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void ExitHub_Click(object sender, EventArgs e) {
+            Environment.Exit(0);
+        }
     }
 }
