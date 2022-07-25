@@ -71,9 +71,10 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             FontDialog fd = new FontDialog();
 
             if (fd.ShowDialog() == DialogResult.OK) {
-                ChangeFont.Font = new Font(CurFontName, CurFontSize);
                 CurFontName = fd.Font.Name;
                 CurFontSize = (int)fd.Font.Size;
+                FontLabel.Text = $"Font: {CurFontName}";
+                FontSizeLabel.Text = $"Font Size: {CurFontSize}";
                 Properties.Settings.Default.FontName = CurFontName;
                 Properties.Settings.Default.FontSize = CurFontSize;
                 Properties.Settings.Default.Save();
@@ -145,21 +146,26 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
         private void TitleLabel_MouseDown(object sender, MouseEventArgs e) {
             TitlePanel_MouseDown(sender, e);
         }
-
+        
         private void UIScale_SelectedIndexChanged(object sender, EventArgs e) {
             Properties.Settings.Default.UIScale = UIScale.SelectedIndex;
+            Properties.Settings.Default.Save();
         }
-
+        
         private void IGUIScale_SelectedIndexChanged(object sender, EventArgs e) {
             Properties.Settings.Default.IGUIScale = IGUIScale.SelectedIndex;
+            Properties.Settings.Default.Save();
         }
 
         private void Hook_Counter_Load(object sender, EventArgs e) {
             UIScale.SelectedIndex = Properties.Settings.Default.UIScale; 
             IGUIScale.SelectedIndex = Properties.Settings.Default.IGUIScale;
             HooktextTB.Text = Properties.Settings.Default.HookedText;
-            ChangeFont.Font = new Font(CurFontName, CurFontSize);
-
+            FontLabel.Text = $"Font: {CurFontName}";
+            FontSizeLabel.Text = $"Font Size: {CurFontSize}";
+#if !DEBUG
+            DebugModeCheckbox.Hide();   
+#endif
             Thread.Start();
         }
 
@@ -169,12 +175,10 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                 ov.Show();
                 bInitOverlay = true;
             }
-
-            
             Bitmap frame = GetFrame();
             Mat mat = BitmapConverter.ToMat(frame);
             Bitmap det_hook = ITM(mat, $@"resources\{res}\hook{IGUIScale.Text}.png", LowerThreshCheckbox.Checked ? 0.8 : 0.9, ref hCount);
-
+            Bitmap det_endgame = ITM(mat, $@"resources\{res}\endgame{IGUIScale.Text}.png", LowerThreshCheckbox.Checked ? 0.8 : 0.9, ref hCount);
         }
     }
 }

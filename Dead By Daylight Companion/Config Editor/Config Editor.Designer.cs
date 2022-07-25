@@ -148,11 +148,11 @@
             // TitleLabel
             // 
             this.TitleLabel.AutoSize = true;
-            this.TitleLabel.Font = new System.Drawing.Font("Fira Sans Medium", 12F);
+            this.TitleLabel.Font = new System.Drawing.Font("Ebrima", 12F, System.Drawing.FontStyle.Bold);
             this.TitleLabel.ForeColor = System.Drawing.Color.Silver;
-            this.TitleLabel.Location = new System.Drawing.Point(422, 7);
+            this.TitleLabel.Location = new System.Drawing.Point(437, 5);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(102, 19);
+            this.TitleLabel.Size = new System.Drawing.Size(111, 21);
             this.TitleLabel.TabIndex = 1;
             this.TitleLabel.Text = "Config Editor";
             this.TitleLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitleLabel_MouseDown);
