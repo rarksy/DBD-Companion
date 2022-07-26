@@ -172,6 +172,7 @@
             this.tTooltip.SetToolTip(this.LowerThreshCheckbox, "Lowers Detection Threshold If Detection Isnt Working (Needed On Doctor) IF YOUR N" +
         "OT HAVING ISSUES LEAVE THIS OFF\r\n");
             this.LowerThreshCheckbox.UseVisualStyleBackColor = true;
+            this.LowerThreshCheckbox.Visible = false;
             // 
             // HookedText
             // 

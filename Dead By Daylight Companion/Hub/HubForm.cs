@@ -132,5 +132,12 @@ namespace Dead_By_Daylight_Companion {
         private void ExitHub_Click(object sender, EventArgs e) {
             Environment.Exit(0);
         }
+
+        //XHAIR
+        private void ShowXHair_Click(object sender, EventArgs e) {
+            var t = new Thread(() => Application.Run(new Crosshair_Overlay.Crosshair()));
+            t.Start();
+            this.Close();
+        }
     }
 }

@@ -37,6 +37,7 @@
             this.Discord = new System.Windows.Forms.PictureBox();
             this.Github = new System.Windows.Forms.PictureBox();
             this.SocialPanel = new System.Windows.Forms.Panel();
+            this.ShowXHair = new System.Windows.Forms.PictureBox();
             this.TitleBarPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ShowHookCounter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ShowConfigEditor)).BeginInit();
@@ -44,6 +45,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Discord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Github)).BeginInit();
             this.SocialPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ShowXHair)).BeginInit();
             this.SuspendLayout();
             // 
             // TitleBarPanel
@@ -91,7 +93,7 @@
             // 
             this.HubTitle.Font = new System.Drawing.Font("Ebrima", 11.75F);
             this.HubTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
-            this.HubTitle.Location = new System.Drawing.Point(3, 2);
+            this.HubTitle.Location = new System.Drawing.Point(-4, 2);
             this.HubTitle.Name = "HubTitle";
             this.HubTitle.Size = new System.Drawing.Size(220, 27);
             this.HubTitle.TabIndex = 3;
@@ -147,6 +149,7 @@
             // HubPanel
             // 
             this.HubPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.HubPanel.Controls.Add(this.ShowXHair);
             this.HubPanel.Controls.Add(this.ShowConfigEditor);
             this.HubPanel.Controls.Add(this.ShowHookCounter);
             this.HubPanel.Dock = System.Windows.Forms.DockStyle.Left;
@@ -205,6 +208,21 @@
             this.SocialPanel.Size = new System.Drawing.Size(341, 40);
             this.SocialPanel.TabIndex = 9;
             // 
+            // ShowXHair
+            // 
+            this.ShowXHair.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ShowXHair.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ShowXHair.Image = ((System.Drawing.Image)(resources.GetObject("ShowXHair.Image")));
+            this.ShowXHair.Location = new System.Drawing.Point(0, 102);
+            this.ShowXHair.Name = "ShowXHair";
+            this.ShowXHair.Size = new System.Drawing.Size(136, 51);
+            this.ShowXHair.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ShowXHair.TabIndex = 6;
+            this.ShowXHair.TabStop = false;
+            this.HubToolTip.SetToolTip(this.ShowXHair, "Crosshair Overlay");
+            this.ShowXHair.Visible = false;
+            this.ShowXHair.Click += new System.EventHandler(this.ShowXHair_Click);
+            // 
             // HubForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -215,6 +233,7 @@
             this.Controls.Add(this.HubPanel);
             this.Controls.Add(this.TitleBarPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HubForm";
             this.Opacity = 0.95D;
             this.Text = "Dead By Daylight Companion";
@@ -227,6 +246,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Discord)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Github)).EndInit();
             this.SocialPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ShowXHair)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -245,6 +265,7 @@
         private System.Windows.Forms.PictureBox Github;
         private System.Windows.Forms.Label MinimizeHub;
         private System.Windows.Forms.Label ExitHub;
+        private System.Windows.Forms.PictureBox ShowXHair;
     }
 }
 
