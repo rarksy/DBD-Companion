@@ -16,17 +16,22 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                              CurFontName = Properties.Settings.Default.FontName;
         public static int CurFontSize = Properties.Settings.Default.FontSize;
         public static List<string> hCount = new List<string>();
+        public static List<string> _2stage = new List<string>();
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")] public extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")] public extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        private void BackToHub_Click(object sender, EventArgs e) {
-            var t = new Thread(() => Application.Run(new HubForm()));
-            t.Start();
+        private void returnToHub() {
+            var hub = new Thread(() => Application.Run(new HubForm()));
+            hub.Start();
             this.Close();
             ov.Close();
         }
 
+        private void BackToHub_Click(object sender, EventArgs e) {
+            returnToHub();
+        }
+        
         private void ExitHookCounter_Click(object sender, EventArgs e) {
             Environment.Exit(0);
         }
@@ -79,7 +84,6 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             using (Mat newMat = new Mat(source.Rows - tempMat.Rows + 1, source.Cols - tempMat.Cols + 1, MatType.CV_32FC1)) {
                 Mat sourceGRAY = source.CvtColor(ColorConversionCodes.BGR2GRAY);
                 Mat tempGRAY = tempMat.CvtColor(ColorConversionCodes.BGR2GRAY);
-
                 Cv2.MatchTemplate(sourceGRAY, tempGRAY, newMat, TemplateMatchModes.CCoeffNormed);
                 sourceGRAY.Dispose();
                 tempGRAY.Dispose();
@@ -94,6 +98,8 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                         if (template.Contains("endgame") && bCheckEndGame) {
                             if (overlay.G != null) overlay.G.Clear(Color.Black);
                             overlay.sList.Clear();
+                            overlay._2List.Clear();
+                            _2stage.Clear();
                             hCount.Clear();
                             break;
                         }
@@ -171,7 +177,16 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             Bitmap frame = GetFrame();
             Mat mat = BitmapConverter.ToMat(frame);
             Bitmap det_hook = ITM(mat, $@"resources\{res}\hook{IGUIScale.Text}.png", LowerThreshCheckbox.Checked ? 0.8 : 0.9, ref hCount);
-            Bitmap det_endgame = ITM(mat, $@"resources\{res}\endgame{IGUIScale.Text}.png", LowerThreshCheckbox.Checked ? 0.8 : 0.9, ref hCount);
+            Bitmap det_second = ITM(mat, $@"resources\{res}\2stage{IGUIScale.Text}.png", 0.92, ref _2stage);
+            Bitmap det_endgame = ITM(mat, $@"resources\{res}\endgame{UIScale.Text}.png", LowerThreshCheckbox.Checked ? 0.8 : 0.9, ref hCount);
+
+            det_hook.Dispose();
+            det_second.Dispose();
+            det_endgame.Dispose();
+            frame.Dispose();
+            mat.Dispose();
+            
+            
         }
     }
 }

@@ -33,19 +33,19 @@
             this.ShowConfigEditor = new System.Windows.Forms.PictureBox();
             this.CreditLabel = new System.Windows.Forms.Label();
             this.HubPanel = new System.Windows.Forms.Panel();
+            this.ShowXHair = new System.Windows.Forms.PictureBox();
             this.HubToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Discord = new System.Windows.Forms.PictureBox();
             this.Github = new System.Windows.Forms.PictureBox();
             this.SocialPanel = new System.Windows.Forms.Panel();
-            this.ShowXHair = new System.Windows.Forms.PictureBox();
             this.TitleBarPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ShowHookCounter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ShowConfigEditor)).BeginInit();
             this.HubPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ShowXHair)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Discord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Github)).BeginInit();
             this.SocialPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ShowXHair)).BeginInit();
             this.SuspendLayout();
             // 
             // TitleBarPanel
@@ -158,6 +158,21 @@
             this.HubPanel.Size = new System.Drawing.Size(136, 265);
             this.HubPanel.TabIndex = 8;
             // 
+            // ShowXHair
+            // 
+            this.ShowXHair.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ShowXHair.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ShowXHair.Image = ((System.Drawing.Image)(resources.GetObject("ShowXHair.Image")));
+            this.ShowXHair.Location = new System.Drawing.Point(0, 102);
+            this.ShowXHair.Name = "ShowXHair";
+            this.ShowXHair.Size = new System.Drawing.Size(136, 51);
+            this.ShowXHair.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ShowXHair.TabIndex = 6;
+            this.ShowXHair.TabStop = false;
+            this.HubToolTip.SetToolTip(this.ShowXHair, "Crosshair Overlay");
+            this.ShowXHair.Visible = false;
+            this.ShowXHair.Click += new System.EventHandler(this.ShowXHair_Click);
+            // 
             // HubToolTip
             // 
             this.HubToolTip.AutomaticDelay = 100;
@@ -208,21 +223,6 @@
             this.SocialPanel.Size = new System.Drawing.Size(341, 40);
             this.SocialPanel.TabIndex = 9;
             // 
-            // ShowXHair
-            // 
-            this.ShowXHair.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ShowXHair.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ShowXHair.Image = ((System.Drawing.Image)(resources.GetObject("ShowXHair.Image")));
-            this.ShowXHair.Location = new System.Drawing.Point(0, 102);
-            this.ShowXHair.Name = "ShowXHair";
-            this.ShowXHair.Size = new System.Drawing.Size(136, 51);
-            this.ShowXHair.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.ShowXHair.TabIndex = 6;
-            this.ShowXHair.TabStop = false;
-            this.HubToolTip.SetToolTip(this.ShowXHair, "Crosshair Overlay");
-            this.ShowXHair.Visible = false;
-            this.ShowXHair.Click += new System.EventHandler(this.ShowXHair_Click);
-            // 
             // HubForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -243,10 +243,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.ShowHookCounter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ShowConfigEditor)).EndInit();
             this.HubPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ShowXHair)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Discord)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Github)).EndInit();
             this.SocialPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ShowXHair)).EndInit();
             this.ResumeLayout(false);
 
         }

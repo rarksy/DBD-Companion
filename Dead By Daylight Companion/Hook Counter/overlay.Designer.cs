@@ -49,6 +49,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Timer DrawTimer;
+        public System.Windows.Forms.Timer DrawTimer;
     }
 }

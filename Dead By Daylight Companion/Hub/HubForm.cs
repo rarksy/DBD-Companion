@@ -80,7 +80,6 @@ namespace Dead_By_Daylight_Companion {
         private void ShowHookCounter_Click(object sender, EventArgs e) {
             var t = new Thread(() => Application.Run(new Hook_Counter.Hook_Counter()));
             t.Start();
-            this.Close();
         }
 
         private void ShowHookCounter_Paint(object sender, PaintEventArgs e) {
@@ -137,7 +136,6 @@ namespace Dead_By_Daylight_Companion {
         private void ShowXHair_Click(object sender, EventArgs e) {
             var t = new Thread(() => Application.Run(new Crosshair_Overlay.Crosshair()));
             t.Start();
-            this.Close();
         }
     }
 }
