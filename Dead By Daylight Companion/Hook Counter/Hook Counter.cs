@@ -175,6 +175,10 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             Mat mat = BitmapConverter.ToMat(frame);
             Bitmap det_hook = ITM(mat, $@"resources\{res}\hook{IGUIScale.Text}.png", LowerThreshCheckbox.Checked ? 0.8 : 0.9, ref hCount);
 
+
+            frame.Dispose();
+            mat.Dispose();
+            det_hook.Dispose();
         }
     }
 }
