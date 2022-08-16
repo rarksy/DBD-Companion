@@ -2,16 +2,9 @@
 using OpenCvSharp.Extensions;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Dead_By_Daylight_Companion.Hook_Counter {
@@ -23,17 +16,22 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                              CurFontName = Properties.Settings.Default.FontName;
         public static int CurFontSize = Properties.Settings.Default.FontSize;
         public static List<string> hCount = new List<string>();
+        public static List<string> _2stage = new List<string>();
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")] public extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")] public extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        private void BackToHub_Click(object sender, EventArgs e) {
-            var t = new Thread(() => Application.Run(new HubForm()));
-            t.Start();
+        private void returnToHub() {
+            var hub = new Thread(() => Application.Run(new HubForm()));
+            hub.Start();
             this.Close();
             ov.Close();
         }
 
+        private void BackToHub_Click(object sender, EventArgs e) {
+            returnToHub();
+        }
+        
         private void ExitHookCounter_Click(object sender, EventArgs e) {
             Environment.Exit(0);
         }
@@ -71,9 +69,10 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             FontDialog fd = new FontDialog();
 
             if (fd.ShowDialog() == DialogResult.OK) {
-                ChangeFont.Font = new Font(CurFontName, CurFontSize);
                 CurFontName = fd.Font.Name;
                 CurFontSize = (int)fd.Font.Size;
+                FontLabel.Text = $"Font: {CurFontName}";
+                FontSizeLabel.Text = $"Font Size: {CurFontSize}";
                 Properties.Settings.Default.FontName = CurFontName;
                 Properties.Settings.Default.FontSize = CurFontSize;
                 Properties.Settings.Default.Save();
@@ -85,7 +84,6 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             using (Mat newMat = new Mat(source.Rows - tempMat.Rows + 1, source.Cols - tempMat.Cols + 1, MatType.CV_32FC1)) {
                 Mat sourceGRAY = source.CvtColor(ColorConversionCodes.BGR2GRAY);
                 Mat tempGRAY = tempMat.CvtColor(ColorConversionCodes.BGR2GRAY);
-
                 Cv2.MatchTemplate(sourceGRAY, tempGRAY, newMat, TemplateMatchModes.CCoeffNormed);
                 sourceGRAY.Dispose();
                 tempGRAY.Dispose();
@@ -100,6 +98,8 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                         if (template.Contains("endgame") && bCheckEndGame) {
                             if (overlay.G != null) overlay.G.Clear(Color.Black);
                             overlay.sList.Clear();
+                            overlay._2List.Clear();
+                            _2stage.Clear();
                             hCount.Clear();
                             break;
                         }
@@ -145,21 +145,26 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
         private void TitleLabel_MouseDown(object sender, MouseEventArgs e) {
             TitlePanel_MouseDown(sender, e);
         }
-
+        
         private void UIScale_SelectedIndexChanged(object sender, EventArgs e) {
             Properties.Settings.Default.UIScale = UIScale.SelectedIndex;
+            Properties.Settings.Default.Save();
         }
-
+        
         private void IGUIScale_SelectedIndexChanged(object sender, EventArgs e) {
             Properties.Settings.Default.IGUIScale = IGUIScale.SelectedIndex;
+            Properties.Settings.Default.Save();
         }
 
         private void Hook_Counter_Load(object sender, EventArgs e) {
             UIScale.SelectedIndex = Properties.Settings.Default.UIScale; 
             IGUIScale.SelectedIndex = Properties.Settings.Default.IGUIScale;
             HooktextTB.Text = Properties.Settings.Default.HookedText;
-            ChangeFont.Font = new Font(CurFontName, CurFontSize);
-
+            FontLabel.Text = $"Font: {CurFontName}";
+            FontSizeLabel.Text = $"Font Size: {CurFontSize}";
+#if !DEBUG
+            DebugModeCheckbox.Hide();   
+#endif
             Thread.Start();
         }
 
@@ -169,8 +174,6 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                 ov.Show();
                 bInitOverlay = true;
             }
-
-            
             Bitmap frame = GetFrame();
             Mat mat = BitmapConverter.ToMat(frame);
             Bitmap det_hook = ITM(mat, $@"resources\{res}\hook{IGUIScale.Text}.png", LowerThreshCheckbox.Checked ? 0.8 : 0.9, ref hCount);

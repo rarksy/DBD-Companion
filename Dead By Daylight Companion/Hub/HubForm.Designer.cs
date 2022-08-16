@@ -33,6 +33,7 @@
             this.ShowConfigEditor = new System.Windows.Forms.PictureBox();
             this.CreditLabel = new System.Windows.Forms.Label();
             this.HubPanel = new System.Windows.Forms.Panel();
+            this.ShowXHair = new System.Windows.Forms.PictureBox();
             this.HubToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.Discord = new System.Windows.Forms.PictureBox();
             this.Github = new System.Windows.Forms.PictureBox();
@@ -41,6 +42,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ShowHookCounter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ShowConfigEditor)).BeginInit();
             this.HubPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ShowXHair)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Discord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Github)).BeginInit();
             this.SocialPanel.SuspendLayout();
@@ -89,12 +91,11 @@
             // 
             // HubTitle
             // 
-            this.HubTitle.Dock = System.Windows.Forms.DockStyle.Left;
-            this.HubTitle.Font = new System.Drawing.Font("Tahoma", 13.75F);
+            this.HubTitle.Font = new System.Drawing.Font("Ebrima", 11.75F);
             this.HubTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
-            this.HubTitle.Location = new System.Drawing.Point(0, 0);
+            this.HubTitle.Location = new System.Drawing.Point(-4, 2);
             this.HubTitle.Name = "HubTitle";
-            this.HubTitle.Size = new System.Drawing.Size(254, 27);
+            this.HubTitle.Size = new System.Drawing.Size(220, 27);
             this.HubTitle.TabIndex = 3;
             this.HubTitle.Text = "Dead By Daylight Companion";
             this.HubTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -136,9 +137,9 @@
             // 
             // CreditLabel
             // 
-            this.CreditLabel.Font = new System.Drawing.Font("Tahoma", 11.75F);
+            this.CreditLabel.Font = new System.Drawing.Font("Ebrima", 11.75F);
             this.CreditLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
-            this.CreditLabel.Location = new System.Drawing.Point(-1, 10);
+            this.CreditLabel.Location = new System.Drawing.Point(3, 9);
             this.CreditLabel.Name = "CreditLabel";
             this.CreditLabel.Size = new System.Drawing.Size(141, 27);
             this.CreditLabel.TabIndex = 7;
@@ -148,6 +149,7 @@
             // HubPanel
             // 
             this.HubPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.HubPanel.Controls.Add(this.ShowXHair);
             this.HubPanel.Controls.Add(this.ShowConfigEditor);
             this.HubPanel.Controls.Add(this.ShowHookCounter);
             this.HubPanel.Dock = System.Windows.Forms.DockStyle.Left;
@@ -156,22 +158,37 @@
             this.HubPanel.Size = new System.Drawing.Size(136, 265);
             this.HubPanel.TabIndex = 8;
             // 
+            // ShowXHair
+            // 
+            this.ShowXHair.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ShowXHair.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ShowXHair.Image = ((System.Drawing.Image)(resources.GetObject("ShowXHair.Image")));
+            this.ShowXHair.Location = new System.Drawing.Point(0, 102);
+            this.ShowXHair.Name = "ShowXHair";
+            this.ShowXHair.Size = new System.Drawing.Size(136, 51);
+            this.ShowXHair.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.ShowXHair.TabIndex = 6;
+            this.ShowXHair.TabStop = false;
+            this.HubToolTip.SetToolTip(this.ShowXHair, "Crosshair Overlay");
+            this.ShowXHair.Visible = false;
+            this.ShowXHair.Click += new System.EventHandler(this.ShowXHair_Click);
+            // 
             // HubToolTip
             // 
-            this.HubToolTip.AutomaticDelay = 10;
-            this.HubToolTip.AutoPopDelay = 100000;
+            this.HubToolTip.AutomaticDelay = 100;
+            this.HubToolTip.AutoPopDelay = 1000000;
             this.HubToolTip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(3)))), ((int)(((byte)(4)))));
             this.HubToolTip.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(197)))), ((int)(((byte)(197)))));
-            this.HubToolTip.InitialDelay = 10;
-            this.HubToolTip.ReshowDelay = 2;
+            this.HubToolTip.InitialDelay = 100;
+            this.HubToolTip.ReshowDelay = 20;
             // 
             // Discord
             // 
             this.Discord.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.Discord.Image = ((System.Drawing.Image)(resources.GetObject("Discord.Image")));
-            this.Discord.Location = new System.Drawing.Point(296, 0);
+            this.Discord.Location = new System.Drawing.Point(306, 4);
             this.Discord.Name = "Discord";
-            this.Discord.Size = new System.Drawing.Size(42, 43);
+            this.Discord.Size = new System.Drawing.Size(32, 32);
             this.Discord.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.Discord.TabIndex = 6;
             this.Discord.TabStop = false;
@@ -184,9 +201,9 @@
             // 
             this.Github.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.Github.Image = ((System.Drawing.Image)(resources.GetObject("Github.Image")));
-            this.Github.Location = new System.Drawing.Point(255, 2);
+            this.Github.Location = new System.Drawing.Point(268, 4);
             this.Github.Name = "Github";
-            this.Github.Size = new System.Drawing.Size(40, 37);
+            this.Github.Size = new System.Drawing.Size(32, 32);
             this.Github.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.Github.TabIndex = 7;
             this.Github.TabStop = false;
@@ -216,6 +233,7 @@
             this.Controls.Add(this.HubPanel);
             this.Controls.Add(this.TitleBarPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HubForm";
             this.Opacity = 0.95D;
             this.Text = "Dead By Daylight Companion";
@@ -225,6 +243,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ShowHookCounter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ShowConfigEditor)).EndInit();
             this.HubPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ShowXHair)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Discord)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Github)).EndInit();
             this.SocialPanel.ResumeLayout(false);
@@ -246,6 +265,7 @@
         private System.Windows.Forms.PictureBox Github;
         private System.Windows.Forms.Label MinimizeHub;
         private System.Windows.Forms.Label ExitHub;
+        private System.Windows.Forms.PictureBox ShowXHair;
     }
 }
 

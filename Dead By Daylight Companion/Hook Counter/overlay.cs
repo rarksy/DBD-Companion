@@ -16,6 +16,7 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
         }
         public static bool bHasDrawn = false;
         public static List<float> sList = new List<float>();
+        public static List<float> _2List = new List<float>();
         public static Graphics G;
         [DllImport("user32.dll", SetLastError = true)] public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll")] public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
@@ -40,7 +41,15 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                     if (!sList.Contains(f)) {
                         sList.Add(f);
                         G = this.CreateGraphics();
-                        G.DrawString(Properties.Settings.Default.HookedText, new Font(Hook_Counter.CurFontName, Hook_Counter.CurFontSize), new SolidBrush(Color.White), 170.0F, f);
+                        G.DrawString("I", new Font(Hook_Counter.CurFontName, Hook_Counter.CurFontSize), new SolidBrush(Color.White), 170.0F, f);
+                    }
+                }
+                
+                for (int i = 0; i < Hook_Counter._2stage.Count; i++) {
+                    float f = float.Parse(Hook_Counter._2stage[i]);
+                    if (!_2List.Contains(f)) {
+                        _2List.Add(f);
+                        G.DrawString("I", new Font(Hook_Counter.CurFontName, Hook_Counter.CurFontSize), new SolidBrush(Color.White), 178.0F, f-47.0F);
                     }
                 }
                 bHasDrawn = true;

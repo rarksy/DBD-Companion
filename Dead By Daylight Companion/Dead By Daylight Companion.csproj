@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>3nnIOk%281%29.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="OpenCvSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenCvSharp4.4.6.0.20220608\lib\net48\OpenCvSharp.dll</HintPath>
@@ -85,6 +88,12 @@
     </Compile>
     <Compile Include="Config Editor\helper\FUNCS.cs" />
     <Compile Include="Config Editor\helper\INI.cs" />
+    <Compile Include="Crosshair\Crosshair.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Crosshair\Crosshair.Designer.cs">
+      <DependentUpon>Crosshair.cs</DependentUpon>
+    </Compile>
     <Compile Include="Hook Counter\Hook Counter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +117,9 @@
     <Compile Include="Settings.cs" />
     <EmbeddedResource Include="Config Editor\Config Editor.resx">
       <DependentUpon>Config Editor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Crosshair\Crosshair.resx">
+      <DependentUpon>Crosshair.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Hook Counter\Hook Counter.resx">
       <DependentUpon>Hook Counter.cs</DependentUpon>
@@ -141,6 +153,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="3nnIOk%281%29.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

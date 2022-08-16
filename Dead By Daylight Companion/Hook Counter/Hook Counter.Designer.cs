@@ -41,6 +41,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.DebugModeCheckbox = new System.Windows.Forms.CheckBox();
+            this.FontLabel = new System.Windows.Forms.Label();
+            this.FontSizeLabel = new System.Windows.Forms.Label();
             this.TitlePanel.SuspendLayout();
             this.SettingPanel.SuspendLayout();
             this.SuspendLayout();
@@ -108,11 +110,11 @@
             // TitleLabel
             // 
             this.TitleLabel.AutoSize = true;
-            this.TitleLabel.Font = new System.Drawing.Font("Fira Sans Medium", 12F);
+            this.TitleLabel.Font = new System.Drawing.Font("Ebrima", 10F, System.Drawing.FontStyle.Bold);
             this.TitleLabel.ForeColor = System.Drawing.Color.Silver;
-            this.TitleLabel.Location = new System.Drawing.Point(161, 9);
+            this.TitleLabel.Location = new System.Drawing.Point(179, 9);
             this.TitleLabel.Name = "TitleLabel";
-            this.TitleLabel.Size = new System.Drawing.Size(164, 19);
+            this.TitleLabel.Size = new System.Drawing.Size(156, 19);
             this.TitleLabel.TabIndex = 3;
             this.TitleLabel.Text = "Hook Counter (Alpha)";
             this.TitleLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitleLabel_MouseDown);
@@ -135,7 +137,7 @@
             this.ChangeFont.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ChangeFont.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.ChangeFont.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ChangeFont.Font = new System.Drawing.Font("Ebrima", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChangeFont.Font = new System.Drawing.Font("Ebrima", 10F, System.Drawing.FontStyle.Bold);
             this.ChangeFont.ForeColor = System.Drawing.Color.Silver;
             this.ChangeFont.Location = new System.Drawing.Point(0, 0);
             this.ChangeFont.Name = "ChangeFont";
@@ -160,25 +162,26 @@
             // LowerThreshCheckbox
             // 
             this.LowerThreshCheckbox.AutoSize = true;
-            this.LowerThreshCheckbox.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.LowerThreshCheckbox.Font = new System.Drawing.Font("Ebrima", 10F);
             this.LowerThreshCheckbox.ForeColor = System.Drawing.Color.Silver;
             this.LowerThreshCheckbox.Location = new System.Drawing.Point(12, 136);
             this.LowerThreshCheckbox.Name = "LowerThreshCheckbox";
-            this.LowerThreshCheckbox.Size = new System.Drawing.Size(191, 21);
+            this.LowerThreshCheckbox.Size = new System.Drawing.Size(192, 23);
             this.LowerThreshCheckbox.TabIndex = 17;
             this.LowerThreshCheckbox.Text = "Lower Detection Threshold";
             this.tTooltip.SetToolTip(this.LowerThreshCheckbox, "Lowers Detection Threshold If Detection Isnt Working (Needed On Doctor) IF YOUR N" +
         "OT HAVING ISSUES LEAVE THIS OFF\r\n");
             this.LowerThreshCheckbox.UseVisualStyleBackColor = true;
+            this.LowerThreshCheckbox.Visible = false;
             // 
             // HookedText
             // 
             this.HookedText.AutoSize = true;
-            this.HookedText.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.HookedText.Font = new System.Drawing.Font("Ebrima", 10F);
             this.HookedText.ForeColor = System.Drawing.Color.Silver;
-            this.HookedText.Location = new System.Drawing.Point(210, 56);
+            this.HookedText.Location = new System.Drawing.Point(211, 55);
             this.HookedText.Name = "HookedText";
-            this.HookedText.Size = new System.Drawing.Size(87, 17);
+            this.HookedText.Size = new System.Drawing.Size(86, 19);
             this.HookedText.TabIndex = 12;
             this.HookedText.Text = "Hooked Text";
             // 
@@ -230,36 +233,58 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.label1.Font = new System.Drawing.Font("Ebrima", 10F);
             this.label1.ForeColor = System.Drawing.Color.Silver;
             this.label1.Location = new System.Drawing.Point(68, 83);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 17);
+            this.label1.Size = new System.Drawing.Size(57, 19);
             this.label1.TabIndex = 15;
             this.label1.Text = "UI Scale";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.label2.Font = new System.Drawing.Font("Ebrima", 10F);
             this.label2.ForeColor = System.Drawing.Color.Silver;
             this.label2.Location = new System.Drawing.Point(68, 110);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 17);
+            this.label2.Size = new System.Drawing.Size(113, 19);
             this.label2.TabIndex = 16;
             this.label2.Text = "In Game UI Scale";
             // 
             // DebugModeCheckbox
             // 
             this.DebugModeCheckbox.AutoSize = true;
-            this.DebugModeCheckbox.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.DebugModeCheckbox.Font = new System.Drawing.Font("Ebrima", 10F);
             this.DebugModeCheckbox.ForeColor = System.Drawing.Color.Silver;
             this.DebugModeCheckbox.Location = new System.Drawing.Point(12, 163);
             this.DebugModeCheckbox.Name = "DebugModeCheckbox";
-            this.DebugModeCheckbox.Size = new System.Drawing.Size(164, 21);
+            this.DebugModeCheckbox.Size = new System.Drawing.Size(166, 23);
             this.DebugModeCheckbox.TabIndex = 18;
             this.DebugModeCheckbox.Text = "Enable Debug Console";
             this.DebugModeCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // FontLabel
+            // 
+            this.FontLabel.AutoSize = true;
+            this.FontLabel.Font = new System.Drawing.Font("Ebrima", 10F);
+            this.FontLabel.ForeColor = System.Drawing.Color.Silver;
+            this.FontLabel.Location = new System.Drawing.Point(9, 353);
+            this.FontLabel.Name = "FontLabel";
+            this.FontLabel.Size = new System.Drawing.Size(44, 19);
+            this.FontLabel.TabIndex = 14;
+            this.FontLabel.Text = "Font: ";
+            // 
+            // FontSizeLabel
+            // 
+            this.FontSizeLabel.AutoSize = true;
+            this.FontSizeLabel.Font = new System.Drawing.Font("Ebrima", 10F);
+            this.FontSizeLabel.ForeColor = System.Drawing.Color.Silver;
+            this.FontSizeLabel.Location = new System.Drawing.Point(9, 376);
+            this.FontSizeLabel.Name = "FontSizeLabel";
+            this.FontSizeLabel.Size = new System.Drawing.Size(71, 19);
+            this.FontSizeLabel.TabIndex = 15;
+            this.FontSizeLabel.Text = "Font Size: ";
             // 
             // Hook_Counter
             // 
@@ -267,7 +292,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.ClientSize = new System.Drawing.Size(475, 407);
+            this.Controls.Add(this.FontSizeLabel);
             this.Controls.Add(this.DebugModeCheckbox);
+            this.Controls.Add(this.FontLabel);
             this.Controls.Add(this.LowerThreshCheckbox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -309,5 +336,7 @@
         private System.Windows.Forms.CheckBox DebugModeCheckbox;
         private System.Windows.Forms.Button ChangeFont;
         private System.Windows.Forms.TextBox HooktextTB;
+        private System.Windows.Forms.Label FontSizeLabel;
+        private System.Windows.Forms.Label FontLabel;
     }
 }

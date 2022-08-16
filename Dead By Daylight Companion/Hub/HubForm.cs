@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Dead_By_Daylight_Companion {
@@ -86,7 +80,6 @@ namespace Dead_By_Daylight_Companion {
         private void ShowHookCounter_Click(object sender, EventArgs e) {
             var t = new Thread(() => Application.Run(new Hook_Counter.Hook_Counter()));
             t.Start();
-            this.Close();
         }
 
         private void ShowHookCounter_Paint(object sender, PaintEventArgs e) {
@@ -137,6 +130,12 @@ namespace Dead_By_Daylight_Companion {
 
         private void ExitHub_Click(object sender, EventArgs e) {
             Environment.Exit(0);
+        }
+
+        //XHAIR
+        private void ShowXHair_Click(object sender, EventArgs e) {
+            var t = new Thread(() => Application.Run(new Crosshair_Overlay.Crosshair()));
+            t.Start();
         }
     }
 }
