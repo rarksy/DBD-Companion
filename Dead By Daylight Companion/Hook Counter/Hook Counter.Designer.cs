@@ -34,8 +34,6 @@
             this.Thread = new System.Windows.Forms.Timer(this.components);
             this.tTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.LowerThreshCheckbox = new System.Windows.Forms.CheckBox();
-            this.HookedText = new System.Windows.Forms.Label();
-            this.HooktextTB = new System.Windows.Forms.TextBox();
             this.UIScale = new System.Windows.Forms.ComboBox();
             this.IGUIScale = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -164,7 +162,7 @@
             this.LowerThreshCheckbox.AutoSize = true;
             this.LowerThreshCheckbox.Font = new System.Drawing.Font("Ebrima", 10F);
             this.LowerThreshCheckbox.ForeColor = System.Drawing.Color.Silver;
-            this.LowerThreshCheckbox.Location = new System.Drawing.Point(12, 136);
+            this.LowerThreshCheckbox.Location = new System.Drawing.Point(13, 107);
             this.LowerThreshCheckbox.Name = "LowerThreshCheckbox";
             this.LowerThreshCheckbox.Size = new System.Drawing.Size(192, 23);
             this.LowerThreshCheckbox.TabIndex = 17;
@@ -173,26 +171,6 @@
         "OT HAVING ISSUES LEAVE THIS OFF\r\n");
             this.LowerThreshCheckbox.UseVisualStyleBackColor = true;
             this.LowerThreshCheckbox.Visible = false;
-            // 
-            // HookedText
-            // 
-            this.HookedText.AutoSize = true;
-            this.HookedText.Font = new System.Drawing.Font("Ebrima", 10F);
-            this.HookedText.ForeColor = System.Drawing.Color.Silver;
-            this.HookedText.Location = new System.Drawing.Point(211, 55);
-            this.HookedText.Name = "HookedText";
-            this.HookedText.Size = new System.Drawing.Size(86, 19);
-            this.HookedText.TabIndex = 12;
-            this.HookedText.Text = "Hooked Text";
-            // 
-            // HooktextTB
-            // 
-            this.HooktextTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.HooktextTB.Location = new System.Drawing.Point(12, 56);
-            this.HooktextTB.Name = "HooktextTB";
-            this.HooktextTB.Size = new System.Drawing.Size(193, 20);
-            this.HooktextTB.TabIndex = 11;
-            this.HooktextTB.TextChanged += new System.EventHandler(this.HooktextTB_TextChanged);
             // 
             // UIScale
             // 
@@ -206,7 +184,7 @@
             "90",
             "95",
             "100"});
-            this.UIScale.Location = new System.Drawing.Point(12, 82);
+            this.UIScale.Location = new System.Drawing.Point(13, 53);
             this.UIScale.Name = "UIScale";
             this.UIScale.Size = new System.Drawing.Size(50, 21);
             this.UIScale.TabIndex = 13;
@@ -224,7 +202,7 @@
             "90",
             "95",
             "100"});
-            this.IGUIScale.Location = new System.Drawing.Point(12, 109);
+            this.IGUIScale.Location = new System.Drawing.Point(13, 80);
             this.IGUIScale.Name = "IGUIScale";
             this.IGUIScale.Size = new System.Drawing.Size(50, 21);
             this.IGUIScale.TabIndex = 14;
@@ -235,7 +213,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Ebrima", 10F);
             this.label1.ForeColor = System.Drawing.Color.Silver;
-            this.label1.Location = new System.Drawing.Point(68, 83);
+            this.label1.Location = new System.Drawing.Point(69, 54);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 19);
             this.label1.TabIndex = 15;
@@ -246,7 +224,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Ebrima", 10F);
             this.label2.ForeColor = System.Drawing.Color.Silver;
-            this.label2.Location = new System.Drawing.Point(68, 110);
+            this.label2.Location = new System.Drawing.Point(69, 81);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 19);
             this.label2.TabIndex = 16;
@@ -257,7 +235,7 @@
             this.DebugModeCheckbox.AutoSize = true;
             this.DebugModeCheckbox.Font = new System.Drawing.Font("Ebrima", 10F);
             this.DebugModeCheckbox.ForeColor = System.Drawing.Color.Silver;
-            this.DebugModeCheckbox.Location = new System.Drawing.Point(12, 163);
+            this.DebugModeCheckbox.Location = new System.Drawing.Point(13, 134);
             this.DebugModeCheckbox.Name = "DebugModeCheckbox";
             this.DebugModeCheckbox.Size = new System.Drawing.Size(166, 23);
             this.DebugModeCheckbox.TabIndex = 18;
@@ -300,8 +278,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.IGUIScale);
             this.Controls.Add(this.UIScale);
-            this.Controls.Add(this.HookedText);
-            this.Controls.Add(this.HooktextTB);
             this.Controls.Add(this.SettingPanel);
             this.Controls.Add(this.TitlePanel);
             this.ForeColor = System.Drawing.Color.Silver;
@@ -327,7 +303,6 @@
         private System.Windows.Forms.ToolTip tTooltip;
         private System.Windows.Forms.Label MinimizeHookCounter;
         private System.Windows.Forms.Label ExitHookCounter;
-        private System.Windows.Forms.Label HookedText;
         private System.Windows.Forms.ComboBox UIScale;
         private System.Windows.Forms.ComboBox IGUIScale;
         private System.Windows.Forms.Label label1;
@@ -335,7 +310,6 @@
         private System.Windows.Forms.CheckBox LowerThreshCheckbox;
         private System.Windows.Forms.CheckBox DebugModeCheckbox;
         private System.Windows.Forms.Button ChangeFont;
-        private System.Windows.Forms.TextBox HooktextTB;
         private System.Windows.Forms.Label FontSizeLabel;
         private System.Windows.Forms.Label FontLabel;
     }

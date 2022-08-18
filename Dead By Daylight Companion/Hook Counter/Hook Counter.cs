@@ -137,10 +137,6 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-        private void HooktextTB_TextChanged(object sender, EventArgs e) {
-            Properties.Settings.Default.HookedText = HooktextTB.Text;
-            Properties.Settings.Default.Save();
-        }
 
         private void TitleLabel_MouseDown(object sender, MouseEventArgs e) {
             TitlePanel_MouseDown(sender, e);
@@ -159,7 +155,6 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
         private void Hook_Counter_Load(object sender, EventArgs e) {
             UIScale.SelectedIndex = Properties.Settings.Default.UIScale; 
             IGUIScale.SelectedIndex = Properties.Settings.Default.IGUIScale;
-            HooktextTB.Text = Properties.Settings.Default.HookedText;
             FontLabel.Text = $"Font: {CurFontName}";
             FontSizeLabel.Text = $"Font Size: {CurFontSize}";
 #if !DEBUG
@@ -176,12 +171,15 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             }
             Bitmap frame = GetFrame();
             Mat mat = BitmapConverter.ToMat(frame);
-            Bitmap det_hook = ITM(mat, $@"resources\{res}\hook{IGUIScale.Text}.png", LowerThreshCheckbox.Checked ? 0.8 : 0.9, ref hCount);
-
+            Bitmap det_first = ITM(mat, $@"resources\{res}\hook{IGUIScale.Text}.png", LowerThreshCheckbox.Checked ? 0.8 : 0.9, ref hCount);
+            Bitmap det_second = ITM(mat, $@"resources\{res}\2stage{IGUIScale.Text}.png", 0.9, ref hCount);
+            Bitmap det_endgame = ITM(mat, $@"resources\{res}\endgame{UIScale.Text}.png", 0.9, ref hCount);
 
             frame.Dispose();
             mat.Dispose();
-            det_hook.Dispose();
+            det_first.Dispose();
+            det_second.Dispose();
+            det_endgame.Dispose();
         }
     }
 }
