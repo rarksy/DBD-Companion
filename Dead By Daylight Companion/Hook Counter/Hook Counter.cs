@@ -13,7 +13,8 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
         static overlay ov = new overlay();
         public static bool bInitOverlay = false, bCheckEndGame = true;
         public static string res = Screen.PrimaryScreen.Bounds.Width + Screen.PrimaryScreen.Bounds.Height.ToString(),
-                             CurFontName = Properties.Settings.Default.FontName;
+                             CurFontName = Properties.Settings.Default.FontName,
+                             HookText;
         public static int CurFontSize = Properties.Settings.Default.FontSize;
         public static List<string> hCount = new List<string>();
         public static List<string> _2stage = new List<string>();
@@ -152,14 +153,29 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             Properties.Settings.Default.Save();
         }
 
-        private void Hook_Counter_Load(object sender, EventArgs e) {
+        private void HookTextBox_TextChanged(object sender, EventArgs e) {
+            HookText = HookTextBox.Text;
+            Properties.Settings.Default.HookedText = HookText;
+        }
+
+        private void CountStageCB_CheckedChanged(object sender, EventArgs e) {
+            if (CountStageCB.Checked) {
+                HookTextBox.Enabled = false;
+                HookText = "I";
+            }
+            else {
+                HookTextBox.Enabled = true;
+                HookText = HookTextBox.Text;
+            }
+        }
+
+            private void Hook_Counter_Load(object sender, EventArgs e) {
             UIScale.SelectedIndex = Properties.Settings.Default.UIScale; 
             IGUIScale.SelectedIndex = Properties.Settings.Default.IGUIScale;
+            HookTextBox.Text = Properties.Settings.Default.HookedText;
             FontLabel.Text = $"Font: {CurFontName}";
             FontSizeLabel.Text = $"Font Size: {CurFontSize}";
-#if !DEBUG
-            DebugModeCheckbox.Hide();   
-#endif
+            
             Thread.Start();
         }
 
@@ -172,13 +188,16 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             Bitmap frame = GetFrame();
             Mat mat = BitmapConverter.ToMat(frame);
             Bitmap det_first = ITM(mat, $@"resources\{res}\hook{IGUIScale.Text}.png", LowerThreshCheckbox.Checked ? 0.8 : 0.9, ref hCount);
-            Bitmap det_second = ITM(mat, $@"resources\{res}\2stage{IGUIScale.Text}.png", 0.9, ref hCount);
+            if (CountStageCB.Checked) {
+                Bitmap det_second = ITM(mat, $@"resources\{res}\2stage{IGUIScale.Text}.png", 0.9, ref hCount);
+                det_second.Dispose();
+            }
             Bitmap det_endgame = ITM(mat, $@"resources\{res}\endgame{UIScale.Text}.png", 0.9, ref hCount);
 
             frame.Dispose();
             mat.Dispose();
             det_first.Dispose();
-            det_second.Dispose();
+
             det_endgame.Dispose();
         }
     }

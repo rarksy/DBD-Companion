@@ -38,9 +38,11 @@
             this.IGUIScale = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.DebugModeCheckbox = new System.Windows.Forms.CheckBox();
             this.FontLabel = new System.Windows.Forms.Label();
             this.FontSizeLabel = new System.Windows.Forms.Label();
+            this.HookTextBox = new System.Windows.Forms.TextBox();
+            this.Hooked_Text_Label = new System.Windows.Forms.Label();
+            this.CountStageCB = new System.Windows.Forms.CheckBox();
             this.TitlePanel.SuspendLayout();
             this.SettingPanel.SuspendLayout();
             this.SuspendLayout();
@@ -162,7 +164,7 @@
             this.LowerThreshCheckbox.AutoSize = true;
             this.LowerThreshCheckbox.Font = new System.Drawing.Font("Ebrima", 10F);
             this.LowerThreshCheckbox.ForeColor = System.Drawing.Color.Silver;
-            this.LowerThreshCheckbox.Location = new System.Drawing.Point(13, 107);
+            this.LowerThreshCheckbox.Location = new System.Drawing.Point(13, 127);
             this.LowerThreshCheckbox.Name = "LowerThreshCheckbox";
             this.LowerThreshCheckbox.Size = new System.Drawing.Size(192, 23);
             this.LowerThreshCheckbox.TabIndex = 17;
@@ -170,7 +172,6 @@
             this.tTooltip.SetToolTip(this.LowerThreshCheckbox, "Lowers Detection Threshold If Detection Isnt Working (Needed On Doctor) IF YOUR N" +
         "OT HAVING ISSUES LEAVE THIS OFF\r\n");
             this.LowerThreshCheckbox.UseVisualStyleBackColor = true;
-            this.LowerThreshCheckbox.Visible = false;
             // 
             // UIScale
             // 
@@ -184,7 +185,7 @@
             "90",
             "95",
             "100"});
-            this.UIScale.Location = new System.Drawing.Point(13, 53);
+            this.UIScale.Location = new System.Drawing.Point(13, 72);
             this.UIScale.Name = "UIScale";
             this.UIScale.Size = new System.Drawing.Size(50, 21);
             this.UIScale.TabIndex = 13;
@@ -202,7 +203,7 @@
             "90",
             "95",
             "100"});
-            this.IGUIScale.Location = new System.Drawing.Point(13, 80);
+            this.IGUIScale.Location = new System.Drawing.Point(13, 99);
             this.IGUIScale.Name = "IGUIScale";
             this.IGUIScale.Size = new System.Drawing.Size(50, 21);
             this.IGUIScale.TabIndex = 14;
@@ -213,7 +214,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Ebrima", 10F);
             this.label1.ForeColor = System.Drawing.Color.Silver;
-            this.label1.Location = new System.Drawing.Point(69, 54);
+            this.label1.Location = new System.Drawing.Point(69, 74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 19);
             this.label1.TabIndex = 15;
@@ -224,23 +225,11 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Ebrima", 10F);
             this.label2.ForeColor = System.Drawing.Color.Silver;
-            this.label2.Location = new System.Drawing.Point(69, 81);
+            this.label2.Location = new System.Drawing.Point(69, 101);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 19);
             this.label2.TabIndex = 16;
             this.label2.Text = "In Game UI Scale";
-            // 
-            // DebugModeCheckbox
-            // 
-            this.DebugModeCheckbox.AutoSize = true;
-            this.DebugModeCheckbox.Font = new System.Drawing.Font("Ebrima", 10F);
-            this.DebugModeCheckbox.ForeColor = System.Drawing.Color.Silver;
-            this.DebugModeCheckbox.Location = new System.Drawing.Point(13, 134);
-            this.DebugModeCheckbox.Name = "DebugModeCheckbox";
-            this.DebugModeCheckbox.Size = new System.Drawing.Size(166, 23);
-            this.DebugModeCheckbox.TabIndex = 18;
-            this.DebugModeCheckbox.Text = "Enable Debug Console";
-            this.DebugModeCheckbox.UseVisualStyleBackColor = true;
             // 
             // FontLabel
             // 
@@ -264,14 +253,48 @@
             this.FontSizeLabel.TabIndex = 15;
             this.FontSizeLabel.Text = "Font Size: ";
             // 
+            // HookTextBox
+            // 
+            this.HookTextBox.Location = new System.Drawing.Point(13, 48);
+            this.HookTextBox.Name = "HookTextBox";
+            this.HookTextBox.Size = new System.Drawing.Size(166, 20);
+            this.HookTextBox.TabIndex = 19;
+            this.HookTextBox.TextChanged += new System.EventHandler(this.HookTextBox_TextChanged);
+            // 
+            // Hooked_Text_Label
+            // 
+            this.Hooked_Text_Label.AutoSize = true;
+            this.Hooked_Text_Label.Font = new System.Drawing.Font("Ebrima", 10F);
+            this.Hooked_Text_Label.ForeColor = System.Drawing.Color.Silver;
+            this.Hooked_Text_Label.Location = new System.Drawing.Point(185, 49);
+            this.Hooked_Text_Label.Name = "Hooked_Text_Label";
+            this.Hooked_Text_Label.Size = new System.Drawing.Size(86, 19);
+            this.Hooked_Text_Label.TabIndex = 20;
+            this.Hooked_Text_Label.Text = "Hooked Text";
+            // 
+            // CountStageCB
+            // 
+            this.CountStageCB.AutoSize = true;
+            this.CountStageCB.Font = new System.Drawing.Font("Ebrima", 10F);
+            this.CountStageCB.ForeColor = System.Drawing.Color.Silver;
+            this.CountStageCB.Location = new System.Drawing.Point(13, 156);
+            this.CountStageCB.Name = "CountStageCB";
+            this.CountStageCB.Size = new System.Drawing.Size(147, 23);
+            this.CountStageCB.TabIndex = 21;
+            this.CountStageCB.Text = "Count Hook Stages";
+            this.CountStageCB.UseVisualStyleBackColor = true;
+            this.CountStageCB.CheckedChanged += new System.EventHandler(this.CountStageCB_CheckedChanged);
+            // 
             // Hook_Counter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.ClientSize = new System.Drawing.Size(475, 407);
+            this.Controls.Add(this.CountStageCB);
+            this.Controls.Add(this.Hooked_Text_Label);
+            this.Controls.Add(this.HookTextBox);
             this.Controls.Add(this.FontSizeLabel);
-            this.Controls.Add(this.DebugModeCheckbox);
             this.Controls.Add(this.FontLabel);
             this.Controls.Add(this.LowerThreshCheckbox);
             this.Controls.Add(this.label2);
@@ -308,9 +331,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox LowerThreshCheckbox;
-        private System.Windows.Forms.CheckBox DebugModeCheckbox;
         private System.Windows.Forms.Button ChangeFont;
         private System.Windows.Forms.Label FontSizeLabel;
         private System.Windows.Forms.Label FontLabel;
+        private System.Windows.Forms.TextBox HookTextBox;
+        private System.Windows.Forms.Label Hooked_Text_Label;
+        private System.Windows.Forms.CheckBox CountStageCB;
     }
 }

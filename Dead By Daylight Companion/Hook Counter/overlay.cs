@@ -41,15 +41,16 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                     if (!sList.Contains(f)) {
                         sList.Add(f);
                         G = this.CreateGraphics();
-                        G.DrawString("I", new Font(Hook_Counter.CurFontName, Hook_Counter.CurFontSize), new SolidBrush(Color.White), 170.0F, f);
+                        G.DrawString(Hook_Counter.HookText, new Font(Hook_Counter.CurFontName, Hook_Counter.CurFontSize), new SolidBrush(Color.White), 170.0F, f);
                     }
                 }
-                
-                for (int i = 0; i < Hook_Counter._2stage.Count; i++) {
-                    float f = float.Parse(Hook_Counter._2stage[i]);
-                    if (!_2List.Contains(f)) {
-                        _2List.Add(f);
-                        G.DrawString("I", new Font(Hook_Counter.CurFontName, Hook_Counter.CurFontSize), new SolidBrush(Color.White), 178.0F, f-47.0F);
+                if (Hook_Counter.HookText == "I") {
+                    for (int i = 0; i < Hook_Counter._2stage.Count; i++) {
+                        float f = float.Parse(Hook_Counter._2stage[i]);
+                        if (!_2List.Contains(f)) {
+                            _2List.Add(f);
+                            G.DrawString("I", new Font(Hook_Counter.CurFontName, Hook_Counter.CurFontSize), new SolidBrush(Color.White), 178.0F, f - 47.0F);
+                        }
                     }
                 }
                 bHasDrawn = true;
