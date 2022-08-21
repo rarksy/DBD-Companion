@@ -35,7 +35,7 @@ Settings include:
 - Toggle Ambient Occlusion
 
 Other Options:
-- 1:1 Sensitivity (Vertical killer sensitivity is slower than horizontal, this fixes that) | Credits to https://twitch.tv/gtvel for providing info on this
+- 1:1 Sensitivity (Vertical killer sensitivity is slower than horizontal, this fixes that) | Credits to [gtVel](https://twitch.tv/gtvel) for providing info on this
 - Export Config (Backup)
 - Copy Config To Clipboard (BASE-64 Encoded) (Used to share config settings with anyone)
 - Inject Config From Clipboard (used to apply settings copied from clipboard)
@@ -50,3 +50,5 @@ No. Nothing in the DBD Companion Is Bannable and 100% safe
 Head to my [discord](https://discord.gg/vKjjS8yazu) and go to the #faq channel for instructions
 
 # Social
+[Twitch](https://twitch.tv/rarksy)
+[Discord](https://discord.gg/vKjjS8yazu)
