@@ -3,6 +3,7 @@ using OpenCvSharp.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
@@ -159,8 +160,13 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
 
         private void CountStageCB_CheckedChanged(object sender, EventArgs e) {
             if (CountStageCB.Checked) {
-                HookTextBox.Enabled = false;
-                HookText = "I";
+                if (!File.Exists($@"resources\{res}\2stage100.png")) {
+                    CountStageCB.Checked = false;
+                    MessageBox.Show("Second Stage Resources Not Found, Disabling");
+                } else {
+                    HookTextBox.Enabled = false;
+                    HookText = "I";
+                }
             }
             else {
                 HookTextBox.Enabled = true;
@@ -188,7 +194,7 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             Mat mat = BitmapConverter.ToMat(frame);
             Bitmap det_first = ITM(mat, $@"resources\{res}\hook{IGUIScale.Text}.png", LowerThreshCheckbox.Checked ? 0.8 : 0.9, ref hCount);
             if (CountStageCB.Checked) {
-                Bitmap det_second = ITM(mat, $@"resources\{res}\2stage{IGUIScale.Text}.png", 0.9, ref hCount);
+                Bitmap det_second = ITM(mat, $@"resources\{res}\2stage{IGUIScale.Text}.png", 0.9, ref _2stage);
                 det_second.Dispose();
             }
             Bitmap det_endgame = ITM(mat, $@"resources\{res}\endgame{UIScale.Text}.png", 0.9, ref hCount);
@@ -196,7 +202,6 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             frame.Dispose();
             mat.Dispose();
             det_first.Dispose();
-
             det_endgame.Dispose();
         }
     }

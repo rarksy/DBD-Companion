@@ -35,21 +35,22 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
 
         private void DrawTimer_Tick(object sender, EventArgs e) {
             if (!bHasDrawn) {
-
+                G = this.CreateGraphics();
                 for (int i = 0; i < Hook_Counter.hCount.Count; i++) {
                     float f = float.Parse(Hook_Counter.hCount[i]);
                     if (!sList.Contains(f)) {
                         sList.Add(f);
-                        G = this.CreateGraphics();
                         G.DrawString(Hook_Counter.HookText, new Font(Hook_Counter.CurFontName, Hook_Counter.CurFontSize), new SolidBrush(Color.White), 170.0F, f);
+                        Console.WriteLine("1st");
                     }
                 }
                 if (Hook_Counter.HookText == "I") {
-                    for (int i = 0; i < Hook_Counter._2stage.Count; i++) {
-                        float f = float.Parse(Hook_Counter._2stage[i]);
-                        if (!_2List.Contains(f)) {
-                            _2List.Add(f);
-                            G.DrawString("I", new Font(Hook_Counter.CurFontName, Hook_Counter.CurFontSize), new SolidBrush(Color.White), 178.0F, f - 47.0F);
+                    for (int j = 0; j < Hook_Counter._2stage.Count; j++) {
+                        float fl = float.Parse(Hook_Counter._2stage[j]);
+                        if (!_2List.Contains(fl)) {
+                            _2List.Add(fl);
+                            G.DrawString("I", new Font(Hook_Counter.CurFontName, Hook_Counter.CurFontSize), new SolidBrush(Color.White), 178.0F, fl - 47.0F);
+                            Console.WriteLine("2nd");
                         }
                     }
                 }
