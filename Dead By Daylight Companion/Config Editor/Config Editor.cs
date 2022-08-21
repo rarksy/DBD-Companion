@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace Dead_By_Daylight_Companion.Config_Editor { //TODO: CREATE HANDLING FOR INVALID VALUES FOR CMB / TRACKBARS
+namespace Dead_By_Daylight_Companion.Config_Editor {
     public partial class Config_Editor : Form {
         public static string sPathToUse = string.Empty;
         static helper.FUNCS func = new helper.FUNCS();
@@ -126,8 +126,10 @@ namespace Dead_By_Daylight_Companion.Config_Editor { //TODO: CREATE HANDLING FOR
                 InfoPanel.Height += 1;
                 if (MiscPanel.Location.Y <= 63) {
                     MiscPanel.Location = new Point(MiscPanel.Location.X, MiscPanel.Location.Y + 1);
-                    MainPanel.Location = new Point(MainPanel.Location.X, MainPanel.Location.Y + 1);                  
+                    MainPanel.Location = new Point(MainPanel.Location.X, MainPanel.Location.Y + 1);
+                    Misc2Panel.Location = new Point(Misc2Panel.Location.X, Misc2Panel.Location.Y + 1);
                     MiscPanel.Height -= 1;
+                    Misc2Panel.Height -= 1;
                 }
             }
         }
@@ -138,7 +140,9 @@ namespace Dead_By_Daylight_Companion.Config_Editor { //TODO: CREATE HANDLING FOR
                 if (MiscPanel.Location.Y >= 38) {
                     MiscPanel.Location = new Point(MiscPanel.Location.X, MiscPanel.Location.Y - 1);
                     MainPanel.Location = new Point(MainPanel.Location.X, MainPanel.Location.Y - 1);
+                    Misc2Panel.Location = new Point(Misc2Panel.Location.X, Misc2Panel.Location.Y - 1);
                     MiscPanel.Height += 1;
+                    Misc2Panel.Height += 1;
                 }
             }
         }
@@ -450,16 +454,6 @@ namespace Dead_By_Daylight_Companion.Config_Editor { //TODO: CREATE HANDLING FOR
                 VSyncInfolabel.ForeColor = Color.Red;
                 VSyncInfolabel.Text = "VSync Enabled";
             }
-           
-            
-            //ViewDistanceCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.ViewDistanceQuality");
-            //ShadowCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.ShadowQuality");
-            //PostProcessingCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.PostProcessQuality");
-            //TextureCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.TextureQuality");
-            //EffectsCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.EffectsQuality");
-            //FoliageCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.FoliageQuality");
-            //ShadingCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.ShadingQuality");
-            //AnimationCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.AnimationQuality");
             
             var eini = new helper.IniFile(sPathToUse + @"\Engine.ini");
             if (eini.KeyExists("r.DefaultFeature.AntiAliasing", "/Script/Engine.GarbageCollectionSettings"))
@@ -510,6 +504,45 @@ namespace Dead_By_Daylight_Companion.Config_Editor { //TODO: CREATE HANDLING FOR
         private void Config_Editor_Activated(object sender, EventArgs e) {
             this.Width = 1000; 
             this.Height = 620;
+        }
+
+        public void ChangeSetting(string file, string _var, string val) {
+            string search_text = _var;
+            string old;
+            string n = String.Empty;
+            StreamReader sr = File.OpenText(file);
+            while ((old = sr.ReadLine()) != null) {
+                if (old.Contains(search_text)) {
+                    n += search_text + val + "\n";
+                }
+
+                if (!old.Contains(search_text)) {
+                    n += old + Environment.NewLine;
+                }
+            }
+            sr.Close();
+            File.WriteAllText(file, n);
+        }
+
+        private void OneToOneSensCB_CheckedChanged(object sender, EventArgs e) {
+            switch (OneToOneSensCB.Checked) {
+                case true:
+                    DialogResult result = MessageBox.Show("Applying 1:1 Sensitivity Is Intended For Killer ONLY\n Survivor Sensitivity Will No Longer Be 1:1 While This Is Enabled", "Confirm", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.No) {
+                        OneToOneSensCB.Checked = false;
+                    }
+                    else {
+                        //AxisMappings=(AxisName="TESTDBD",Scale=1.000000,Key=MouseX)
+                        helper.IniFile ini = new helper.IniFile(sPathToUse+@"\Input.ini");
+                        ChangeSetting(sPathToUse + @"\Input.ini", "AxisMappings=(AxisName=\"LookUp\",Scale=", "-1.550654,Key=MouseY)");
+                        //10 / 100
+                    }
+                    break;
+                case false:
+                    ChangeSetting(sPathToUse + @"\Input.ini", "AxisMappings=(AxisName=\"LookUp\",Scale=", "-1.000000,Key=MouseY)");
+                    break;
+            }
+            
         }
     }
 }

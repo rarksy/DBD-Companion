@@ -164,20 +164,24 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                     CountStageCB.Checked = false;
                     MessageBox.Show("Second Stage Resources Not Found, Disabling");
                 } else {
+                    Properties.Settings.Default.CountStages = true;
                     HookTextBox.Enabled = false;
                     HookText = "I";
                 }
             }
             else {
+                Properties.Settings.Default.CountStages = false;
                 HookTextBox.Enabled = true;
                 HookText = HookTextBox.Text;
             }
+            Properties.Settings.Default.Save();
         }
 
             private void Hook_Counter_Load(object sender, EventArgs e) {
             UIScale.SelectedIndex = Properties.Settings.Default.UIScale; 
             IGUIScale.SelectedIndex = Properties.Settings.Default.IGUIScale;
             HookTextBox.Text = Properties.Settings.Default.HookedText;
+            CountStageCB.Checked = Properties.Settings.Default.CountStages;
             FontLabel.Text = $"Font: {CurFontName}";
             FontSizeLabel.Text = $"Font Size: {CurFontSize}";
             

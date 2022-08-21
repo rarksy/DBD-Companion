@@ -25,7 +25,6 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.TitleBarPanel = new System.Windows.Forms.Panel();
-            this.BackToHub = new System.Windows.Forms.Button();
             this.MinimizeConfigEditor = new System.Windows.Forms.Label();
             this.ExitConfigEditor = new System.Windows.Forms.Label();
             this.TitleLabel = new System.Windows.Forms.Label();
@@ -74,12 +73,16 @@
             this.UserLabel = new System.Windows.Forms.Label();
             this.VSyncInfolabel = new System.Windows.Forms.Label();
             this.FPSInfoLabel = new System.Windows.Forms.Label();
+            this.BackToHub = new System.Windows.Forms.Button();
+            this.Misc2Panel = new System.Windows.Forms.Panel();
+            this.OneToOneSensCB = new System.Windows.Forms.CheckBox();
             this.TitleBarPanel.SuspendLayout();
             this.MiscPanel.SuspendLayout();
             this.ConfigPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ResScaleTrackbar)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.InfoPanel.SuspendLayout();
+            this.Misc2Panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // TitleBarPanel
@@ -98,24 +101,6 @@
             this.TitleBarPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitleBarPanel_MouseDown);
             this.TitleBarPanel.MouseEnter += new System.EventHandler(this.TitleBarPanel_MouseEnter);
             this.TitleBarPanel.MouseLeave += new System.EventHandler(this.TitleBarPanel_MouseLeave);
-            // 
-            // BackToHub
-            // 
-            this.BackToHub.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.BackToHub.Dock = System.Windows.Forms.DockStyle.Left;
-            this.BackToHub.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.BackToHub.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.BackToHub.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.BackToHub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BackToHub.Font = new System.Drawing.Font("Ebrima", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BackToHub.ForeColor = System.Drawing.Color.Silver;
-            this.BackToHub.Location = new System.Drawing.Point(0, 0);
-            this.BackToHub.Name = "BackToHub";
-            this.BackToHub.Size = new System.Drawing.Size(102, 30);
-            this.BackToHub.TabIndex = 11;
-            this.BackToHub.Text = "← Back To Hub";
-            this.BackToHub.UseVisualStyleBackColor = false;
-            this.BackToHub.Click += new System.EventHandler(this.BackToHub_Click);
             // 
             // MinimizeConfigEditor
             // 
@@ -821,12 +806,53 @@
             this.FPSInfoLabel.TabIndex = 2;
             this.FPSInfoLabel.Text = "FPS Unlocked";
             // 
+            // BackToHub
+            // 
+            this.BackToHub.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.BackToHub.Dock = System.Windows.Forms.DockStyle.Left;
+            this.BackToHub.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.BackToHub.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.BackToHub.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.BackToHub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BackToHub.Font = new System.Drawing.Font("Ebrima", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BackToHub.ForeColor = System.Drawing.Color.Silver;
+            this.BackToHub.Location = new System.Drawing.Point(0, 0);
+            this.BackToHub.Name = "BackToHub";
+            this.BackToHub.Size = new System.Drawing.Size(102, 30);
+            this.BackToHub.TabIndex = 11;
+            this.BackToHub.Text = "← Back To Hub";
+            this.BackToHub.UseVisualStyleBackColor = false;
+            this.BackToHub.Click += new System.EventHandler(this.BackToHub_Click);
+            // 
+            // Misc2Panel
+            // 
+            this.Misc2Panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.Misc2Panel.Controls.Add(this.OneToOneSensCB);
+            this.Misc2Panel.Location = new System.Drawing.Point(12, 275);
+            this.Misc2Panel.Name = "Misc2Panel";
+            this.Misc2Panel.Size = new System.Drawing.Size(242, 339);
+            this.Misc2Panel.TabIndex = 9;
+            // 
+            // OneToOneSensCB
+            // 
+            this.OneToOneSensCB.AutoSize = true;
+            this.OneToOneSensCB.Font = new System.Drawing.Font("Ebrima", 9F, System.Drawing.FontStyle.Bold);
+            this.OneToOneSensCB.ForeColor = System.Drawing.Color.Silver;
+            this.OneToOneSensCB.Location = new System.Drawing.Point(18, 15);
+            this.OneToOneSensCB.Name = "OneToOneSensCB";
+            this.OneToOneSensCB.Size = new System.Drawing.Size(104, 19);
+            this.OneToOneSensCB.TabIndex = 0;
+            this.OneToOneSensCB.Text = "1:1 Sensitivity";
+            this.OneToOneSensCB.UseVisualStyleBackColor = true;
+            this.OneToOneSensCB.CheckedChanged += new System.EventHandler(this.OneToOneSensCB_CheckedChanged);
+            // 
             // Config_Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.ClientSize = new System.Drawing.Size(1000, 620);
+            this.Controls.Add(this.Misc2Panel);
             this.Controls.Add(this.InfoPanel);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.ConfigPanel);
@@ -849,6 +875,8 @@
             this.MainPanel.PerformLayout();
             this.InfoPanel.ResumeLayout(false);
             this.InfoPanel.PerformLayout();
+            this.Misc2Panel.ResumeLayout(false);
+            this.Misc2Panel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -905,5 +933,7 @@
         private System.Windows.Forms.Label VSyncInfolabel;
         private System.Windows.Forms.Label FPSInfoLabel;
         private System.Windows.Forms.Button BackToHub;
+        private System.Windows.Forms.Panel Misc2Panel;
+        private System.Windows.Forms.CheckBox OneToOneSensCB;
     }
 }

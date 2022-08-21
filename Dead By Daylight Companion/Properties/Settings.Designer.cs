@@ -82,5 +82,17 @@ namespace Dead_By_Daylight_Companion.Properties {
                 this["HookedText"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CountStages {
+            get {
+                return ((bool)(this["CountStages"]));
+            }
+            set {
+                this["CountStages"] = value;
+            }
+        }
     }
 }

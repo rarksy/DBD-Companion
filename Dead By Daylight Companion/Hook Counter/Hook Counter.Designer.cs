@@ -27,7 +27,6 @@
             this.TitlePanel = new System.Windows.Forms.Panel();
             this.MinimizeHookCounter = new System.Windows.Forms.Label();
             this.ExitHookCounter = new System.Windows.Forms.Label();
-            this.BackToHub = new System.Windows.Forms.Button();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.SettingPanel = new System.Windows.Forms.Panel();
             this.ChangeFont = new System.Windows.Forms.Button();
@@ -52,7 +51,6 @@
             this.TitlePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.TitlePanel.Controls.Add(this.MinimizeHookCounter);
             this.TitlePanel.Controls.Add(this.ExitHookCounter);
-            this.TitlePanel.Controls.Add(this.BackToHub);
             this.TitlePanel.Controls.Add(this.TitleLabel);
             this.TitlePanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TitlePanel.Location = new System.Drawing.Point(0, 0);
@@ -89,30 +87,12 @@
             this.ExitHookCounter.MouseEnter += new System.EventHandler(this.ExitHookCounter_MouseEnter);
             this.ExitHookCounter.MouseLeave += new System.EventHandler(this.ExitHookCounter_MouseLeave);
             // 
-            // BackToHub
-            // 
-            this.BackToHub.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.BackToHub.Dock = System.Windows.Forms.DockStyle.Left;
-            this.BackToHub.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.BackToHub.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.BackToHub.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.BackToHub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BackToHub.Font = new System.Drawing.Font("Ebrima", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BackToHub.ForeColor = System.Drawing.Color.Silver;
-            this.BackToHub.Location = new System.Drawing.Point(0, 0);
-            this.BackToHub.Name = "BackToHub";
-            this.BackToHub.Size = new System.Drawing.Size(102, 37);
-            this.BackToHub.TabIndex = 12;
-            this.BackToHub.Text = "← Back To Hub";
-            this.BackToHub.UseVisualStyleBackColor = false;
-            this.BackToHub.Click += new System.EventHandler(this.BackToHub_Click);
-            // 
             // TitleLabel
             // 
             this.TitleLabel.AutoSize = true;
             this.TitleLabel.Font = new System.Drawing.Font("Ebrima", 10F, System.Drawing.FontStyle.Bold);
             this.TitleLabel.ForeColor = System.Drawing.Color.Silver;
-            this.TitleLabel.Location = new System.Drawing.Point(179, 9);
+            this.TitleLabel.Location = new System.Drawing.Point(163, 9);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(156, 19);
             this.TitleLabel.TabIndex = 3;
@@ -169,8 +149,7 @@
             this.LowerThreshCheckbox.Size = new System.Drawing.Size(192, 23);
             this.LowerThreshCheckbox.TabIndex = 17;
             this.LowerThreshCheckbox.Text = "Lower Detection Threshold";
-            this.tTooltip.SetToolTip(this.LowerThreshCheckbox, "Lowers Detection Threshold If Detection Isnt Working (Needed On Doctor) IF YOUR N" +
-        "OT HAVING ISSUES LEAVE THIS OFF\r\n");
+            this.tTooltip.SetToolTip(this.LowerThreshCheckbox, "Lowers Detection Threshold If Detection Isnt Working (experimental)\r\n\r\n");
             this.LowerThreshCheckbox.UseVisualStyleBackColor = true;
             // 
             // UIScale
@@ -259,6 +238,7 @@
             this.HookTextBox.Name = "HookTextBox";
             this.HookTextBox.Size = new System.Drawing.Size(166, 20);
             this.HookTextBox.TabIndex = 19;
+            this.HookTextBox.Text = "Hooked";
             this.HookTextBox.TextChanged += new System.EventHandler(this.HookTextBox_TextChanged);
             // 
             // Hooked_Text_Label
@@ -321,7 +301,6 @@
         private System.Windows.Forms.Panel TitlePanel;
         private System.Windows.Forms.Panel SettingPanel;
         private System.Windows.Forms.Label TitleLabel;
-        private System.Windows.Forms.Button BackToHub;
         private System.Windows.Forms.Timer Thread;
         private System.Windows.Forms.ToolTip tTooltip;
         private System.Windows.Forms.Label MinimizeHookCounter;
