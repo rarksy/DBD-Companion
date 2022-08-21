@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace Dead_By_Daylight_Companion.Config_Editor {
+namespace Dead_By_Daylight_Companion.Config_Editor { //TODO: CREATE HANDLING FOR INVALID VALUES FOR CMB / TRACKBARS
     public partial class Config_Editor : Form {
         public static string sPathToUse = string.Empty;
         static helper.FUNCS func = new helper.FUNCS();
@@ -81,6 +82,27 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
             GamePathTextBox.Text = sPathToUse;
             UserLabel.Text += Environment.UserName;
             InfoPanel.Height = 0;
+            List<string> variables = new List<string> {
+                "sgViewDistanceQuality",
+                "sgShadowQuality",
+                "sgPostProcessQuality",
+                "sgTextureQuality",
+                "sgEffectsQuality",
+                "sgFoliageQuality",
+                "sgShadingQuality",
+                "sgAnimationQuality"
+            };
+            
+            foreach (ComboBox c in MainPanel.Controls.OfType<ComboBox>()) {
+                foreach (string s in variables) {
+                    if (c.Name.Contains(s)) {
+                        var userini = new helper.IniFile(sPathToUse + @"\GameUserSettings.ini");
+                        int value = userini.ReadInt("ScalabilityGroups", s.Insert(2, "."));
+                        if (value < 5) c.SelectedIndex = value;
+                        else c.SelectedIndex = 4;
+                    }
+                }
+            }
             TimerInit.Start();
         }
 
@@ -131,7 +153,7 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
         
         private void ViewDistanceCMB_SelectedIndexChanged(object sender, EventArgs e) {
             var ini = new helper.IniFile(sPathToUse + @"\GameUserSettings.ini");
-            ini.Write("sg.ViewDistanceQuality", ViewDistanceCMB.SelectedIndex.ToString(), "ScalabilityGroups");
+            ini.Write("sg.ViewDistanceQuality", sgViewDistanceQualityCMB.SelectedIndex.ToString(), "ScalabilityGroups");
         }
 
         private void AntiAliasingCMB_SelectedIndexChanged(object sender, EventArgs e) {
@@ -149,37 +171,37 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
 
         private void FoliageCMB_SelectedIndexChanged(object sender, EventArgs e) {
             var ini = new helper.IniFile(sPathToUse + @"\GameUserSettings.ini");
-            ini.Write("sg.FoliageQuality", FoliageCMB.SelectedIndex.ToString(), "ScalabilityGroups");
+            ini.Write("sg.FoliageQuality", sgFoliageQualityCMB.SelectedIndex.ToString(), "ScalabilityGroups");
         }
 
         private void ShadingCMB_SelectedIndexChanged(object sender, EventArgs e) {
             var ini = new helper.IniFile(sPathToUse + @"\GameUserSettings.ini");
-            ini.Write("sg.ShadingQuality", ShadingCMB.SelectedIndex.ToString(), "ScalabilityGroups");
+            ini.Write("sg.ShadingQuality", sgShadingQualityCMB.SelectedIndex.ToString(), "ScalabilityGroups");
         }
 
         private void ShadowCMB_SelectedIndexChanged(object sender, EventArgs e) {
             var ini = new helper.IniFile(sPathToUse + @"\GameUserSettings.ini");
-            ini.Write("sg.ShadowQuality", ShadowCMB.SelectedIndex.ToString(), "ScalabilityGroups");
+            ini.Write("sg.ShadowQuality", sgShadowQualityCMB.SelectedIndex.ToString(), "ScalabilityGroups");
         }
 
         private void PostProcessingCMB_SelectedIndexChanged(object sender, EventArgs e) {
             var ini = new helper.IniFile(sPathToUse + @"\GameUserSettings.ini");
-            ini.Write("sg.PostProcessQuality", PostProcessingCMB.SelectedIndex.ToString(), "ScalabilityGroups");
+            ini.Write("sg.PostProcessQuality", sgPostProcessQualityCMB.SelectedIndex.ToString(), "ScalabilityGroups");
         }
 
         private void AnimationCMB_SelectedIndexChanged(object sender, EventArgs e) {
             var ini = new helper.IniFile(sPathToUse + @"\GameUserSettings.ini");
-            ini.Write("sg.AnimationQuality", AnimationCMB.SelectedIndex.ToString(), "ScalabilityGroups");
+            ini.Write("sg.AnimationQuality", sgAnimationQualityCMB.SelectedIndex.ToString(), "ScalabilityGroups");
         }
 
         private void TextureCMB_SelectedIndexChanged(object sender, EventArgs e) {
             var ini = new helper.IniFile(sPathToUse + @"\GameUserSettings.ini");
-            ini.Write("sg.TextureQuality", TextureCMB.SelectedIndex.ToString(), "ScalabilityGroups");
+            ini.Write("sg.TextureQuality", sgTextureQualityCMB.SelectedIndex.ToString(), "ScalabilityGroups");
         }
 
         private void EffectsCMB_SelectedIndexChanged(object sender, EventArgs e) {
             var ini = new helper.IniFile(sPathToUse + @"\GameUserSettings.ini");
-            ini.Write("sg.EffectsQuality", EffectsCMB.SelectedIndex.ToString(), "ScalabilityGroups");
+            ini.Write("sg.EffectsQuality", sgEffectsQualityCMB.SelectedIndex.ToString(), "ScalabilityGroups");
         }
         
         private void ResScaleTrackbar_Scroll(object sender, EventArgs e) {
@@ -325,7 +347,6 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
             Application.Restart();
             Application.Exit();
         }
-
         private void TimerInit_Tick(object sender, EventArgs e) {
             var userini = new helper.IniFile(sPathToUse + @"\Engine.ini");
 
@@ -429,20 +450,22 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
                 VSyncInfolabel.ForeColor = Color.Red;
                 VSyncInfolabel.Text = "VSync Enabled";
             }
+           
             
-            ViewDistanceCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.ViewDistanceQuality");
+            //ViewDistanceCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.ViewDistanceQuality");
+            //ShadowCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.ShadowQuality");
+            //PostProcessingCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.PostProcessQuality");
+            //TextureCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.TextureQuality");
+            //EffectsCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.EffectsQuality");
+            //FoliageCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.FoliageQuality");
+            //ShadingCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.ShadingQuality");
+            //AnimationCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.AnimationQuality");
+            
             var eini = new helper.IniFile(sPathToUse + @"\Engine.ini");
             if (eini.KeyExists("r.DefaultFeature.AntiAliasing", "/Script/Engine.GarbageCollectionSettings"))
                 AntiAliasingCMB.SelectedIndex = 0;
             else
                 AntiAliasingCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.AntiAliasingQuality");
-            ShadowCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.ShadowQuality");
-            PostProcessingCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.PostProcessQuality");
-            TextureCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.TextureQuality");
-            EffectsCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.EffectsQuality");
-            FoliageCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.FoliageQuality");
-            ShadingCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.ShadingQuality");
-            AnimationCMB.SelectedIndex = userini.ReadInt("ScalabilityGroups", "sg.AnimationQuality");
 
 
             TimerInit.Stop();

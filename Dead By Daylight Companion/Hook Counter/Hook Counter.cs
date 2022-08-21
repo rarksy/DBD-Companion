@@ -138,7 +138,6 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-
         private void TitleLabel_MouseDown(object sender, MouseEventArgs e) {
             TitlePanel_MouseDown(sender, e);
         }

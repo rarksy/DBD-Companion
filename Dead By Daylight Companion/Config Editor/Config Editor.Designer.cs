@@ -46,15 +46,15 @@
             this.TimerInit = new System.Windows.Forms.Timer(this.components);
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ResScaleTrackbar = new System.Windows.Forms.TrackBar();
-            this.AnimationCMB = new System.Windows.Forms.ComboBox();
-            this.ShadingCMB = new System.Windows.Forms.ComboBox();
-            this.FoliageCMB = new System.Windows.Forms.ComboBox();
-            this.EffectsCMB = new System.Windows.Forms.ComboBox();
-            this.TextureCMB = new System.Windows.Forms.ComboBox();
-            this.PostProcessingCMB = new System.Windows.Forms.ComboBox();
-            this.ShadowCMB = new System.Windows.Forms.ComboBox();
+            this.sgAnimationQualityCMB = new System.Windows.Forms.ComboBox();
+            this.sgShadingQualityCMB = new System.Windows.Forms.ComboBox();
+            this.sgFoliageQualityCMB = new System.Windows.Forms.ComboBox();
+            this.sgEffectsQualityCMB = new System.Windows.Forms.ComboBox();
+            this.sgTextureQualityCMB = new System.Windows.Forms.ComboBox();
+            this.sgPostProcessQualityCMB = new System.Windows.Forms.ComboBox();
+            this.sgShadowQualityCMB = new System.Windows.Forms.ComboBox();
             this.AntiAliasingCMB = new System.Windows.Forms.ComboBox();
-            this.ViewDistanceCMB = new System.Windows.Forms.ComboBox();
+            this.sgViewDistanceQualityCMB = new System.Windows.Forms.ComboBox();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.ResQualityLabel = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -406,146 +406,146 @@
             this.ResScaleTrackbar.Value = 70;
             this.ResScaleTrackbar.Scroll += new System.EventHandler(this.ResScaleTrackbar_Scroll);
             // 
-            // AnimationCMB
+            // sgAnimationQualityCMB
             // 
-            this.AnimationCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.AnimationCMB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.AnimationCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.AnimationCMB.ForeColor = System.Drawing.Color.Silver;
-            this.AnimationCMB.FormattingEnabled = true;
-            this.AnimationCMB.Items.AddRange(new object[] {
+            this.sgAnimationQualityCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.sgAnimationQualityCMB.Cursor = System.Windows.Forms.Cursors.Default;
+            this.sgAnimationQualityCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sgAnimationQualityCMB.ForeColor = System.Drawing.Color.Silver;
+            this.sgAnimationQualityCMB.FormattingEnabled = true;
+            this.sgAnimationQualityCMB.Items.AddRange(new object[] {
             "Very Low",
             "Low",
             "Medium",
             "High",
             "Ultra"});
-            this.AnimationCMB.Location = new System.Drawing.Point(354, 90);
-            this.AnimationCMB.Name = "AnimationCMB";
-            this.AnimationCMB.Size = new System.Drawing.Size(121, 21);
-            this.AnimationCMB.TabIndex = 24;
-            this.ToolTip.SetToolTip(this.AnimationCMB, "Determines The Length At Which Animations Will Retain The Highest Functioning Ani" +
+            this.sgAnimationQualityCMB.Location = new System.Drawing.Point(371, 90);
+            this.sgAnimationQualityCMB.Name = "sgAnimationQualityCMB";
+            this.sgAnimationQualityCMB.Size = new System.Drawing.Size(121, 21);
+            this.sgAnimationQualityCMB.TabIndex = 24;
+            this.ToolTip.SetToolTip(this.sgAnimationQualityCMB, "Determines The Length At Which Animations Will Retain The Highest Functioning Ani" +
         "mation");
-            this.AnimationCMB.SelectedIndexChanged += new System.EventHandler(this.AnimationCMB_SelectedIndexChanged);
+            this.sgAnimationQualityCMB.SelectedIndexChanged += new System.EventHandler(this.AnimationCMB_SelectedIndexChanged);
             // 
-            // ShadingCMB
+            // sgShadingQualityCMB
             // 
-            this.ShadingCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ShadingCMB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.ShadingCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ShadingCMB.ForeColor = System.Drawing.Color.Silver;
-            this.ShadingCMB.FormattingEnabled = true;
-            this.ShadingCMB.Items.AddRange(new object[] {
+            this.sgShadingQualityCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.sgShadingQualityCMB.Cursor = System.Windows.Forms.Cursors.Default;
+            this.sgShadingQualityCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sgShadingQualityCMB.ForeColor = System.Drawing.Color.Silver;
+            this.sgShadingQualityCMB.FormattingEnabled = true;
+            this.sgShadingQualityCMB.Items.AddRange(new object[] {
             "Very Low",
             "Low",
             "Medium",
             "High",
             "Ultra"});
-            this.ShadingCMB.Location = new System.Drawing.Point(543, 28);
-            this.ShadingCMB.Name = "ShadingCMB";
-            this.ShadingCMB.Size = new System.Drawing.Size(121, 21);
-            this.ShadingCMB.TabIndex = 22;
-            this.ToolTip.SetToolTip(this.ShadingCMB, "Determines How Strong Textures & Materials Will Reflect Incoming Light");
-            this.ShadingCMB.SelectedIndexChanged += new System.EventHandler(this.ShadingCMB_SelectedIndexChanged);
+            this.sgShadingQualityCMB.Location = new System.Drawing.Point(543, 28);
+            this.sgShadingQualityCMB.Name = "sgShadingQualityCMB";
+            this.sgShadingQualityCMB.Size = new System.Drawing.Size(121, 21);
+            this.sgShadingQualityCMB.TabIndex = 22;
+            this.ToolTip.SetToolTip(this.sgShadingQualityCMB, "Determines How Strong Textures & Materials Will Reflect Incoming Light");
+            this.sgShadingQualityCMB.SelectedIndexChanged += new System.EventHandler(this.ShadingCMB_SelectedIndexChanged);
             // 
-            // FoliageCMB
+            // sgFoliageQualityCMB
             // 
-            this.FoliageCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.FoliageCMB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.FoliageCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.FoliageCMB.ForeColor = System.Drawing.Color.Silver;
-            this.FoliageCMB.FormattingEnabled = true;
-            this.FoliageCMB.Items.AddRange(new object[] {
+            this.sgFoliageQualityCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.sgFoliageQualityCMB.Cursor = System.Windows.Forms.Cursors.Default;
+            this.sgFoliageQualityCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sgFoliageQualityCMB.ForeColor = System.Drawing.Color.Silver;
+            this.sgFoliageQualityCMB.FormattingEnabled = true;
+            this.sgFoliageQualityCMB.Items.AddRange(new object[] {
             "Very Low",
             "Low",
             "Medium",
             "High",
             "Ultra"});
-            this.FoliageCMB.Location = new System.Drawing.Point(354, 28);
-            this.FoliageCMB.Name = "FoliageCMB";
-            this.FoliageCMB.Size = new System.Drawing.Size(121, 21);
-            this.FoliageCMB.TabIndex = 20;
-            this.ToolTip.SetToolTip(this.FoliageCMB, "Determines The Thickness Of Foliage Such As Trees, Shrubs & Bushes\r\n");
-            this.FoliageCMB.SelectedIndexChanged += new System.EventHandler(this.FoliageCMB_SelectedIndexChanged);
+            this.sgFoliageQualityCMB.Location = new System.Drawing.Point(371, 28);
+            this.sgFoliageQualityCMB.Name = "sgFoliageQualityCMB";
+            this.sgFoliageQualityCMB.Size = new System.Drawing.Size(121, 21);
+            this.sgFoliageQualityCMB.TabIndex = 20;
+            this.ToolTip.SetToolTip(this.sgFoliageQualityCMB, "Determines The Thickness Of Foliage Such As Trees, Shrubs & Bushes\r\n");
+            this.sgFoliageQualityCMB.SelectedIndexChanged += new System.EventHandler(this.FoliageCMB_SelectedIndexChanged);
             // 
-            // EffectsCMB
+            // sgEffectsQualityCMB
             // 
-            this.EffectsCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.EffectsCMB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.EffectsCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.EffectsCMB.ForeColor = System.Drawing.Color.Silver;
-            this.EffectsCMB.FormattingEnabled = true;
-            this.EffectsCMB.Items.AddRange(new object[] {
+            this.sgEffectsQualityCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.sgEffectsQualityCMB.Cursor = System.Windows.Forms.Cursors.Default;
+            this.sgEffectsQualityCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sgEffectsQualityCMB.ForeColor = System.Drawing.Color.Silver;
+            this.sgEffectsQualityCMB.FormattingEnabled = true;
+            this.sgEffectsQualityCMB.Items.AddRange(new object[] {
             "Very Low",
             "Low",
             "Medium",
             "High",
             "Ultra"});
-            this.EffectsCMB.Location = new System.Drawing.Point(203, 147);
-            this.EffectsCMB.Name = "EffectsCMB";
-            this.EffectsCMB.Size = new System.Drawing.Size(121, 21);
-            this.EffectsCMB.TabIndex = 18;
-            this.ToolTip.SetToolTip(this.EffectsCMB, "Determines The Visual Quality Of In-Game Effects Such As Fire, Blood etc\r\n");
-            this.EffectsCMB.SelectedIndexChanged += new System.EventHandler(this.EffectsCMB_SelectedIndexChanged);
+            this.sgEffectsQualityCMB.Location = new System.Drawing.Point(195, 147);
+            this.sgEffectsQualityCMB.Name = "sgEffectsQualityCMB";
+            this.sgEffectsQualityCMB.Size = new System.Drawing.Size(121, 21);
+            this.sgEffectsQualityCMB.TabIndex = 18;
+            this.ToolTip.SetToolTip(this.sgEffectsQualityCMB, "Determines The Visual Quality Of In-Game Effects Such As Fire, Blood etc\r\n");
+            this.sgEffectsQualityCMB.SelectedIndexChanged += new System.EventHandler(this.EffectsCMB_SelectedIndexChanged);
             // 
-            // TextureCMB
+            // sgTextureQualityCMB
             // 
-            this.TextureCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.TextureCMB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.TextureCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.TextureCMB.ForeColor = System.Drawing.Color.Silver;
-            this.TextureCMB.FormattingEnabled = true;
-            this.TextureCMB.Items.AddRange(new object[] {
+            this.sgTextureQualityCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.sgTextureQualityCMB.Cursor = System.Windows.Forms.Cursors.Default;
+            this.sgTextureQualityCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sgTextureQualityCMB.ForeColor = System.Drawing.Color.Silver;
+            this.sgTextureQualityCMB.FormattingEnabled = true;
+            this.sgTextureQualityCMB.Items.AddRange(new object[] {
             "Very Low",
             "Low",
             "Medium",
             "High",
             "Ultra"});
-            this.TextureCMB.Location = new System.Drawing.Point(14, 146);
-            this.TextureCMB.Name = "TextureCMB";
-            this.TextureCMB.Size = new System.Drawing.Size(121, 21);
-            this.TextureCMB.TabIndex = 16;
-            this.ToolTip.SetToolTip(this.TextureCMB, "Determines The Visual Quality Of Texture On Models\r\n");
-            this.TextureCMB.SelectedIndexChanged += new System.EventHandler(this.TextureCMB_SelectedIndexChanged);
+            this.sgTextureQualityCMB.Location = new System.Drawing.Point(14, 146);
+            this.sgTextureQualityCMB.Name = "sgTextureQualityCMB";
+            this.sgTextureQualityCMB.Size = new System.Drawing.Size(121, 21);
+            this.sgTextureQualityCMB.TabIndex = 16;
+            this.ToolTip.SetToolTip(this.sgTextureQualityCMB, "Determines The Visual Quality Of Texture On Models\r\n");
+            this.sgTextureQualityCMB.SelectedIndexChanged += new System.EventHandler(this.TextureCMB_SelectedIndexChanged);
             // 
-            // PostProcessingCMB
+            // sgPostProcessQualityCMB
             // 
-            this.PostProcessingCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.PostProcessingCMB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.PostProcessingCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.PostProcessingCMB.ForeColor = System.Drawing.Color.Silver;
-            this.PostProcessingCMB.FormattingEnabled = true;
-            this.PostProcessingCMB.Items.AddRange(new object[] {
+            this.sgPostProcessQualityCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.sgPostProcessQualityCMB.Cursor = System.Windows.Forms.Cursors.Default;
+            this.sgPostProcessQualityCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sgPostProcessQualityCMB.ForeColor = System.Drawing.Color.Silver;
+            this.sgPostProcessQualityCMB.FormattingEnabled = true;
+            this.sgPostProcessQualityCMB.Items.AddRange(new object[] {
             "Very Low",
             "Low",
             "Medium",
             "High",
             "Ultra"});
-            this.PostProcessingCMB.Location = new System.Drawing.Point(203, 87);
-            this.PostProcessingCMB.Name = "PostProcessingCMB";
-            this.PostProcessingCMB.Size = new System.Drawing.Size(121, 21);
-            this.PostProcessingCMB.TabIndex = 14;
-            this.ToolTip.SetToolTip(this.PostProcessingCMB, "Determines The Strength Of Post Processing Filters Applied By BHVR");
-            this.PostProcessingCMB.SelectedIndexChanged += new System.EventHandler(this.PostProcessingCMB_SelectedIndexChanged);
+            this.sgPostProcessQualityCMB.Location = new System.Drawing.Point(195, 87);
+            this.sgPostProcessQualityCMB.Name = "sgPostProcessQualityCMB";
+            this.sgPostProcessQualityCMB.Size = new System.Drawing.Size(121, 21);
+            this.sgPostProcessQualityCMB.TabIndex = 14;
+            this.ToolTip.SetToolTip(this.sgPostProcessQualityCMB, "Determines The Strength Of Post Processing Filters Applied By BHVR");
+            this.sgPostProcessQualityCMB.SelectedIndexChanged += new System.EventHandler(this.PostProcessingCMB_SelectedIndexChanged);
             // 
-            // ShadowCMB
+            // sgShadowQualityCMB
             // 
-            this.ShadowCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ShadowCMB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.ShadowCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ShadowCMB.ForeColor = System.Drawing.Color.Silver;
-            this.ShadowCMB.FormattingEnabled = true;
-            this.ShadowCMB.Items.AddRange(new object[] {
+            this.sgShadowQualityCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.sgShadowQualityCMB.Cursor = System.Windows.Forms.Cursors.Default;
+            this.sgShadowQualityCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sgShadowQualityCMB.ForeColor = System.Drawing.Color.Silver;
+            this.sgShadowQualityCMB.FormattingEnabled = true;
+            this.sgShadowQualityCMB.Items.AddRange(new object[] {
             "Very Low",
             "Low",
             "Medium",
             "High",
             "Ultra"});
-            this.ShadowCMB.Location = new System.Drawing.Point(14, 87);
-            this.ShadowCMB.Name = "ShadowCMB";
-            this.ShadowCMB.Size = new System.Drawing.Size(121, 21);
-            this.ShadowCMB.TabIndex = 12;
-            this.ToolTip.SetToolTip(this.ShadowCMB, "Determines The Quality Of The Harshness & Visibility Of Shadows\r\n");
-            this.ShadowCMB.SelectedIndexChanged += new System.EventHandler(this.ShadowCMB_SelectedIndexChanged);
+            this.sgShadowQualityCMB.Location = new System.Drawing.Point(14, 87);
+            this.sgShadowQualityCMB.Name = "sgShadowQualityCMB";
+            this.sgShadowQualityCMB.Size = new System.Drawing.Size(121, 21);
+            this.sgShadowQualityCMB.TabIndex = 12;
+            this.ToolTip.SetToolTip(this.sgShadowQualityCMB, "Determines The Quality Of The Harshness & Visibility Of Shadows\r\n");
+            this.sgShadowQualityCMB.SelectedIndexChanged += new System.EventHandler(this.ShadowCMB_SelectedIndexChanged);
             // 
             // AntiAliasingCMB
             // 
@@ -561,33 +561,33 @@
             "Medium",
             "High",
             "Ultra"});
-            this.AntiAliasingCMB.Location = new System.Drawing.Point(203, 28);
+            this.AntiAliasingCMB.Location = new System.Drawing.Point(195, 28);
             this.AntiAliasingCMB.Name = "AntiAliasingCMB";
             this.AntiAliasingCMB.Size = new System.Drawing.Size(121, 21);
             this.AntiAliasingCMB.TabIndex = 10;
             this.ToolTip.SetToolTip(this.AntiAliasingCMB, "Determines The Removal Of Jagged Lines On Models");
             this.AntiAliasingCMB.SelectedIndexChanged += new System.EventHandler(this.AntiAliasingCMB_SelectedIndexChanged);
             // 
-            // ViewDistanceCMB
+            // sgViewDistanceQualityCMB
             // 
-            this.ViewDistanceCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.ViewDistanceCMB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.ViewDistanceCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ViewDistanceCMB.ForeColor = System.Drawing.Color.Silver;
-            this.ViewDistanceCMB.FormattingEnabled = true;
-            this.ViewDistanceCMB.Items.AddRange(new object[] {
+            this.sgViewDistanceQualityCMB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.sgViewDistanceQualityCMB.Cursor = System.Windows.Forms.Cursors.Default;
+            this.sgViewDistanceQualityCMB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.sgViewDistanceQualityCMB.ForeColor = System.Drawing.Color.Silver;
+            this.sgViewDistanceQualityCMB.FormattingEnabled = true;
+            this.sgViewDistanceQualityCMB.Items.AddRange(new object[] {
             "Very Low",
             "Low",
             "Medium",
             "High",
             "Ultra"});
-            this.ViewDistanceCMB.Location = new System.Drawing.Point(14, 28);
-            this.ViewDistanceCMB.Name = "ViewDistanceCMB";
-            this.ViewDistanceCMB.Size = new System.Drawing.Size(121, 21);
-            this.ViewDistanceCMB.TabIndex = 0;
-            this.ToolTip.SetToolTip(this.ViewDistanceCMB, "Determines The Distance At Which Objects And The In-Game World Will Be Visible To" +
+            this.sgViewDistanceQualityCMB.Location = new System.Drawing.Point(14, 28);
+            this.sgViewDistanceQualityCMB.Name = "sgViewDistanceQualityCMB";
+            this.sgViewDistanceQualityCMB.Size = new System.Drawing.Size(121, 21);
+            this.sgViewDistanceQualityCMB.TabIndex = 0;
+            this.ToolTip.SetToolTip(this.sgViewDistanceQualityCMB, "Determines The Distance At Which Objects And The In-Game World Will Be Visible To" +
         " The Player");
-            this.ViewDistanceCMB.SelectedIndexChanged += new System.EventHandler(this.ViewDistanceCMB_SelectedIndexChanged);
+            this.sgViewDistanceQualityCMB.SelectedIndexChanged += new System.EventHandler(this.ViewDistanceCMB_SelectedIndexChanged);
             // 
             // MainPanel
             // 
@@ -595,23 +595,23 @@
             this.MainPanel.Controls.Add(this.ResQualityLabel);
             this.MainPanel.Controls.Add(this.ResScaleTrackbar);
             this.MainPanel.Controls.Add(this.label9);
-            this.MainPanel.Controls.Add(this.AnimationCMB);
+            this.MainPanel.Controls.Add(this.sgAnimationQualityCMB);
             this.MainPanel.Controls.Add(this.label7);
-            this.MainPanel.Controls.Add(this.ShadingCMB);
+            this.MainPanel.Controls.Add(this.sgShadingQualityCMB);
             this.MainPanel.Controls.Add(this.label8);
-            this.MainPanel.Controls.Add(this.FoliageCMB);
+            this.MainPanel.Controls.Add(this.sgFoliageQualityCMB);
             this.MainPanel.Controls.Add(this.label5);
-            this.MainPanel.Controls.Add(this.EffectsCMB);
+            this.MainPanel.Controls.Add(this.sgEffectsQualityCMB);
             this.MainPanel.Controls.Add(this.label6);
-            this.MainPanel.Controls.Add(this.TextureCMB);
+            this.MainPanel.Controls.Add(this.sgTextureQualityCMB);
             this.MainPanel.Controls.Add(this.label3);
-            this.MainPanel.Controls.Add(this.PostProcessingCMB);
+            this.MainPanel.Controls.Add(this.sgPostProcessQualityCMB);
             this.MainPanel.Controls.Add(this.label4);
-            this.MainPanel.Controls.Add(this.ShadowCMB);
+            this.MainPanel.Controls.Add(this.sgShadowQualityCMB);
             this.MainPanel.Controls.Add(this.label2);
             this.MainPanel.Controls.Add(this.AntiAliasingCMB);
             this.MainPanel.Controls.Add(this.label1);
-            this.MainPanel.Controls.Add(this.ViewDistanceCMB);
+            this.MainPanel.Controls.Add(this.sgViewDistanceQualityCMB);
             this.MainPanel.Location = new System.Drawing.Point(12, 41);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(700, 228);
@@ -633,7 +633,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Ebrima", 9F, System.Drawing.FontStyle.Bold);
             this.label9.ForeColor = System.Drawing.Color.Silver;
-            this.label9.Location = new System.Drawing.Point(366, 70);
+            this.label9.Location = new System.Drawing.Point(383, 70);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(106, 15);
             this.label9.TabIndex = 25;
@@ -655,7 +655,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Ebrima", 9F, System.Drawing.FontStyle.Bold);
             this.label8.ForeColor = System.Drawing.Color.Silver;
-            this.label8.Location = new System.Drawing.Point(369, 9);
+            this.label8.Location = new System.Drawing.Point(386, 9);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(88, 15);
             this.label8.TabIndex = 21;
@@ -666,7 +666,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Ebrima", 9F, System.Drawing.FontStyle.Bold);
             this.label5.ForeColor = System.Drawing.Color.Silver;
-            this.label5.Location = new System.Drawing.Point(221, 129);
+            this.label5.Location = new System.Drawing.Point(213, 129);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(88, 15);
             this.label5.TabIndex = 19;
@@ -688,7 +688,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Ebrima", 9F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.Silver;
-            this.label3.Location = new System.Drawing.Point(200, 68);
+            this.label3.Location = new System.Drawing.Point(192, 68);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(135, 15);
             this.label3.TabIndex = 15;
@@ -710,7 +710,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Ebrima", 9F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.Silver;
-            this.label2.Location = new System.Drawing.Point(203, 9);
+            this.label2.Location = new System.Drawing.Point(195, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(119, 15);
             this.label2.TabIndex = 11;
@@ -879,23 +879,23 @@
         private System.Windows.Forms.Label ResQualityLabel;
         private System.Windows.Forms.TrackBar ResScaleTrackbar;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox AnimationCMB;
+        private System.Windows.Forms.ComboBox sgAnimationQualityCMB;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox ShadingCMB;
+        private System.Windows.Forms.ComboBox sgShadingQualityCMB;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox FoliageCMB;
+        private System.Windows.Forms.ComboBox sgFoliageQualityCMB;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox EffectsCMB;
+        private System.Windows.Forms.ComboBox sgEffectsQualityCMB;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox TextureCMB;
+        private System.Windows.Forms.ComboBox sgTextureQualityCMB;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox PostProcessingCMB;
+        private System.Windows.Forms.ComboBox sgPostProcessQualityCMB;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox ShadowCMB;
+        private System.Windows.Forms.ComboBox sgShadowQualityCMB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox AntiAliasingCMB;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox ViewDistanceCMB;
+        private System.Windows.Forms.ComboBox sgViewDistanceQualityCMB;
         private System.Windows.Forms.Panel InfoPanel;
         private System.Windows.Forms.Label AmbientOcclusionInfoLabel;
         private System.Windows.Forms.Label LensFlareInfoLabel;
