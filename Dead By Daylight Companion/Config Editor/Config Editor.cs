@@ -506,25 +506,9 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
             this.Height = 620;
         }
 
-        public void ChangeSetting(string file, string _var, string val) {
-            string search_text = _var;
-            string old;
-            string n = String.Empty;
-            StreamReader sr = File.OpenText(file);
-            while ((old = sr.ReadLine()) != null) {
-                if (old.Contains(search_text)) {
-                    n += search_text + val + "\n";
-                }
-
-                if (!old.Contains(search_text)) {
-                    n += old + Environment.NewLine;
-                }
-            }
-            sr.Close();
-            File.WriteAllText(file, n);
-        }
 
         private void OneToOneSensCB_CheckedChanged(object sender, EventArgs e) {
+            helper.FUNCS f = new helper.FUNCS();
             switch (OneToOneSensCB.Checked) {
                 case true:
                     DialogResult result = MessageBox.Show("Applying 1:1 Sensitivity Is Intended For Killer ONLY\n Survivor Sensitivity Will No Longer Be 1:1 While This Is Enabled", "Confirm", MessageBoxButtons.YesNo);
@@ -532,14 +516,11 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
                         OneToOneSensCB.Checked = false;
                     }
                     else {
-                        //AxisMappings=(AxisName="TESTDBD",Scale=1.000000,Key=MouseX)
-                        helper.IniFile ini = new helper.IniFile(sPathToUse+@"\Input.ini");
-                        ChangeSetting(sPathToUse + @"\Input.ini", "AxisMappings=(AxisName=\"LookUp\",Scale=", "-1.550654,Key=MouseY)");
-                        //10 / 100
+                        f.ChangeSetting(sPathToUse + @"\Input.ini", "AxisMappings=(AxisName=\"LookUp\",Scale=", "-1.550654,Key=MouseY)"); //ini class doesnt support nested ini objects
                     }
                     break;
                 case false:
-                    ChangeSetting(sPathToUse + @"\Input.ini", "AxisMappings=(AxisName=\"LookUp\",Scale=", "-1.000000,Key=MouseY)");
+                    f.ChangeSetting(sPathToUse + @"\Input.ini", "AxisMappings=(AxisName=\"LookUp\",Scale=", "-1.000000,Key=MouseY)");
                     break;
             }
             

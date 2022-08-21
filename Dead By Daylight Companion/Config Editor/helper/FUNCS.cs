@@ -26,7 +26,23 @@ namespace Dead_By_Daylight_Companion.Config_Editor.helper {
                 return false;
             }
         }
+        public void ChangeSetting(string file, string _var, string val) {
+            string search_text = _var;
+            string old;
+            string n = String.Empty;
+            StreamReader sr = File.OpenText(file);
+            while ((old = sr.ReadLine()) != null) {
+                if (old.Contains(search_text)) {
+                    n += search_text + val + "\n";
+                }
 
+                if (!old.Contains(search_text)) {
+                    n += old + Environment.NewLine;
+                }
+            }
+            sr.Close();
+            File.WriteAllText(file, n);
+        }
 
         public void DoReadOnly(string filepath, bool var) {
             FileInfo fI = new FileInfo(filepath+@"\GameUserSettings.ini");
