@@ -57,6 +57,7 @@ namespace Dead_By_Daylight_Companion {
 
         private void ShowConfigEditor_Click(object sender, EventArgs e) {
             var t = new Thread(() => Application.Run(new Config_Editor.Config_Editor()));
+            t.SetApartmentState(ApartmentState.STA);
             t.Start();
             this.Close();
         }
