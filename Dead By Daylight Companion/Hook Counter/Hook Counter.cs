@@ -22,17 +22,6 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")] public extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")] public extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
-
-        private void returnToHub() {
-            var hub = new Thread(() => Application.Run(new HubForm()));
-            hub.Start();
-            this.Close();
-            ov.Close();
-        }
-
-        private void BackToHub_Click(object sender, EventArgs e) {
-            returnToHub();
-        }
         
         private void ExitHookCounter_Click(object sender, EventArgs e) {
             Environment.Exit(0);
