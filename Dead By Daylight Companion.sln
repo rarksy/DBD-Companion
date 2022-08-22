@@ -7,14 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dead By Daylight Companion"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6DA7853A-E898-4236-874D-381A3A649A5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6DA7853A-E898-4236-874D-381A3A649A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6DA7853A-E898-4236-874D-381A3A649A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6DA7853A-E898-4236-874D-381A3A649A5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DA7853A-E898-4236-874D-381A3A649A5E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6DA7853A-E898-4236-874D-381A3A649A5E}.Debug|x64.Build.0 = Debug|Any CPU
+		{6DA7853A-E898-4236-874D-381A3A649A5E}.Release|x64.ActiveCfg = Release|Any CPU
+		{6DA7853A-E898-4236-874D-381A3A649A5E}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
