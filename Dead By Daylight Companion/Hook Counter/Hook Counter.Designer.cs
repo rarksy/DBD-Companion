@@ -129,7 +129,7 @@
             // 
             // Thread
             // 
-            this.Thread.Interval = 1000;
+            this.Thread.Interval = 500;
             this.Thread.Tick += new System.EventHandler(this.Thread_Tick);
             // 
             // tTooltip
