@@ -22,6 +22,9 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             Hook.Dispose();
             Stage2.Dispose();
             Endgame.Dispose();
+            HookResult.Dispose();
+            Stage2Result.Dispose();
+            EndgameResult.Dispose();
         }
 
         static overlay ov = new overlay();
@@ -41,7 +44,7 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
         [DllImport("user32.DLL", EntryPoint = "SendMessage")] public extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         private void ExitHookCounter_Click(object sender, EventArgs e) {
-            Environment.Exit(0);
+            Application.Exit();
         }
 
         private void MinimizeHookCounter_MouseEnter(object sender, EventArgs e) {
