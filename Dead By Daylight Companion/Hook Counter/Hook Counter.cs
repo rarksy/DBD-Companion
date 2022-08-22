@@ -17,22 +17,25 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
         }
 
         private void Hook_Counter_Disposed(object sender, EventArgs e) {
+            BmScreen.Dispose();
             Frame.Dispose();
             Hook.Dispose();
             Stage2.Dispose();
-            EndGame.Dispose();
+            Endgame.Dispose();
         }
 
         static overlay ov = new overlay();
+        private readonly System.Drawing.Size leftmostFifth = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 5, Screen.PrimaryScreen.Bounds.Height);
         public static bool bInitOverlay = false;
         public static string res = Screen.PrimaryScreen.Bounds.Width.ToString() + Screen.PrimaryScreen.Bounds.Height.ToString(),
                              CurFontName = Properties.Settings.Default.FontName,
                              HookText;
         public static int CurFontSize = Properties.Settings.Default.FontSize;
-        public static List<float> hCount = new List<float>();
-        public static List<float> _2stage = new List<float>();
-        private Mat Frame;
-        private Mat Hook, Stage2, EndGame;
+        public static List<int> hCount = new List<int>();
+        public static List<int> _2stage = new List<int>();
+        private readonly Bitmap BmScreen = new Bitmap(Screen.PrimaryScreen.Bounds.Width / 5, Screen.PrimaryScreen.Bounds.Height);
+        private readonly Mat Frame = new Mat(new OpenCvSharp.Size(Screen.PrimaryScreen.Bounds.Size.Width / 5, Screen.PrimaryScreen.Bounds.Size.Height), MatType.CV_8UC3);
+        private Mat Hook, Stage2, Endgame, HookResult, Stage2Result, EndgameResult;
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")] public extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")] public extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
@@ -84,12 +87,10 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             }
         }
 
-        private bool FindMatch(Mat source, Mat template, double threshold) {
-            using (var result = new Mat(source.Rows - template.Rows + 1, source.Cols - template.Cols + 1, MatType.CV_32FC1)) {
-                Cv2.MatchTemplate(source, template, result, TemplateMatchModes.CCoeffNormed);
-                Cv2.MinMaxLoc(result, out _, out double maxVal);
-                return maxVal >= threshold;
-            }
+        private bool MatchesTemplate(Mat source, Mat template, Mat result, double threshold) {
+            Cv2.MatchTemplate(source, template, result, TemplateMatchModes.CCoeffNormed);
+            Cv2.MinMaxLoc(result, out _, out double maxVal);
+            return maxVal >= threshold;
         }
 
         private bool FindMatch(Mat source, Mat template, double threshold, out OpenCvSharp.Point maxLoc) {
@@ -100,22 +101,28 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             }
         }
 
-        private List<float> FindMatches(Mat source, Mat template, double threshold) {
-            var points = new List<float>();
-            
-            using (var result = new Mat(source.Rows - template.Rows + 1, source.Cols - template.Cols + 1, MatType.CV_32FC1)) {
-                Cv2.MatchTemplate(source, template, result, TemplateMatchModes.CCoeffNormed);
-                
-                unsafe {
-                    void DetectThreshold(float* value, int* pos) {
-                        if (*value > threshold) {
-                            // The second element of the pos array is the Y coordinate.
-                            points.Add(pos[0]);
-                        }
-                    }
+        /// <summary>
+        /// Finds matching locations for template
+        /// </summary>
+        /// <param name="source">The source image</param>
+        /// <param name="template">The image to match</param>
+        /// <param name="result">A pre-allocated Mat to store the result in</param>
+        /// <param name="threshold">A Normalized matching threshold. 0 means no match and 1 means full match.</param>
+        /// <returns>A list of Y coordinates in the source image that matched the template</returns>
+        private List<int> FindMatches(Mat source, Mat template, Mat result, float threshold) {
+            Cv2.MatchTemplate(source, template, result, TemplateMatchModes.CCoeffNormed);
+            var points = new List<int>();
 
-                    result.ForEachAsFloat(DetectThreshold);
+            // This is the most efficient way to iterate over a Mat.
+            unsafe {
+                void DetectThreshold(float* value, int* pos) {
+                    if (*value > threshold) {
+                        // The first element of the pos array is the Y coordinate.
+                        points.Add(pos[0]);
+                    }
                 }
+
+                result.ForEachAsFloat(DetectThreshold);
             }
 
             return points;
@@ -149,16 +156,22 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
 
         private void ReloadRes() {
             if (!string.IsNullOrEmpty(IGUIScale.Text)) {
-                using (var h = new Mat($@"resources\{res}\hook{IGUIScale.Text}.png"))
-                    Hook = h.CvtColor(ColorConversionCodes.BGR2GRAY);
+                Hook?.Dispose();
+                Hook = new Mat($@"resources\{res}\hook{IGUIScale.Text}.png");
+                HookResult?.Dispose();
+                HookResult = new Mat(leftmostFifth.Width - Hook.Width + 1, leftmostFifth.Height - Hook.Height + 1, MatType.CV_32FC1);
 
-                using (var s2 = new Mat($@"resources\{res}\2stage{IGUIScale.Text}.png"))
-                    Stage2 = s2.CvtColor(ColorConversionCodes.BGR2GRAY);
+                Stage2?.Dispose();
+                Stage2 = new Mat($@"resources\{res}\2stage{IGUIScale.Text}.png");
+                Stage2Result?.Dispose();
+                Stage2Result = new Mat(leftmostFifth.Width - Stage2.Width + 1, leftmostFifth.Height - Stage2.Height + 1, MatType.CV_32FC1);
             }
 
             if (!string.IsNullOrEmpty(UIScale.Text)) {
-                using (var eg = new Mat($@"resources\{res}\endgame{UIScale.Text}.png"))
-                    EndGame = eg.CvtColor(ColorConversionCodes.BGR2GRAY);
+                Endgame?.Dispose();
+                Endgame = new Mat($@"resources\{res}\endgame{UIScale.Text}.png");
+                EndgameResult?.Dispose();
+                EndgameResult = new Mat(leftmostFifth.Width - Endgame.Width + 1, leftmostFifth.Height - Endgame.Height + 1, MatType.CV_32FC1);
             }
         }
 
@@ -202,35 +215,31 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
 
             // Grab the screen.
             // TODO: Grab just DBD, not the whole screen.
-            Frame?.Dispose();
-            using (var b = new Bitmap(Screen.PrimaryScreen.Bounds.Width / 5, Screen.PrimaryScreen.Bounds.Height))
-            using (var g = Graphics.FromImage(b)) {
-                g.CopyFromScreen(Screen.PrimaryScreen.Bounds.X / 5,
+            using (var g = Graphics.FromImage(BmScreen)) {
+                g.CopyFromScreen(Screen.PrimaryScreen.Bounds.X,
                         Screen.PrimaryScreen.Bounds.Y,
                         0,
                         0,
-                        Screen.PrimaryScreen.Bounds.Size,
+                        leftmostFifth,
                         CopyPixelOperation.SourceCopy);
-                using (var m = BitmapConverter.ToMat(b)) {
-                    Frame = m.CvtColor(ColorConversionCodes.BGR2GRAY);
-                }
+                BmScreen.ToMat(Frame);
             }
 
             // Check for first hook.
-            var hookMatches = FindMatches(Frame, Hook, LowerThreshCheckbox.Checked ? 0.8 : 0.9);
+            var hookMatches = FindMatches(Frame, Hook, HookResult, LowerThreshCheckbox.Checked ? 0.8f : 0.9f);
             if (hookMatches.Any()) {
                 hCount.AddRange(hookMatches);
                 overlay.bHasDrawn = false;
             }
 
-            var stage2Matches = FindMatches(Frame, Stage2, 0.9);
+            var stage2Matches = FindMatches(Frame, Stage2, Stage2Result, 0.9f);
             if (stage2Matches.Any()) {
                 _2stage.AddRange(stage2Matches);
                 overlay.bHasDrawn = false;
             }
 
             // Check for endgame.
-            if (FindMatch(Frame, EndGame, 0.9)) {
+            if (MatchesTemplate(Frame, Endgame, EndgameResult, 0.9)) {
                 overlay.G?.Clear(Color.Black);
                 overlay.sList.Clear();
                 overlay._2List.Clear();

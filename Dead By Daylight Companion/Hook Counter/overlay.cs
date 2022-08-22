@@ -15,8 +15,8 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             InitializeComponent();
         }
         public static bool bHasDrawn = false;
-        public static List<float> sList = new List<float>();
-        public static List<float> _2List = new List<float>();
+        public static List<int> sList = new List<int>();
+        public static List<int> _2List = new List<int>();
         public static Graphics G; 
         [DllImport("user32.dll", SetLastError = true)] public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll")] public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
@@ -37,18 +37,18 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             if (!bHasDrawn) {
                 G = this.CreateGraphics();
                 for (int i = 0; i < Hook_Counter.hCount.Count; i++) {
-                    float f = Hook_Counter.hCount[i];
-                    if (!sList.Contains(f)) {
-                        sList.Add(f);
-                        G.DrawString(Hook_Counter.HookText, new Font(Hook_Counter.CurFontName, Hook_Counter.CurFontSize), new SolidBrush(Color.White), 170.0F, f);
+                    int j = Hook_Counter.hCount[i];
+                    if (!sList.Contains(j)) {
+                        sList.Add(j);
+                        G.DrawString(Hook_Counter.HookText, new Font(Hook_Counter.CurFontName, Hook_Counter.CurFontSize), new SolidBrush(Color.White), 170.0F, j);
                     }
                 }
                 if (Hook_Counter.HookText == "I") {
-                    for (int j = 0; j < Hook_Counter._2stage.Count; j++) {
-                        float fl = Hook_Counter._2stage[j];
-                        if (!_2List.Contains(fl)) {
-                            _2List.Add(fl);
-                            G.DrawString("I", new Font(Hook_Counter.CurFontName, Hook_Counter.CurFontSize), new SolidBrush(Color.White), 178.0F, fl - 47.0F);
+                    for (int k = 0; k < Hook_Counter._2stage.Count; k++) {
+                        int l = Hook_Counter._2stage[k];
+                        if (!_2List.Contains(l)) {
+                            _2List.Add(l);
+                            G.DrawString("I", new Font(Hook_Counter.CurFontName, Hook_Counter.CurFontSize), new SolidBrush(Color.White), 178.0F, l - 47.0F);
                         }
                     }
                 }
