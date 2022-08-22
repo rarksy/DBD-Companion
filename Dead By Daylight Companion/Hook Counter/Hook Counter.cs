@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Dead_By_Daylight_Companion.Hook_Counter {
     public partial class Hook_Counter : Form {
@@ -28,8 +29,8 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                              CurFontName = Properties.Settings.Default.FontName,
                              HookText;
         public static int CurFontSize = Properties.Settings.Default.FontSize;
-        public static List<string> hCount = new List<string>();
-        public static List<string> _2stage = new List<string>();
+        public static List<float> hCount = new List<float>();
+        public static List<float> _2stage = new List<float>();
         private Mat Frame;
         private Mat Hook, Stage2, EndGame;
 
@@ -83,13 +84,41 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             }
         }
 
-        private bool CompareToTemplate(Mat source, Mat template, double threshold, out OpenCvSharp.Point maxLoc) {
+        private bool FindMatch(Mat source, Mat template, double threshold) {
             using (var result = new Mat(source.Rows - template.Rows + 1, source.Cols - template.Cols + 1, MatType.CV_32FC1)) {
                 Cv2.MatchTemplate(source, template, result, TemplateMatchModes.CCoeffNormed);
-                Cv2.Threshold(result, result, threshold, 1.0, ThresholdTypes.Tozero);
+                Cv2.MinMaxLoc(result, out _, out double maxVal);
+                return maxVal >= threshold;
+            }
+        }
+
+        private bool FindMatch(Mat source, Mat template, double threshold, out OpenCvSharp.Point maxLoc) {
+            using (var result = new Mat(source.Rows - template.Rows + 1, source.Cols - template.Cols + 1, MatType.CV_32FC1)) {
+                Cv2.MatchTemplate(source, template, result, TemplateMatchModes.CCoeffNormed);
                 Cv2.MinMaxLoc(result, out _, out double maxVal, out _, out maxLoc);
                 return maxVal >= threshold;
             }
+        }
+
+        private List<float> FindMatches(Mat source, Mat template, double threshold) {
+            var points = new List<float>();
+            
+            using (var result = new Mat(source.Rows - template.Rows + 1, source.Cols - template.Cols + 1, MatType.CV_32FC1)) {
+                Cv2.MatchTemplate(source, template, result, TemplateMatchModes.CCoeffNormed);
+                
+                unsafe {
+                    void DetectThreshold(float* value, int* pos) {
+                        if (*value > threshold) {
+                            // The second element of the pos array is the Y coordinate.
+                            points.Add(pos[0]);
+                        }
+                    }
+
+                    result.ForEachAsFloat(DetectThreshold);
+                }
+            }
+
+            return points;
         }
 
         private void TitlePanel_MouseDown(object sender, MouseEventArgs e) {
@@ -188,19 +217,20 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             }
 
             // Check for first hook.
-            if (CompareToTemplate(Frame, Hook, LowerThreshCheckbox.Checked ? 0.8 : 0.9, out OpenCvSharp.Point hookLoc)) {
-                hCount.Add(hookLoc.Y.ToString());
+            var hookMatches = FindMatches(Frame, Hook, LowerThreshCheckbox.Checked ? 0.8 : 0.9);
+            if (hookMatches.Any()) {
+                hCount.AddRange(hookMatches);
                 overlay.bHasDrawn = false;
             }
 
-            // Check for second stage.
-            if (CountStageCB.Checked && CompareToTemplate(Frame, Stage2, 0.9, out OpenCvSharp.Point stage2Loc)) {
-                _2stage.Add(stage2Loc.Y.ToString());
+            var stage2Matches = FindMatches(Frame, Stage2, 0.9);
+            if (stage2Matches.Any()) {
+                _2stage.AddRange(stage2Matches);
                 overlay.bHasDrawn = false;
             }
 
             // Check for endgame.
-            if (CompareToTemplate(Frame, EndGame, 0.9, out OpenCvSharp.Point _)) {
+            if (FindMatch(Frame, EndGame, 0.9)) {
                 overlay.G?.Clear(Color.Black);
                 overlay.sList.Clear();
                 overlay._2List.Clear();
