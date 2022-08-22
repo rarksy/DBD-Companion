@@ -36,11 +36,11 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
         }
 
         private void MinimizeHookCounter_Click(object sender, EventArgs e) {
-            for (int i = this.Width; i >= 0; i--) {
-                this.Width -= 10;
-                this.Height -= 10;
+            for (int i = Width; i >= 0; i--) {
+                Width -= 10;
+                Height -= 10;
             }
-            this.WindowState = FormWindowState.Minimized;
+            WindowState = FormWindowState.Minimized;
         }
 
         private void ExitHookCounter_MouseEnter(object sender, EventArgs e) {
@@ -52,8 +52,8 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
         }
 
         private void Hook_Counter_Activated(object sender, EventArgs e) {
-            this.Width = 475;
-            this.Height = 407;
+            Width = 475;
+            Height = 407;
         }
 
         private void ChangeFont_Click(object sender, EventArgs e) {
@@ -125,7 +125,7 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
 
         private void TitlePanel_MouseDown(object sender, MouseEventArgs e) {
             ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
+            SendMessage(Handle, 0x112, 0xf012, 0);
         }
 
         private void TitleLabel_MouseDown(object sender, MouseEventArgs e) {
