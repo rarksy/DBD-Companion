@@ -13,7 +13,7 @@ using System.Text;
 namespace Dead_By_Daylight_Companion.Hook_Counter {
     public partial class Hook_Counter : Form {
         public Hook_Counter() {
-            Disposed += Hook_Counter_Disposed;
+            Disposed += new EventHandler(Hook_Counter_Disposed);
             InitializeComponent();
             ov.Show();
         }
