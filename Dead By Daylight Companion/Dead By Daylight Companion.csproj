@@ -109,6 +109,7 @@
     <Compile Include="Hook Counter\overlay.Designer.cs">
       <DependentUpon>overlay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Hook Counter\RECT.cs" />
     <Compile Include="Hub\HubForm.cs">
       <SubType>Form</SubType>
     </Compile>
