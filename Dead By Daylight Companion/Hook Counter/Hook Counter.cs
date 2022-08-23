@@ -223,14 +223,14 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
 
         private void ResizeEndGameResult() {
             EndgameResult?.Dispose();
-            EndgameResult = new Mat(Frame.Height - Endgame.Height + 1, Frame.Width - Endgame.Width + 1, MatType.CV_32FC1);
+            EndgameResult = new Mat(Frame.Rows - Endgame.Rows + 1, Frame.Cols - Endgame.Cols + 1, MatType.CV_32FC1);
         }
 
         private void ResizeHookResults() {
             HookResult?.Dispose();
-            HookResult = new Mat(Frame.Height - Hook.Height + 1, Frame.Width - Hook.Width + 1, MatType.CV_32FC1);
+            HookResult = new Mat(Frame.Rows - Hook.Rows + 1, Frame.Cols - Hook.Cols + 1, MatType.CV_32FC1);
             Stage2Result?.Dispose();
-            Stage2Result = new Mat(Frame.Height - Stage2.Height + 1, Frame.Width - Stage2.Width + 1,  MatType.CV_32FC1);
+            Stage2Result = new Mat(Frame.Rows - Stage2.Rows + 1, Frame.Cols - Stage2.Cols + 1,  MatType.CV_32FC1);
         }
 
         private void CountStageCB_CheckedChanged(object sender, EventArgs e) {
@@ -297,7 +297,7 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                 return;
             }
 
-            // TODO: position the overlay.
+            // TODO: Position the overlay.
 
             int oneFifth = size.right / 5;
 
