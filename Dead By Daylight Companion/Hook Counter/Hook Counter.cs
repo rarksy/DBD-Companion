@@ -1,23 +1,25 @@
 ﻿using OpenCvSharp;
-using OpenCvSharp.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows.Forms;
 using System.Linq;
+using OpenCvSharp.Extensions;
+using System.Diagnostics;
+using System.Text;
 
 namespace Dead_By_Daylight_Companion.Hook_Counter {
     public partial class Hook_Counter : Form {
         public Hook_Counter() {
             Disposed += Hook_Counter_Disposed;
             InitializeComponent();
+            ov.Show();
         }
 
         private void Hook_Counter_Disposed(object sender, EventArgs e) {
-            BmScreen.Dispose();
+            BmScreen?.Dispose();
             Frame.Dispose();
             Hook.Dispose();
             Stage2.Dispose();
@@ -27,21 +29,67 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             EndgameResult.Dispose();
         }
 
-        static overlay ov = new overlay();
-        private readonly System.Drawing.Size leftmostFifth = new System.Drawing.Size(Screen.PrimaryScreen.Bounds.Width / 5, Screen.PrimaryScreen.Bounds.Height);
-        public static bool bInitOverlay = false;
+        const int SRCCOPY = 0x00CC0020;
+        enum FORMAT_MESSAGE : uint {
+            ALLOCATE_BUFFER = 0x00000100,
+            IGNORE_INSERTS = 0x00000200,
+            FROM_SYSTEM = 0x00001000,
+            ARGUMENT_ARRAY = 0x00002000,
+            FROM_HMODULE = 0x00000800,
+            FROM_STRING = 0x00000400
+        }
+        private int WindowWidth = 0, WindowHeight = 0;
+        readonly overlay ov = new overlay();
         public static string res = Screen.PrimaryScreen.Bounds.Width.ToString() + Screen.PrimaryScreen.Bounds.Height.ToString(),
                              CurFontName = Properties.Settings.Default.FontName,
                              HookText;
         public static int CurFontSize = Properties.Settings.Default.FontSize;
         public static List<int> hCount = new List<int>();
         public static List<int> _2stage = new List<int>();
-        private readonly Bitmap BmScreen = new Bitmap(Screen.PrimaryScreen.Bounds.Width / 5, Screen.PrimaryScreen.Bounds.Height);
-        private readonly Mat Frame = new Mat(new OpenCvSharp.Size(Screen.PrimaryScreen.Bounds.Size.Width / 5, Screen.PrimaryScreen.Bounds.Size.Height), MatType.CV_8UC3);
-        private Mat Hook, Stage2, Endgame, HookResult, Stage2Result, EndgameResult;
+        private Bitmap BmScreen;
+        private Mat Frame = new Mat(Screen.PrimaryScreen.Bounds.Size.Height, Screen.PrimaryScreen.Bounds.Size.Width, MatType.CV_8UC3),
+            Hook, Stage2, Endgame, HookResult, Stage2Result, EndgameResult;
+        private IntPtr GameWindow = IntPtr.Zero;
 
-        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")] public extern static void ReleaseCapture();
-        [DllImport("user32.DLL", EntryPoint = "SendMessage")] public extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
+        [DllImport("User32.dll")]
+        extern static void ReleaseCapture();
+
+        [DllImport("User32.dll")]
+        extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
+
+        [DllImport("User32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        extern static bool IsWindow([In, Optional] IntPtr hWnd);
+
+        [DllImport("User32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool GetClientRect([In] IntPtr hWnd, ref RECT lpRect);
+
+        [DllImport("Gdi32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool BitBlt(
+            [In] IntPtr hdc,
+            [In] int x,
+            [In] int y,
+            [In] int cx,
+            [In] int cy,
+            [In] IntPtr hdcSrc,
+            [In] int x1,
+            [In] int y1,
+            [In] int rop);
+
+        [DllImport("Kernel32.dll")]
+        static extern int FormatMessage(
+            [In] FORMAT_MESSAGE dwFlags,
+            [In, Optional] IntPtr lpSource,
+            [In] int dwMessageId,
+            [In] int dwLanguageId,
+            out StringBuilder lpBuffer,
+            [In] int nSize,
+            [In, Optional] IntPtr Arguments);
+
+        [DllImport("Kernel32.dll")]
+        static extern void SetLastError(uint dwErrCode);
 
         private void ExitHookCounter_Click(object sender, EventArgs e) {
             Application.Exit();
@@ -161,21 +209,28 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             if (!string.IsNullOrEmpty(IGUIScale.Text)) {
                 Hook?.Dispose();
                 Hook = new Mat($@"resources\{res}\hook{IGUIScale.Text}.png");
-                HookResult?.Dispose();
-                HookResult = new Mat(leftmostFifth.Width - Hook.Width + 1, leftmostFifth.Height - Hook.Height + 1, MatType.CV_32FC1);
-
                 Stage2?.Dispose();
                 Stage2 = new Mat($@"resources\{res}\2stage{IGUIScale.Text}.png");
-                Stage2Result?.Dispose();
-                Stage2Result = new Mat(leftmostFifth.Width - Stage2.Width + 1, leftmostFifth.Height - Stage2.Height + 1, MatType.CV_32FC1);
+                ResizeHookResults();
             }
 
             if (!string.IsNullOrEmpty(UIScale.Text)) {
                 Endgame?.Dispose();
                 Endgame = new Mat($@"resources\{res}\endgame{UIScale.Text}.png");
-                EndgameResult?.Dispose();
-                EndgameResult = new Mat(leftmostFifth.Width - Endgame.Width + 1, leftmostFifth.Height - Endgame.Height + 1, MatType.CV_32FC1);
+                ResizeEndGameResult();
             }
+        }
+
+        private void ResizeEndGameResult() {
+            EndgameResult?.Dispose();
+            EndgameResult = new Mat(Frame.Height - Endgame.Height + 1, Frame.Width - Endgame.Width + 1, MatType.CV_32FC1);
+        }
+
+        private void ResizeHookResults() {
+            HookResult?.Dispose();
+            HookResult = new Mat(Frame.Height - Hook.Height + 1, Frame.Width - Hook.Width + 1, MatType.CV_32FC1);
+            Stage2Result?.Dispose();
+            Stage2Result = new Mat(Frame.Height - Stage2.Height + 1, Frame.Width - Stage2.Width + 1,  MatType.CV_32FC1);
         }
 
         private void CountStageCB_CheckedChanged(object sender, EventArgs e) {
@@ -206,25 +261,73 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             FontLabel.Text = $"Font: {CurFontName}";
             FontSizeLabel.Text = $"Font Size: {CurFontSize}";
 
+            #region temp
+            //EnumWindows(WndProc, 42069);
+            //Application.Exit();
+            #endregion
+
             Thread.Start();
         }
 
+        public static void PrintErrorMessage() {
+#if DEBUG
+            var sb = new StringBuilder(256);
+            var written = FormatMessage(FORMAT_MESSAGE.FROM_SYSTEM
+                | FORMAT_MESSAGE.ALLOCATE_BUFFER, IntPtr.Zero, Marshal.GetLastWin32Error(), 0, out sb, sb.Capacity);
+            Debug.WriteLineIf(written > 0, sb.ToString().Substring(0, written));
+#endif
+        }
+
         private void Thread_Tick(object sender, EventArgs e) {
-            if (!bInitOverlay) {
-                overlay ov = new overlay();
-                ov.Show();
-                bInitOverlay = true;
+            // If the game window has not been set, it will be Zero. If it is not a valid window, attempt to find one.
+            if (GameWindow.Equals(IntPtr.Zero) || !IsWindow(GameWindow)) {
+                ClearAll();
+                var proc = Process.GetProcessesByName("DeadByDaylight-Win64-Shipping").FirstOrDefault();
+                if (proc != null && !proc.HasExited) {
+                    GameWindow = proc.MainWindowHandle;
+                    proc.Dispose();
+                }
+
+                return;
             }
 
-            // Grab the screen.
-            // TODO: Grab just DBD, not the whole screen.
-            using (var g = Graphics.FromImage(BmScreen)) {
-                g.CopyFromScreen(Screen.PrimaryScreen.Bounds.X,
-                        Screen.PrimaryScreen.Bounds.Y,
-                        0,
-                        0,
-                        leftmostFifth,
-                        CopyPixelOperation.SourceCopy);
+            RECT size = new RECT();
+            if (!GetClientRect(GameWindow, ref size)) {
+                PrintErrorMessage();
+                return;
+            }
+
+            // TODO: position the overlay.
+
+            int oneFifth = size.right / 5;
+
+            if (size.right != WindowWidth || size.bottom != WindowHeight) {
+                WindowWidth = size.right;
+                WindowHeight = size.bottom;
+                Frame?.Dispose();
+                Frame = new Mat(size.bottom, oneFifth, MatType.CV_8UC3);
+                ResizeHookResults();
+                ResizeEndGameResult();
+                BmScreen?.Dispose();
+                BmScreen = new Bitmap(oneFifth, size.bottom);
+            }
+
+            using (var gSrc = Graphics.FromHwnd(GameWindow))
+            using (var gDst = Graphics.FromImage(BmScreen)) {
+                IntPtr hdcSrc = gSrc.GetHdc();
+                if (hdcSrc.Equals(IntPtr.Zero))
+                    return;
+
+                IntPtr hdcDst = gDst.GetHdc();
+                bool success = BitBlt(hdcDst, 0, 0, oneFifth, size.bottom, hdcSrc, 0, 0, SRCCOPY);
+                gSrc.ReleaseHdc(hdcSrc);
+                gDst.ReleaseHdc(hdcDst);
+
+                if (!success) {
+                    PrintErrorMessage();
+                    return;
+                }
+
                 BmScreen.ToMat(Frame);
             }
 
@@ -243,12 +346,16 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
 
             // Check for endgame.
             if (MatchesTemplate(Frame, Endgame, EndgameResult, 0.9)) {
-                overlay.G?.Clear(Color.Black);
-                overlay.sList.Clear();
-                overlay._2List.Clear();
-                _2stage.Clear();
-                hCount.Clear();
+                ClearAll();
             }
+        }
+
+        private static void ClearAll() {
+            overlay.G?.Clear(Color.Black);
+            overlay.sList.Clear();
+            overlay._2List.Clear();
+            _2stage.Clear();
+            hCount.Clear();
         }
     }
 }
