@@ -38,6 +38,7 @@
             this.Discord = new System.Windows.Forms.PictureBox();
             this.Github = new System.Windows.Forms.PictureBox();
             this.SocialPanel = new System.Windows.Forms.Panel();
+            this.DonationPicBox = new System.Windows.Forms.PictureBox();
             this.TitleBarPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ShowHookCounter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ShowConfigEditor)).BeginInit();
@@ -46,6 +47,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Discord)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Github)).BeginInit();
             this.SocialPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DonationPicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // TitleBarPanel
@@ -215,6 +217,7 @@
             // SocialPanel
             // 
             this.SocialPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.SocialPanel.Controls.Add(this.DonationPicBox);
             this.SocialPanel.Controls.Add(this.Github);
             this.SocialPanel.Controls.Add(this.Discord);
             this.SocialPanel.Controls.Add(this.CreditLabel);
@@ -222,6 +225,19 @@
             this.SocialPanel.Name = "SocialPanel";
             this.SocialPanel.Size = new System.Drawing.Size(341, 40);
             this.SocialPanel.TabIndex = 9;
+            // 
+            // DonationPicBox
+            // 
+            this.DonationPicBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.DonationPicBox.Image = ((System.Drawing.Image)(resources.GetObject("DonationPicBox.Image")));
+            this.DonationPicBox.Location = new System.Drawing.Point(230, 4);
+            this.DonationPicBox.Name = "DonationPicBox";
+            this.DonationPicBox.Size = new System.Drawing.Size(32, 32);
+            this.DonationPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.DonationPicBox.TabIndex = 8;
+            this.DonationPicBox.TabStop = false;
+            this.HubToolTip.SetToolTip(this.DonationPicBox, "Support Rarksy!");
+            this.DonationPicBox.Click += new System.EventHandler(this.DonationPicBox_Click);
             // 
             // HubForm
             // 
@@ -247,6 +263,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Discord)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Github)).EndInit();
             this.SocialPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DonationPicBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -266,6 +283,7 @@
         private System.Windows.Forms.Label MinimizeHub;
         private System.Windows.Forms.Label ExitHub;
         private System.Windows.Forms.PictureBox ShowXHair;
+        private System.Windows.Forms.PictureBox DonationPicBox;
     }
 }
 

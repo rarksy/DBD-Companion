@@ -138,5 +138,9 @@ namespace Dead_By_Daylight_Companion {
             var t = new Thread(() => Application.Run(new Crosshair_Overlay.Crosshair()));
             t.Start();
         }
+
+        private void DonationPicBox_Click(object sender, EventArgs e) {
+            Process.Start("https://donate.stripe.com/fZe7u9gU72wQ6hG6oo");
+        }
     }
 }
