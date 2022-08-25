@@ -276,35 +276,55 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
         }
 
         private void Thread_Tick(object sender, EventArgs e) {
-            // If the game window has not been set, it will be Zero. If it is not a valid window, attempt to find one.
-            if (GameWindow.Equals(IntPtr.Zero) || !IsWindow(GameWindow)) {
-                ClearAll();
-                var proc = Process.GetProcessesByName("DeadByDaylight-Win64-Shipping").FirstOrDefault(p => !p.HasExited);
+            // If the game window has not been set, it will be Zero.
+            if (GameWindow.Equals(IntPtr.Zero)) {
+                return;
+            }
 
+            if (!IsWindow(GameWindow)) {
+                Trace.TraceInformation("Game window closed.");
+                GameWindow = IntPtr.Zero;
+                ClearAll();
+
+                // Get the game process.
+                var procs = Process.GetProcessesByName("DeadByDaylight-Win64-Shipping");
+                var proc = procs.FirstOrDefault();
+
+                // Could not find the process.
                 if (proc == null) {
-                    return;
+                    goto dispose;
                 }
 
-                Trace.TraceInformation("Game window found.");
+                if (proc.HasExited) {
+                    Trace.TraceInformation("Game process has gone stale.");
+                    goto dispose;
+                }
+
+                Trace.TraceInformation("Game process found.");
                 GameWindow = proc.MainWindowHandle;
-                proc.Dispose();
+
+            dispose:
+                foreach (var p in procs) {
+                    p.Dispose();
+                }
 
                 return;
             }
 
+            // Get the dimensions of the game's client area.
             if (!GetClientRect(GameWindow, ref WindowSize)) {
                 PrintErrorMessage("Failed to get size of client rect.");
                 return;
             }
 
-            // TODO: Position the overlay.
+            // TODO: Position the overlay on top of the game.
 
             int oneFifth = WindowSize.right / 5;
 
             if (WindowSize.right != WindowWidth || WindowSize.bottom != WindowHeight) {
                 WindowWidth = WindowSize.right;
                 WindowHeight = WindowSize.bottom;
-                Trace.TraceInformation("Game window resized to {0}x{1}", WindowWidth, WindowHeight);
+                Trace.TraceInformation("Game window resized to {0}x{1}.", WindowWidth, WindowHeight);
                 Frame?.Dispose();
                 Frame = new Mat(WindowSize.bottom, oneFifth, MatType.CV_8UC3);
                 ResizeHookResults();
@@ -316,12 +336,15 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             using (var gSrc = Graphics.FromHwnd(GameWindow))
             using (var gDst = Graphics.FromImage(BmScreen)) {
                 IntPtr hdcSrc = gSrc.GetHdc();
+
                 if (hdcSrc.Equals(IntPtr.Zero)) {
-                    Trace.TraceError("Failed to acquire game window HDC.");
+                    Trace.TraceError("Failed to acquire device context handle for game window.");
                     return;
                 }
 
                 IntPtr hdcDst = gDst.GetHdc();
+
+                // Copy the pixels from the game window to an in-memory bitmap.
                 bool success = BitBlt(hdcDst, 0, 0, oneFifth, WindowSize.bottom, hdcSrc, 0, 0, SRCCOPY);
                 gSrc.ReleaseHdc(hdcSrc);
                 gDst.ReleaseHdc(hdcDst);
