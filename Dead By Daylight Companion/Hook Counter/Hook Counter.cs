@@ -277,11 +277,7 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
 
         private void Thread_Tick(object sender, EventArgs e) {
             // If the game window has not been set, it will be Zero.
-            if (GameWindow.Equals(IntPtr.Zero)) {
-                return;
-            }
-
-            if (!IsWindow(GameWindow)) {
+            if (GameWindow.Equals(IntPtr.Zero) || !IsWindow(GameWindow)) {
                 Trace.TraceInformation("Game window closed.");
                 GameWindow = IntPtr.Zero;
                 ClearAll();
