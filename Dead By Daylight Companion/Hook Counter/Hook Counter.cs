@@ -276,9 +276,7 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
         }
 
         private void Thread_Tick(object sender, EventArgs e) {
-            // If the game window has not been set, it will be Zero.
-            if (GameWindow.Equals(IntPtr.Zero) || !IsWindow(GameWindow)) {
-                Trace.TraceInformation("Game window closed.");
+            void SearchForGame() {
                 GameWindow = IntPtr.Zero;
                 ClearAll();
 
@@ -303,7 +301,18 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                 foreach (var p in procs) {
                     p.Dispose();
                 }
+            }
 
+            // If the game window has not been set, it will be Zero.
+            if (GameWindow.Equals(IntPtr.Zero)) {
+                SearchForGame();
+                return;
+            }
+
+
+            if (!IsWindow(GameWindow)) {
+                Trace.TraceInformation("Game window closed.");
+                SearchForGame();
                 return;
             }
 
@@ -373,6 +382,8 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                 Trace.TraceInformation("Game over.");
                 ClearAll();
             }
+
+            
         }
 
         private static void ClearAll() {
