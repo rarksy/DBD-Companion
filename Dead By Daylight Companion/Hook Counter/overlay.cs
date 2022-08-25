@@ -19,23 +19,23 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
         public static bool bHasDrawn = false;
         public static List<int> sList = new List<int>();
         public static List<int> _2List = new List<int>();
-        public static Graphics G; 
+        public static Graphics G;
         [DllImport("user32.dll", SetLastError = true)] public static extern int GetWindowLongPtr(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll")] public static extern int SetWindowLongPtr(IntPtr hWnd, int nIndex, int dwNewLong);
 
-        private void overlay_Load(object sender, EventArgs e) {
-            this.Height = Screen.PrimaryScreen.Bounds.Height;
-            this.Width = Screen.PrimaryScreen.Bounds.Width / 5;
-            this.ShowInTaskbar = false;
-            this.Location = new Point(0, 0);
-            this.TopMost = true;
+        private void OverlayLoad(object sender, EventArgs e) {
+            Height = Screen.PrimaryScreen.Bounds.Height;
+            Width = Screen.PrimaryScreen.Bounds.Width / 5;
+            ShowInTaskbar = false;
+            Location = new Point(0, 0);
+            TopMost = true;
             int initStyle = GetWindowLongPtr(this.Handle, -20);
             SetWindowLongPtr(this.Handle, -20, initStyle | WS_EX_TRANSPARENT);
 
             DrawTimer.Start();
         }
 
-        private void DrawTimer_Tick(object sender, EventArgs e) {
+        private void DrawTimerTick(object sender, EventArgs e) {
             if (!bHasDrawn) {
                 G = this.CreateGraphics();
                 for (int i = 0; i < Hook_Counter.hCount.Count; i++) {

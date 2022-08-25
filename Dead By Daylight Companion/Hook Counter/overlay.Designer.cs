@@ -30,7 +30,7 @@
             // DrawTimer
             // 
             this.DrawTimer.Interval = 1000;
-            this.DrawTimer.Tick += new System.EventHandler(this.DrawTimer_Tick);
+            this.DrawTimer.Tick += new System.EventHandler(this.DrawTimerTick);
             // 
             // overlay
             // 
@@ -46,7 +46,7 @@
             this.Text = "overlay";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.Black;
-            this.Load += new System.EventHandler(this.overlay_Load);
+            this.Load += new System.EventHandler(this.OverlayLoad);
             this.ResumeLayout(false);
 
         }
