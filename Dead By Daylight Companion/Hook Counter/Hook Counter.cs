@@ -50,6 +50,7 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
         private Mat Frame = new Mat(Screen.PrimaryScreen.Bounds.Size.Height, Screen.PrimaryScreen.Bounds.Size.Width, MatType.CV_8UC3),
             Hook, Stage2, Endgame, HookResult, Stage2Result, EndgameResult;
         private IntPtr GameWindow = IntPtr.Zero;
+        private RECT WindowSize = new RECT();
 
         [DllImport("User32.dll")]
         extern static void ReleaseCapture();
@@ -285,9 +286,8 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                 return;
             }
 
-            RECT size = new RECT();
-            if (!GetClientRect(GameWindow, ref size)) {
                 PrintErrorMessage();
+            if (!GetClientRect(GameWindow, ref WindowSize)) {
                 return;
             }
 
