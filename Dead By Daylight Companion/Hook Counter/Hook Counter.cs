@@ -231,7 +231,7 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             HookResult?.Dispose();
             HookResult = new Mat(Frame.Rows - Hook.Rows + 1, Frame.Cols - Hook.Cols + 1, MatType.CV_32FC1);
             Stage2Result?.Dispose();
-            Stage2Result = new Mat(Frame.Rows - Stage2.Rows + 1, Frame.Cols - Stage2.Cols + 1,  MatType.CV_32FC1);
+            Stage2Result = new Mat(Frame.Rows - Stage2.Rows + 1, Frame.Cols - Stage2.Cols + 1, MatType.CV_32FC1);
         }
 
         private void CountStageCB_CheckedChanged(object sender, EventArgs e) {
@@ -264,12 +264,14 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             Thread.Start();
         }
 
-        public static void PrintErrorMessage() {
+        public static void PrintErrorMessage(string staticMessage) {
 #if DEBUG
             var sb = new StringBuilder(256);
             var written = FormatMessage(FORMAT_MESSAGE.FROM_SYSTEM
                 | FORMAT_MESSAGE.ALLOCATE_BUFFER, IntPtr.Zero, Marshal.GetLastWin32Error(), 0, out sb, sb.Capacity);
             Debug.WriteLineIf(written > 0, sb.ToString().Substring(0, written));
+#else
+            Trace.TraceError(staticMessage);
 #endif
         }
 
@@ -277,48 +279,55 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             // If the game window has not been set, it will be Zero. If it is not a valid window, attempt to find one.
             if (GameWindow.Equals(IntPtr.Zero) || !IsWindow(GameWindow)) {
                 ClearAll();
-                var proc = Process.GetProcessesByName("DeadByDaylight-Win64-Shipping").FirstOrDefault();
-                if (proc != null && !proc.HasExited) {
-                    GameWindow = proc.MainWindowHandle;
-                    proc.Dispose();
+                var proc = Process.GetProcessesByName("DeadByDaylight-Win64-Shipping").FirstOrDefault(p => !p.HasExited);
+
+                if (proc == null) {
+                    return;
                 }
+
+                Trace.TraceInformation("Game window found.");
+                GameWindow = proc.MainWindowHandle;
+                proc.Dispose();
 
                 return;
             }
 
-                PrintErrorMessage();
             if (!GetClientRect(GameWindow, ref WindowSize)) {
+                PrintErrorMessage("Failed to get size of client rect.");
                 return;
             }
 
             // TODO: Position the overlay.
 
-            int oneFifth = size.right / 5;
+            int oneFifth = WindowSize.right / 5;
 
-            if (size.right != WindowWidth || size.bottom != WindowHeight) {
-                WindowWidth = size.right;
-                WindowHeight = size.bottom;
+            if (WindowSize.right != WindowWidth || WindowSize.bottom != WindowHeight) {
+                WindowWidth = WindowSize.right;
+                WindowHeight = WindowSize.bottom;
+                Trace.TraceInformation("Game window resized to {0}x{1}", WindowWidth, WindowHeight);
                 Frame?.Dispose();
-                Frame = new Mat(size.bottom, oneFifth, MatType.CV_8UC3);
+                Frame = new Mat(WindowSize.bottom, oneFifth, MatType.CV_8UC3);
                 ResizeHookResults();
                 ResizeEndGameResult();
                 BmScreen?.Dispose();
-                BmScreen = new Bitmap(oneFifth, size.bottom);
+                BmScreen = new Bitmap(oneFifth, WindowSize.bottom);
             }
 
             using (var gSrc = Graphics.FromHwnd(GameWindow))
             using (var gDst = Graphics.FromImage(BmScreen)) {
                 IntPtr hdcSrc = gSrc.GetHdc();
-                if (hdcSrc.Equals(IntPtr.Zero))
+                if (hdcSrc.Equals(IntPtr.Zero)) {
+                    Trace.TraceError("Failed to acquire game window HDC.");
                     return;
+                }
 
                 IntPtr hdcDst = gDst.GetHdc();
-                bool success = BitBlt(hdcDst, 0, 0, oneFifth, size.bottom, hdcSrc, 0, 0, SRCCOPY);
+                bool success = BitBlt(hdcDst, 0, 0, oneFifth, WindowSize.bottom, hdcSrc, 0, 0, SRCCOPY);
                 gSrc.ReleaseHdc(hdcSrc);
                 gDst.ReleaseHdc(hdcDst);
 
                 if (!success) {
-                    PrintErrorMessage();
+                    PrintErrorMessage("BitBlt did not complete successfully.");
                     return;
                 }
 
@@ -328,18 +337,21 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             // Check for first hook.
             var hookMatches = FindMatches(Frame, Hook, HookResult, LowerThreshCheckbox.Checked ? 0.8f : 0.9f);
             if (hookMatches.Any()) {
+                Trace.TraceInformation("Hooked!");
                 hCount.AddRange(hookMatches);
                 overlay.bHasDrawn = false;
             }
 
             var stage2Matches = FindMatches(Frame, Stage2, Stage2Result, 0.9f);
             if (stage2Matches.Any()) {
+                Trace.TraceInformation("Death hook!");
                 _2stage.AddRange(stage2Matches);
                 overlay.bHasDrawn = false;
             }
 
             // Check for endgame.
             if (MatchesTemplate(Frame, Endgame, EndgameResult, 0.9)) {
+                Trace.TraceInformation("Game over.");
                 ClearAll();
             }
         }
