@@ -264,6 +264,8 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             Thread.Start();
         }
 
+        [Conditional("DEBUG")]
+        [Conditional("TRACE")]
         public static void PrintErrorMessage(string staticMessage) {
 #if DEBUG
             var sb = new StringBuilder(256);
