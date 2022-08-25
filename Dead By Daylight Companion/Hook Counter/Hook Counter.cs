@@ -260,12 +260,6 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             CountStageCB.Checked = Properties.Settings.Default.CountStages;
             FontLabel.Text = $"Font: {CurFontName}";
             FontSizeLabel.Text = $"Font Size: {CurFontSize}";
-
-            #region temp
-            //EnumWindows(WndProc, 42069);
-            //Application.Exit();
-            #endregion
-
             Thread.Start();
         }
 
