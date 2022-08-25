@@ -14,12 +14,14 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
         public overlay() {
             InitializeComponent();
         }
+
+        const int WS_EX_TRANSPARENT = 0x20;
         public static bool bHasDrawn = false;
         public static List<int> sList = new List<int>();
         public static List<int> _2List = new List<int>();
         public static Graphics G; 
-        [DllImport("user32.dll", SetLastError = true)] public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
-        [DllImport("user32.dll")] public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+        [DllImport("user32.dll", SetLastError = true)] public static extern int GetWindowLongPtr(IntPtr hWnd, int nIndex);
+        [DllImport("user32.dll")] public static extern int SetWindowLongPtr(IntPtr hWnd, int nIndex, int dwNewLong);
 
         private void overlay_Load(object sender, EventArgs e) {
             this.Height = Screen.PrimaryScreen.Bounds.Height;
@@ -27,8 +29,8 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             this.ShowInTaskbar = false;
             this.Location = new Point(0, 0);
             this.TopMost = true;
-            int initStyle = GetWindowLong(this.Handle, -20);
-            SetWindowLong(this.Handle, -20, initStyle | 0x8000 | 0x20);
+            int initStyle = GetWindowLongPtr(this.Handle, -20);
+            SetWindowLongPtr(this.Handle, -20, initStyle | WS_EX_TRANSPARENT);
 
             DrawTimer.Start();
         }
