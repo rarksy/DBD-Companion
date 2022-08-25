@@ -277,9 +277,6 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
 
         private void Thread_Tick(object sender, EventArgs e) {
             void SearchForGame() {
-                GameWindow = IntPtr.Zero;
-                ClearAll();
-
                 // Get the game process.
                 var procs = Process.GetProcessesByName("DeadByDaylight-Win64-Shipping");
                 var proc = procs.FirstOrDefault();
@@ -303,15 +300,15 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                 }
             }
 
-            // If the game window has not been set, it will be Zero.
             if (GameWindow.Equals(IntPtr.Zero)) {
                 SearchForGame();
                 return;
             }
 
-
             if (!IsWindow(GameWindow)) {
                 Trace.TraceInformation("Game window closed.");
+                GameWindow = IntPtr.Zero;
+                ClearAll();
                 SearchForGame();
                 return;
             }
@@ -382,8 +379,6 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                 Trace.TraceInformation("Game over.");
                 ClearAll();
             }
-
-            
         }
 
         private static void ClearAll() {
