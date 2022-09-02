@@ -30,19 +30,23 @@
             // DrawTimer
             // 
             this.DrawTimer.Interval = 1000;
-            this.DrawTimer.Tick += new System.EventHandler(this.DrawTimer_Tick);
+            this.DrawTimer.Tick += new System.EventHandler(this.DrawTimerTick);
             // 
             // overlay
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(211, 581);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "overlay";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "overlay";
+            this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.Black;
-            this.Load += new System.EventHandler(this.overlay_Load);
+            this.Load += new System.EventHandler(this.OverlayLoad);
             this.ResumeLayout(false);
 
         }
