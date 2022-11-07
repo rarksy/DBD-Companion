@@ -487,13 +487,6 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
             Environment.Exit(0);
         }
 
-        private void ExitButton_MouseEnter(object sender, EventArgs e) {
-            ExitConfigEditor.ForeColor = Color.Red;
-        }
-
-        private void ExitButton_MouseLeave(object sender, EventArgs e) {
-            ExitConfigEditor.ForeColor = Color.Silver;
-        }
 
         private void Config_Editor_Activated(object sender, EventArgs e) {
             this.Width = 1000; 
