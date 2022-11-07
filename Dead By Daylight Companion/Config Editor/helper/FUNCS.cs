@@ -61,5 +61,48 @@ namespace Dead_By_Daylight_Companion.Config_Editor.helper {
                     fI.IsReadOnly = false;
             }
         }
+
+        public string iniReadKey(string file, string section, string key) {
+            IniFile ini = new IniFile(Config_Editor.sPathToUse + file);
+            return ini.ReadString(section, key);
+        }
+
+        public bool iniKeyExists(string file, string header, string key) {
+            IniFile ini = new IniFile(Config_Editor.sPathToUse + file);
+            return ini.KeyExists(key, header);
+        }
+        public void iniChangeKey(string file, string header, string key, string value) {
+            FileInfo info = new FileInfo(Config_Editor.sPathToUse + file);
+            IniFile ini = new IniFile(Config_Editor.sPathToUse + file);
+            info.IsReadOnly = false;
+            ini.Write(key, value, header);
+            info.IsReadOnly = true;
+        }
+
+        public void iniDeleteSection(string file, string header) {
+            FileInfo info = new FileInfo(Config_Editor.sPathToUse + file);
+            IniFile ini = new IniFile(Config_Editor.sPathToUse + file);
+            info.IsReadOnly = false;
+            ini.DeleteSection(header);
+            info.IsReadOnly = true;
+        }
+
+        public void iniDeleteKey(string file, string header, string key) {
+            IniFile ini = new IniFile(Config_Editor.sPathToUse + file);
+            FileInfo info = new FileInfo(Config_Editor.sPathToUse + file);
+            info.IsReadOnly = false;
+            ini.DeleteKey(key, header);
+            info.IsReadOnly = true;
+        }
+
+        public void iniWriteKey(string file, string header, string key, string value) {
+            IniFile ini = new IniFile(Config_Editor.sPathToUse + file);
+            FileInfo info = new FileInfo(Config_Editor.sPathToUse + file);
+
+            info.IsReadOnly = false;
+            ini.Write(key, value, header);
+            info.IsReadOnly = true;
+        }
+
     }
 }

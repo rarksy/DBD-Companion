@@ -215,101 +215,95 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
         }
 
         private void UnlockFPSButton_Click(object sender, EventArgs e) {
-            var ini = new helper.IniFile(sPathToUse + @"\Engine.ini");
-            if (File.ReadAllText(sPathToUse + @"\Engine.ini").Contains("[/script/engine.engine]")) {
-                ini.DeleteSection("/script/engine.engine");
-                FPSInfoLabel.ForeColor = Color.Red;
-                UnlockFPSButton.Text = "Unlock FPS";
-                FPSInfoLabel.Text = "FPS Locked";
-            }
-            else {
-                ini.Write("bSmoothFrameRate", "False", "/script/engine.engine");
-                ini.Write("MinSmoothedFrameRate", "False", "/script/engine.engine");
-                ini.Write("MaxSmoothedFrameRate", "120", "/script/engine.engine");
-                FPSInfoLabel.ForeColor = Color.Green;
-                UnlockFPSButton.Text = "Lock FPS";
-                FPSInfoLabel.Text = "FPS Unlocked";
-            }
+
+            Dictionary<string, string> vars = new Dictionary<string, string>() {
+                    { "bSmoothFrameRate", "False" },
+                    { "MinSmoothedFrameRate", "False" },
+                    { "MaxSmoothedFrameRate", "120" }
+                };
+
+            bool bDelete = File.ReadAllText(sPathToUse + @"\Engine.ini").Contains("[/script/engine.engine]");
+
+            if (bDelete) {
+                func.iniDeleteSection(@"\Engine.ini", "/script/engine.engine");
+            } else foreach(var next in vars) {
+                    func.iniChangeKey(@"\Engine.ini", "/script/engine.engine", next.Key, next.Value);
+                }
+
+            FPSInfoLabel.ForeColor = bDelete ? Color.Red : Color.Green;
+            UnlockFPSButton.Text = bDelete ? "Unlock FPS" : "Lock FPS";
+            FPSInfoLabel.Text = bDelete ? "FPS Locked" : "FPS Unlocked";
+
         }
 
         private void VSyncButton_Click(object sender, EventArgs e) {
-            var ini = new helper.IniFile(sPathToUse + @"\GameUserSettings.ini");
-            if (ini.ReadString("/Script/DeadByDaylight.DBDGameUserSettings", "bUseVSync") == "True") {
-                ini.Write("bUseVSync", "False", "/Script/DeadByDaylight.DBDGameUserSettings");
-                VSyncButton.Text = "Enable VSync";
-                VSyncInfolabel.ForeColor = Color.Green;
-                VSyncInfolabel.Text = "VSync Disabled";
-            }
-            else {
-                ini.Write("bUseVSync", "True", "/Script/DeadByDaylight.DBDGameUserSettings");
-                VSyncInfolabel.ForeColor = Color.Red;
-                VSyncInfolabel.Text = "VSync Enabled";
-                VSyncButton.Text = "Disable VSync";
-            }
+            bool bDelete = func.iniReadKey(@"\GameUserSettings.ini", "/Script/DeadByDaylight.DBDGameUserSettings", "bUseVSync") == "False";
+
+            func.iniChangeKey(@"\GameUserSettings.ini", "/Script/DeadByDaylight.DBDGameUserSettings", "bUseVSync", bDelete ? "True" : "False");
+            VSyncInfolabel.ForeColor = bDelete ? Color.Red : Color.Green;
+            VSyncInfolabel.Text = bDelete ? "VSync Enabled" : "VSync Disabled";
+            VSyncButton.Text = bDelete ? "Disable VSync" : "Enable VSync";
         }
 
         private void MotionBlurButton_Click(object sender, EventArgs e) {
-            var ini = new helper.IniFile(sPathToUse + @"\Engine.ini");
-            if (ini.KeyExists("r.DefaultFeature.MotionBlur", "/Script/Engine.GarbageCollectionSettings")) {
-                ini.DeleteKey("r.DefaultFeature.MotionBlur", "/Script/Engine.GarbageCollectionSettings");
-                MotionBlurButton.Text = "Disable Motion Blur";
-                MotionBlurInfoLabel.ForeColor = Color.Red;
-                MotionBlurInfoLabel.Text = "Motion Blur Enabled";
+            bool bDelete = func.iniKeyExists(@"\Engine.ini", "/Script/Engine.GarbageCollectionSettings", "r.DefaultFeature.MotionBlur");
+
+            if (bDelete) {
+                func.iniDeleteKey(@"\Engine.ini", "/Script/Engine.GarbageCollectionSettings", "r.DefaultFeature.MotionBlur");
+            } else {
+                func.iniWriteKey(@"\Engine.ini", "/Script/Engine.GarbageCollectionSettings", "r.DefaultFeature.MotionBlur", "0");
             }
-            else {
-                ini.Write("r.DefaultFeature.MotionBlur", "False", "/Script/Engine.GarbageCollectionSettings");
-                MotionBlurButton.Text = "Enable Motion Blur";
-                MotionBlurInfoLabel.ForeColor = Color.Green;
-                MotionBlurInfoLabel.Text = "Motion Blur Disabled";
-            }
+
+            MotionBlurButton.Text = bDelete ? "Disable Motion Blur" : "Enable Motion Blur";
+            MotionBlurInfoLabel.Text = bDelete ? "Motion Blur Enabled" : "Motion Blur Disabled";
+            MotionBlurInfoLabel.ForeColor = bDelete ? Color.Red : Color.Green;
+
         }
 
         private void BloomButton_Click(object sender, EventArgs e) {
-            var ini = new helper.IniFile(sPathToUse + @"\Engine.ini");
-            if (ini.KeyExists("r.DefaultFeature.Bloom", "/Script/Engine.GarbageCollectionSettings")) {
-                ini.DeleteKey("r.DefaultFeature.Bloom", "/Script/Engine.GarbageCollectionSettings");
-                BloomButton.Text = "Disable Bloom";
-                BloomInfoLabel.ForeColor = Color.Red;
-                BloomInfoLabel.Text = "Bloom Enabled";
+            bool bDelete = func.iniKeyExists(@"\Engine.ini", "/Script/Engine.GarbageCollectionSettings", "r.DefaultFeature.Bloom");
+
+            if (bDelete) {
+                func.iniDeleteKey(@"\Engine.ini", "/Script/Engine.GarbageCollectionSettings", "r.DefaultFeature.Bloom");
             }
             else {
-                ini.Write("r.DefaultFeature.Bloom", "False", "/Script/Engine.GarbageCollectionSettings");
-                BloomButton.Text = "Enable Bloom";
-                BloomInfoLabel.ForeColor = Color.Green;
-                BloomInfoLabel.Text = "Bloom Disabled";
+                func.iniWriteKey(@"\Engine.ini", "/Script/Engine.GarbageCollectionSettings", "r.DefaultFeature.Bloom", "False");
             }
+
+            BloomButton.Text = bDelete ? "Disable Bloom" : "Enable Bloom";
+            BloomInfoLabel.Text = bDelete ? "Bloom Enabled" : "Bloom Disabled";
+            BloomInfoLabel.ForeColor = bDelete ? Color.Red : Color.Green;
+
         }
 
         private void LensFlareButton_Click(object sender, EventArgs e) {
-            var ini = new helper.IniFile(sPathToUse + @"\Engine.ini");
-            if (ini.KeyExists("r.DefaultFeature.LensFlare", "/Script/Engine.GarbageCollectionSettings")) {
-                ini.DeleteKey("r.DefaultFeature.LensFlare", "/Script/Engine.GarbageCollectionSettings");
-                LensFlareButton.Text = "Disable Lens Flare";
-                LensFlareInfoLabel.ForeColor = Color.Red;
-                LensFlareInfoLabel.Text = "Lens Flare Enabled";
+            bool bDelete = func.iniKeyExists(@"\Engine.ini", "/Script/Engine.GarbageCollectionSettings", "r.DefaultFeature.LensFlare");
+
+            if (bDelete) {
+                func.iniDeleteKey(@"\Engine.ini", "/Script/Engine.GarbageCollectionSettings", "r.DefaultFeature.LensFlare");
             }
             else {
-                ini.Write("r.DefaultFeature.LensFlare", "False", "/Script/Engine.GarbageCollectionSettings");
-                LensFlareButton.Text = "Enable Lens Flare";
-                LensFlareInfoLabel.ForeColor = Color.Green;
-                LensFlareInfoLabel.Text = "Lens Flare Disabled";
+                func.iniWriteKey(@"\Engine.ini", "/Script/Engine.GarbageCollectionSettings", "r.DefaultFeature.LensFlare", "False");
             }
+
+            LensFlareButton.Text = bDelete ? "Disable Lens Flare" : "Enable Lens Flare";
+            LensFlareInfoLabel.Text = bDelete ? "Lens Flare Enabled" : "Lens Flare Disabled";
+            LensFlareInfoLabel.ForeColor = bDelete ? Color.Red : Color.Green;
         }
 
         private void AmbientOcclusionButton_Click(object sender, EventArgs e) {
-            var ini = new helper.IniFile(sPathToUse + @"\Engine.ini");
-            if (ini.KeyExists("r.DefaultFeature.AmbientOcclusion", "/Script/Engine.GarbageCollectionSettings")) {
-                ini.DeleteKey("r.DefaultFeature.AmbientOcclusion", "/Script/Engine.GarbageCollectionSettings");
-                AmbientOcclusionButton.Text = "Disable Ambient Occlusion";
-                AmbientOcclusionInfoLabel.ForeColor = Color.Red;
-                AmbientOcclusionInfoLabel.Text = "Ambient Occlusion Enabled";
+            bool bDelete = func.iniKeyExists(@"\Engine.ini", "/Script/Engine.GarbageCollectionSettings", "r.DefaultFeature.AmbientOcclusion");
+
+            if (bDelete) {
+                func.iniDeleteKey(@"\Engine.ini", "/Script/Engine.GarbageCollectionSettings", "r.DefaultFeature.AmbientOcclusion");
             }
             else {
-                ini.Write("r.DefaultFeature.AmbientOcclusion", "False", "/Script/Engine.GarbageCollectionSettings");
-                AmbientOcclusionButton.Text = "Enable Ambient Occlusion";
-                AmbientOcclusionInfoLabel.ForeColor = Color.Green;
-                LensFlareInfoLabel.Text = "Lens Flare Disabled";
+                func.iniWriteKey(@"\Engine.ini", "/Script/Engine.GarbageCollectionSettings", "r.DefaultFeature.AmbientOcclusion", "False");
             }
+
+            AmbientOcclusionButton.Text = bDelete ? "Disable Ambient Occlusion" : "Enable Ambient Occlusion";
+            AmbientOcclusionInfoLabel.Text = bDelete ? "Ambient Occlusion Enabled" : "Ambient Occlusion Disabled";
+            AmbientOcclusionInfoLabel.ForeColor = bDelete ? Color.Red : Color.Green;
         }
 
         private void ExportConfigButton_Click(object sender, EventArgs e) {
@@ -505,7 +499,6 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
             this.Width = 1000; 
             this.Height = 620;
         }
-
 
         private void OneToOneSensCB_CheckedChanged(object sender, EventArgs e) {
             helper.FUNCS f = new helper.FUNCS();
