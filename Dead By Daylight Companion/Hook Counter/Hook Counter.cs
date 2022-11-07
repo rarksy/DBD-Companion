@@ -292,7 +292,7 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
                     Trace.TraceInformation("Game process has gone stale.");
                     goto dispose;
                 }
-
+                 
                 Trace.TraceInformation("Game process found.");
                 GameWindow = proc.MainWindowHandle;
 
