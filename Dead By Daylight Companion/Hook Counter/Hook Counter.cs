@@ -13,32 +13,10 @@ using System.Text;
 namespace Dead_By_Daylight_Companion.Hook_Counter {
     public partial class Hook_Counter : Form {
         public Hook_Counter() {
-            Disposed += new EventHandler(Hook_Counter_Disposed);
             InitializeComponent();
             ov.Show();
         }
 
-        private void Hook_Counter_Disposed(object sender, EventArgs e) {
-            BmScreen?.Dispose();
-            Frame.Dispose();
-            Hook.Dispose();
-            Stage2.Dispose();
-            Endgame.Dispose();
-            HookResult.Dispose();
-            Stage2Result.Dispose();
-            EndgameResult.Dispose();
-        }
-
-        const int SRCCOPY = 0x00CC0020;
-        enum FORMAT_MESSAGE : uint {
-            ALLOCATE_BUFFER = 0x00000100,
-            IGNORE_INSERTS = 0x00000200,
-            FROM_SYSTEM = 0x00001000,
-            ARGUMENT_ARRAY = 0x00002000,
-            FROM_HMODULE = 0x00000800,
-            FROM_STRING = 0x00000400
-        }
-        private int WindowWidth = 0, WindowHeight = 0;
         readonly overlay ov = new overlay();
         public static string res = Screen.PrimaryScreen.Bounds.Width.ToString() + Screen.PrimaryScreen.Bounds.Height.ToString(),
                              CurFontName = Properties.Settings.Default.FontName,
@@ -46,51 +24,14 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
         public static int CurFontSize = Properties.Settings.Default.FontSize;
         public static List<int> hCount = new List<int>();
         public static List<int> _2stage = new List<int>();
-        private Bitmap BmScreen;
         private Mat Frame = new Mat(Screen.PrimaryScreen.Bounds.Size.Height, Screen.PrimaryScreen.Bounds.Size.Width, MatType.CV_8UC3),
             Hook, Stage2, Endgame, HookResult, Stage2Result, EndgameResult;
-        private IntPtr GameWindow = IntPtr.Zero;
-        private RECT WindowSize = new RECT();
 
         [DllImport("User32.dll")]
         extern static void ReleaseCapture();
 
         [DllImport("User32.dll")]
         extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
-
-        [DllImport("User32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        extern static bool IsWindow([In, Optional] IntPtr hWnd);
-
-        [DllImport("User32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool GetClientRect([In] IntPtr hWnd, ref RECT lpRect);
-
-        [DllImport("Gdi32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool BitBlt(
-            [In] IntPtr hdc,
-            [In] int x,
-            [In] int y,
-            [In] int cx,
-            [In] int cy,
-            [In] IntPtr hdcSrc,
-            [In] int x1,
-            [In] int y1,
-            [In] int rop);
-
-        [DllImport("Kernel32.dll")]
-        static extern int FormatMessage(
-            [In] FORMAT_MESSAGE dwFlags,
-            [In, Optional] IntPtr lpSource,
-            [In] int dwMessageId,
-            [In] int dwLanguageId,
-            out StringBuilder lpBuffer,
-            [In] int nSize,
-            [In, Optional] IntPtr Arguments);
-
-        [DllImport("Kernel32.dll")]
-        static extern void SetLastError(uint dwErrCode);
 
         private void ExitHookCounter_Click(object sender, EventArgs e) {
             Application.Exit();
@@ -139,45 +80,12 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             }
         }
 
-        private bool MatchesTemplate(Mat source, Mat template, Mat result, double threshold) {
-            Cv2.MatchTemplate(source, template, result, TemplateMatchModes.CCoeffNormed);
-            Cv2.MinMaxLoc(result, out _, out double maxVal);
-            return maxVal >= threshold;
-        }
-
         private bool FindMatch(Mat source, Mat template, double threshold, out OpenCvSharp.Point maxLoc) {
             using (var result = new Mat(source.Rows - template.Rows + 1, source.Cols - template.Cols + 1, MatType.CV_32FC1)) {
                 Cv2.MatchTemplate(source, template, result, TemplateMatchModes.CCoeffNormed);
                 Cv2.MinMaxLoc(result, out _, out double maxVal, out _, out maxLoc);
                 return maxVal >= threshold;
             }
-        }
-
-        /// <summary>
-        /// Finds matching locations for template
-        /// </summary>
-        /// <param name="source">The source image</param>
-        /// <param name="template">The image to match</param>
-        /// <param name="result">A pre-allocated Mat to store the result in</param>
-        /// <param name="threshold">A Normalized matching threshold. 0 means no match and 1 means full match.</param>
-        /// <returns>A list of Y coordinates in the source image that matched the template</returns>
-        private List<int> FindMatches(Mat source, Mat template, Mat result, float threshold) {
-            Cv2.MatchTemplate(source, template, result, TemplateMatchModes.CCoeffNormed);
-            var points = new List<int>();
-
-            // This is the most efficient way to iterate over a Mat.
-            unsafe {
-                void DetectThreshold(float* value, int* pos) {
-                    if (*value > threshold) {
-                        // The first element of the pos array is the Y coordinate.
-                        points.Add(pos[0]);
-                    }
-                }
-
-                result.ForEachAsFloat(DetectThreshold);
-            }
-
-            return points;
         }
 
         private void TitlePanel_MouseDown(object sender, MouseEventArgs e) {
@@ -201,9 +109,52 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             ReloadRes();
         }
 
+
         private void HookTextBox_TextChanged(object sender, EventArgs e) {
             HookText = HookTextBox.Text;
             Properties.Settings.Default.HookedText = HookText;
+        }
+
+        private void Hook_Counter_KeyDown(object sender, KeyEventArgs e) {
+
+        }
+
+
+        private void BIND_S1_KeyDown(object sender, KeyEventArgs e) {
+            Keys k1 = new Keys();
+            Register_KeyBind(out k1, e, BIND_S1);
+            Properties.Settings.Default.S1_BIND = k1;
+            Properties.Settings.Default.Save();
+        }
+
+
+        private void BIND_S2_KeyDown(object sender, KeyEventArgs e) {
+            Keys k2 = new Keys();
+            Register_KeyBind(out k2, e, BIND_S2);
+            Properties.Settings.Default.S2_BIND = k2;
+            Properties.Settings.Default.Save();
+        }
+
+        private void BIND_S3_KeyDown(object sender, KeyEventArgs e) {
+            Keys k3 = new Keys();
+            Register_KeyBind(out k3, e, BIND_S3);
+            Properties.Settings.Default.S3_BIND = k3;
+            Properties.Settings.Default.Save();
+        }
+
+        private void BIND_S4_KeyDown(object sender, KeyEventArgs e) {
+            Keys k4 = new Keys();
+            Register_KeyBind(out k4, e, BIND_S4);
+            Properties.Settings.Default.S4_BIND = k4;
+            Properties.Settings.Default.Save();
+        }
+
+        private void Register_KeyBind(out Keys _var, KeyEventArgs e, TextBox tb) {
+            _var = 0;
+            if (e.KeyData == Keys.LWin || e.KeyData == Keys.RWin || e.KeyData == Keys.Escape) return;
+            _var = Keys.KeyCode;
+            tb.Text = e.KeyData.ToString();
+            this.ActiveControl = null;
         }
 
         private void ReloadRes() {
@@ -264,131 +215,11 @@ namespace Dead_By_Daylight_Companion.Hook_Counter {
             Thread.Start();
         }
 
-        [Conditional("DEBUG")]
-        [Conditional("TRACE")]
-        public static void PrintErrorMessage(string staticMessage) {
-#if DEBUG
-            var sb = new StringBuilder(256);
-            var written = FormatMessage(FORMAT_MESSAGE.FROM_SYSTEM
-                | FORMAT_MESSAGE.ALLOCATE_BUFFER, IntPtr.Zero, Marshal.GetLastWin32Error(), 0, out sb, sb.Capacity);
-            Debug.WriteLineIf(written > 0, sb.ToString().Substring(0, written));
-#else
-            Trace.TraceError(staticMessage);
-#endif
-        }
 
         private void Thread_Tick(object sender, EventArgs e) {
-            void SearchForGame() {
-                // Get the game process.
-                var procs = Process.GetProcessesByName("DeadByDaylight-Win64-Shipping");
-                var proc = procs.FirstOrDefault();
 
-                // Could not find the process.
-                if (proc == null) {
-                    goto dispose;
-                }
-
-                if (proc.HasExited) {
-                    Trace.TraceInformation("Game process has gone stale.");
-                    goto dispose;
-                }
-                 
-                Trace.TraceInformation("Game process found.");
-                GameWindow = proc.MainWindowHandle;
-
-            dispose:
-                foreach (var p in procs) {
-                    p.Dispose();
-                }
-            }
-
-            if (GameWindow.Equals(IntPtr.Zero)) {
-                SearchForGame();
-                return;
-            }
-
-            if (!IsWindow(GameWindow)) {
-                Trace.TraceInformation("Game window closed.");
-                GameWindow = IntPtr.Zero;
-                ClearAll();
-                SearchForGame();
-                return;
-            }
-
-            // Get the dimensions of the game's client area.
-            if (!GetClientRect(GameWindow, ref WindowSize)) {
-                PrintErrorMessage("Failed to get size of client rect.");
-                return;
-            }
-
-            // TODO: Position the overlay on top of the game.
-
-            int oneFifth = WindowSize.right / 5;
-
-            if (WindowSize.right != WindowWidth || WindowSize.bottom != WindowHeight) {
-                WindowWidth = WindowSize.right;
-                WindowHeight = WindowSize.bottom;
-                Trace.TraceInformation("Game window resized to {0}x{1}.", WindowWidth, WindowHeight);
-                Frame?.Dispose();
-                Frame = new Mat(WindowSize.bottom, oneFifth, MatType.CV_8UC3);
-                ResizeHookResults();
-                ResizeEndGameResult();
-                BmScreen?.Dispose();
-                BmScreen = new Bitmap(oneFifth, WindowSize.bottom);
-            }
-
-            using (var gSrc = Graphics.FromHwnd(GameWindow))
-            using (var gDst = Graphics.FromImage(BmScreen)) {
-                IntPtr hdcSrc = gSrc.GetHdc();
-
-                if (hdcSrc.Equals(IntPtr.Zero)) {
-                    Trace.TraceError("Failed to acquire device context handle for game window.");
-                    return;
-                }
-
-                IntPtr hdcDst = gDst.GetHdc();
-
-                // Copy the pixels from the game window to an in-memory bitmap.
-                bool success = BitBlt(hdcDst, 0, 0, oneFifth, WindowSize.bottom, hdcSrc, 0, 0, SRCCOPY);
-                gSrc.ReleaseHdc(hdcSrc);
-                gDst.ReleaseHdc(hdcDst);
-
-                if (!success) {
-                    PrintErrorMessage("BitBlt did not complete successfully.");
-                    return;
-                }
-
-                BmScreen.ToMat(Frame);
-            }
-
-            // Check for first hook.
-            var hookMatches = FindMatches(Frame, Hook, HookResult, LowerThreshCheckbox.Checked ? 0.8f : 0.9f);
-            if (hookMatches.Any()) {
-                Trace.TraceInformation("Hooked!");
-                hCount.AddRange(hookMatches);
-                overlay.bHasDrawn = false;
-            }
-
-            var stage2Matches = FindMatches(Frame, Stage2, Stage2Result, 0.9f);
-            if (stage2Matches.Any()) {
-                Trace.TraceInformation("Death hook!");
-                _2stage.AddRange(stage2Matches);
-                overlay.bHasDrawn = false;
-            }
-
-            // Check for endgame.
-            if (MatchesTemplate(Frame, Endgame, EndgameResult, 0.9)) {
-                Trace.TraceInformation("Game over.");
-                ClearAll();
-            }
+           
         }
 
-        private static void ClearAll() {
-            overlay.G?.Clear(Color.Black);
-            overlay.sList.Clear();
-            overlay._2List.Clear();
-            _2stage.Clear();
-            hCount.Clear();
-        }
     }
 }

@@ -12,7 +12,7 @@ namespace Dead_By_Daylight_Companion.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.3.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.2.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -92,6 +92,50 @@ namespace Dead_By_Daylight_Companion.Properties {
             }
             set {
                 this["CountStages"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Windows.Forms.Keys S1_BIND {
+            get {
+                return ((global::System.Windows.Forms.Keys)(this["S1_BIND"]));
+            }
+            set {
+                this["S1_BIND"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Windows.Forms.Keys S2_BIND {
+            get {
+                return ((global::System.Windows.Forms.Keys)(this["S2_BIND"]));
+            }
+            set {
+                this["S2_BIND"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Windows.Forms.Keys S3_BIND {
+            get {
+                return ((global::System.Windows.Forms.Keys)(this["S3_BIND"]));
+            }
+            set {
+                this["S3_BIND"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Windows.Forms.Keys S4_BIND {
+            get {
+                return ((global::System.Windows.Forms.Keys)(this["S4_BIND"]));
+            }
+            set {
+                this["S4_BIND"] = value;
             }
         }
     }

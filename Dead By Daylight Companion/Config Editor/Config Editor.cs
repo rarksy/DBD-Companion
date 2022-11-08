@@ -494,21 +494,21 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
         }
 
         private void OneToOneSensCB_CheckedChanged(object sender, EventArgs e) {
-            helper.FUNCS f = new helper.FUNCS();
-            switch (OneToOneSensCB.Checked) {
-                case true:
-                    DialogResult result = MessageBox.Show("Applying 1:1 Sensitivity Is Intended For Killer ONLY\n Survivor Sensitivity Will No Longer Be 1:1 While This Is Enabled", "Confirm", MessageBoxButtons.YesNo);
-                    if (result == DialogResult.No) {
-                        OneToOneSensCB.Checked = false;
-                    }
-                    else {
-                        f.ChangeSetting(sPathToUse + @"\Input.ini", "AxisMappings=(AxisName=\"LookUp\",Scale=", "-1.550654,Key=MouseY)"); //ini class doesnt support nested ini objects
-                    }
-                    break;
-                case false:
-                    f.ChangeSetting(sPathToUse + @"\Input.ini", "AxisMappings=(AxisName=\"LookUp\",Scale=", "-1.000000,Key=MouseY)");
-                    break;
-            }
+            //helper.FUNCS f = new helper.FUNCS();
+            //switch (OneToOneSensCB.Checked) {
+            //    case true:
+            //        DialogResult result = MessageBox.Show("Applying 1:1 Sensitivity Is Intended For Killer ONLY\n Survivor Sensitivity Will No Longer Be 1:1 While This Is Enabled", "Confirm", MessageBoxButtons.YesNo);
+            //        if (result == DialogResult.No) {
+            //            OneToOneSensCB.Checked = false;
+            //        }
+            //        else {
+            //            f.ChangeSetting(sPathToUse + @"\Input.ini", "AxisMappings=(AxisName=\"LookUp\",Scale=", "-1.550654,Key=MouseY)"); //ini class doesnt support nested ini objects
+            //        }
+            //        break;
+            //    case false:
+            //        f.ChangeSetting(sPathToUse + @"\Input.ini", "AxisMappings=(AxisName=\"LookUp\",Scale=", "-1.000000,Key=MouseY)");
+            //        break;
+            //}
             
         }
     }

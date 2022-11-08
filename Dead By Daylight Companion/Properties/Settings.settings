@@ -20,5 +20,17 @@
     <Setting Name="CountStages" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="S1_BIND" Type="System.Windows.Input.Key" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="S2_BIND" Type="System.Windows.Input.Key" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="S3_BIND" Type="System.Windows.Input.Key" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="S4_BIND" Type="System.Windows.Input.Key" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

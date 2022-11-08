@@ -42,8 +42,19 @@
             this.HookTextBox = new System.Windows.Forms.TextBox();
             this.Hooked_Text_Label = new System.Windows.Forms.Label();
             this.CountStageCB = new System.Windows.Forms.CheckBox();
+            this.ManualBindPanel = new System.Windows.Forms.Panel();
+            this.BIND_S4 = new System.Windows.Forms.TextBox();
+            this.BIND_S2 = new System.Windows.Forms.TextBox();
+            this.BIND_S3 = new System.Windows.Forms.TextBox();
+            this.BIND_S1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.MHC_S1 = new System.Windows.Forms.Label();
+            this.ManualCycleLabel = new System.Windows.Forms.Label();
             this.TitlePanel.SuspendLayout();
             this.SettingPanel.SuspendLayout();
+            this.ManualBindPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // TitlePanel
@@ -215,7 +226,7 @@
             this.FontLabel.AutoSize = true;
             this.FontLabel.Font = new System.Drawing.Font("Ebrima", 10F);
             this.FontLabel.ForeColor = System.Drawing.Color.Silver;
-            this.FontLabel.Location = new System.Drawing.Point(9, 353);
+            this.FontLabel.Location = new System.Drawing.Point(9, 193);
             this.FontLabel.Name = "FontLabel";
             this.FontLabel.Size = new System.Drawing.Size(44, 19);
             this.FontLabel.TabIndex = 14;
@@ -226,7 +237,7 @@
             this.FontSizeLabel.AutoSize = true;
             this.FontSizeLabel.Font = new System.Drawing.Font("Ebrima", 10F);
             this.FontSizeLabel.ForeColor = System.Drawing.Color.Silver;
-            this.FontSizeLabel.Location = new System.Drawing.Point(9, 376);
+            this.FontSizeLabel.Location = new System.Drawing.Point(9, 216);
             this.FontSizeLabel.Name = "FontSizeLabel";
             this.FontSizeLabel.Size = new System.Drawing.Size(71, 19);
             this.FontSizeLabel.TabIndex = 15;
@@ -265,12 +276,127 @@
             this.CountStageCB.UseVisualStyleBackColor = true;
             this.CountStageCB.CheckedChanged += new System.EventHandler(this.CountStageCB_CheckedChanged);
             // 
+            // ManualBindPanel
+            // 
+            this.ManualBindPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.ManualBindPanel.Controls.Add(this.BIND_S4);
+            this.ManualBindPanel.Controls.Add(this.BIND_S2);
+            this.ManualBindPanel.Controls.Add(this.BIND_S3);
+            this.ManualBindPanel.Controls.Add(this.BIND_S1);
+            this.ManualBindPanel.Controls.Add(this.label5);
+            this.ManualBindPanel.Controls.Add(this.label4);
+            this.ManualBindPanel.Controls.Add(this.label3);
+            this.ManualBindPanel.Controls.Add(this.MHC_S1);
+            this.ManualBindPanel.Controls.Add(this.ManualCycleLabel);
+            this.ManualBindPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ManualBindPanel.Location = new System.Drawing.Point(0, 307);
+            this.ManualBindPanel.Name = "ManualBindPanel";
+            this.ManualBindPanel.Size = new System.Drawing.Size(303, 100);
+            this.ManualBindPanel.TabIndex = 22;
+            // 
+            // BIND_S4
+            // 
+            this.BIND_S4.Location = new System.Drawing.Point(230, 65);
+            this.BIND_S4.MaxLength = 1;
+            this.BIND_S4.Name = "BIND_S4";
+            this.BIND_S4.Size = new System.Drawing.Size(31, 20);
+            this.BIND_S4.TabIndex = 27;
+            this.BIND_S4.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BIND_S4_KeyDown);
+            // 
+            // BIND_S2
+            // 
+            this.BIND_S2.Location = new System.Drawing.Point(95, 65);
+            this.BIND_S2.MaxLength = 1;
+            this.BIND_S2.Name = "BIND_S2";
+            this.BIND_S2.Size = new System.Drawing.Size(31, 20);
+            this.BIND_S2.TabIndex = 26;
+            this.BIND_S2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BIND_S2_KeyDown);
+            // 
+            // BIND_S3
+            // 
+            this.BIND_S3.Location = new System.Drawing.Point(162, 64);
+            this.BIND_S3.MaxLength = 1;
+            this.BIND_S3.Name = "BIND_S3";
+            this.BIND_S3.Size = new System.Drawing.Size(31, 20);
+            this.BIND_S3.TabIndex = 25;
+            this.BIND_S3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BIND_S3_KeyDown);
+            // 
+            // BIND_S1
+            // 
+            this.BIND_S1.Location = new System.Drawing.Point(31, 65);
+            this.BIND_S1.MaxLength = 1;
+            this.BIND_S1.Name = "BIND_S1";
+            this.BIND_S1.Size = new System.Drawing.Size(31, 20);
+            this.BIND_S1.TabIndex = 24;
+            this.BIND_S1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BIND_S1_KeyDown);
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Ebrima", 9F);
+            this.label5.ForeColor = System.Drawing.Color.Silver;
+            this.label5.Location = new System.Drawing.Point(219, 45);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 15);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Survivor 4";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Ebrima", 9F);
+            this.label4.ForeColor = System.Drawing.Color.Silver;
+            this.label4.Location = new System.Drawing.Point(149, 45);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 15);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "Survivor 3";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Ebrima", 9F);
+            this.label3.ForeColor = System.Drawing.Color.Silver;
+            this.label3.Location = new System.Drawing.Point(84, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 15);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Survivor 2";
+            // 
+            // MHC_S1
+            // 
+            this.MHC_S1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.MHC_S1.AutoSize = true;
+            this.MHC_S1.Font = new System.Drawing.Font("Ebrima", 9F);
+            this.MHC_S1.ForeColor = System.Drawing.Color.Silver;
+            this.MHC_S1.Location = new System.Drawing.Point(19, 46);
+            this.MHC_S1.Name = "MHC_S1";
+            this.MHC_S1.Size = new System.Drawing.Size(59, 15);
+            this.MHC_S1.TabIndex = 17;
+            this.MHC_S1.Text = "Survivor 1";
+            // 
+            // ManualCycleLabel
+            // 
+            this.ManualCycleLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.ManualCycleLabel.AutoSize = true;
+            this.ManualCycleLabel.Font = new System.Drawing.Font("Ebrima", 10F);
+            this.ManualCycleLabel.ForeColor = System.Drawing.Color.Silver;
+            this.ManualCycleLabel.Location = new System.Drawing.Point(79, 10);
+            this.ManualCycleLabel.Name = "ManualCycleLabel";
+            this.ManualCycleLabel.Size = new System.Drawing.Size(140, 19);
+            this.ManualCycleLabel.TabIndex = 16;
+            this.ManualCycleLabel.Text = "Manual Hook Cycling";
+            // 
             // Hook_Counter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(15)))));
             this.ClientSize = new System.Drawing.Size(475, 407);
+            this.Controls.Add(this.ManualBindPanel);
             this.Controls.Add(this.CountStageCB);
             this.Controls.Add(this.Hooked_Text_Label);
             this.Controls.Add(this.HookTextBox);
@@ -289,9 +415,12 @@
             this.Text = "Hook_Counter";
             this.Activated += new System.EventHandler(this.Hook_Counter_Activated);
             this.Load += new System.EventHandler(this.Hook_Counter_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Hook_Counter_KeyDown);
             this.TitlePanel.ResumeLayout(false);
             this.TitlePanel.PerformLayout();
             this.SettingPanel.ResumeLayout(false);
+            this.ManualBindPanel.ResumeLayout(false);
+            this.ManualBindPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -316,5 +445,15 @@
         private System.Windows.Forms.TextBox HookTextBox;
         private System.Windows.Forms.Label Hooked_Text_Label;
         private System.Windows.Forms.CheckBox CountStageCB;
+        private System.Windows.Forms.Panel ManualBindPanel;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label MHC_S1;
+        private System.Windows.Forms.Label ManualCycleLabel;
+        private System.Windows.Forms.TextBox BIND_S4;
+        private System.Windows.Forms.TextBox BIND_S2;
+        private System.Windows.Forms.TextBox BIND_S3;
+        private System.Windows.Forms.TextBox BIND_S1;
     }
 }
