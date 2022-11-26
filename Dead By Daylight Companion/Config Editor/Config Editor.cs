@@ -13,6 +13,7 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
     public partial class Config_Editor : Form {
         public static string sPathToUse = string.Empty;
         static helper.FUNCS func = new helper.FUNCS();
+       
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")] public extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")] public extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
@@ -103,6 +104,13 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
                     }
                 }
             }
+
+            OneToOneSensCB.Checked = Properties.Settings.Default.b_one2one;
+            one2one_label.Text = "Multiplier: x" + Properties.Settings.Default.f_one2onemultiplier.ToString();
+            float o2o = Properties.Settings.Default.f_one2onemultiplier * 100f;
+            int i_o2o = int.Parse(o2o.ToString());
+            one2one_TB.Value = i_o2o;
+
             TimerInit.Start();
         }
 
@@ -494,22 +502,37 @@ namespace Dead_By_Daylight_Companion.Config_Editor {
         }
 
         private void OneToOneSensCB_CheckedChanged(object sender, EventArgs e) {
-            //helper.FUNCS f = new helper.FUNCS();
-            //switch (OneToOneSensCB.Checked) {
-            //    case true:
-            //        DialogResult result = MessageBox.Show("Applying 1:1 Sensitivity Is Intended For Killer ONLY\n Survivor Sensitivity Will No Longer Be 1:1 While This Is Enabled", "Confirm", MessageBoxButtons.YesNo);
-            //        if (result == DialogResult.No) {
-            //            OneToOneSensCB.Checked = false;
-            //        }
-            //        else {
-            //            f.ChangeSetting(sPathToUse + @"\Input.ini", "AxisMappings=(AxisName=\"LookUp\",Scale=", "-1.550654,Key=MouseY)"); //ini class doesnt support nested ini objects
-            //        }
-            //        break;
-            //    case false:
-            //        f.ChangeSetting(sPathToUse + @"\Input.ini", "AxisMappings=(AxisName=\"LookUp\",Scale=", "-1.000000,Key=MouseY)");
-            //        break;
-            //}
-            
+            helper.FUNCS f = new helper.FUNCS();
+            if (OneToOneSensCB.Checked) {
+                one2one_TB.Show();
+                one2one_label.Show();
+                DialogResult result = MessageBox.Show("Applying 1:1 Sensitivity Is Intended For Killer ONLY\n Survivor Sensitivity Will No Longer Be 1:1 While This Is Enabled", "Confirm", MessageBoxButtons.YesNo);
+                if (result == DialogResult.No) {
+                    OneToOneSensCB.Checked = false;
+                }
+                else {
+                    f.ChangeSetting(sPathToUse + @"\Input.ini", "AxisMappings=(AxisName=\"LookUp\",Scale=", $"-{one2one_multiplier},Key=MouseY)"); //ini class doesnt support nested ini objects
+                }
+            }
+            else {
+                one2one_TB.Hide();
+                one2one_label.Hide();
+                f.ChangeSetting(sPathToUse + @"\Input.ini", "AxisMappings=(AxisName=\"LookUp\",Scale=", $"-1.000000,Key=MouseY)");
+            }
+
+            Properties.Settings.Default.b_one2one = OneToOneSensCB.Checked;
+            Properties.Settings.Default.Save();
+
+        }
+        public static float one2one_multiplier;
+        private void one2one_TB_Scroll(object sender, EventArgs e) {
+            float mult = float.Parse(one2one_TB.Value.ToString()) / 100f;
+            one2one_multiplier = 1.550654f * mult;
+            one2one_label.Text = "Multiplier: x" + mult.ToString();
+            helper.FUNCS f = new helper.FUNCS();
+            f.ChangeSetting(sPathToUse + @"\Input.ini", "AxisMappings=(AxisName=\"LookUp\",Scale=", $"-{one2one_multiplier},Key=MouseY)");
+            Properties.Settings.Default.f_one2onemultiplier = mult;
+            Properties.Settings.Default.Save();
         }
     }
 }

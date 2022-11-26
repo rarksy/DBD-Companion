@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace Dead_By_Daylight_Companion {
     public partial class HubForm : Form {
@@ -14,7 +15,7 @@ namespace Dead_By_Daylight_Companion {
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")] public extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")] public extern static void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
         //TITLE BAR
-        private void TitlePanel_MouseDown(object sender, MouseEventArgs e) {
+        private void TitlePanel_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e) {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
@@ -27,7 +28,7 @@ namespace Dead_By_Daylight_Companion {
             ExitHub.ForeColor = Color.Silver;
         }
 
-        private void ExitHub_MouseDown(object sender, MouseEventArgs e) {
+        private void ExitHub_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e) {
             Environment.Exit(0);
         }
 
@@ -38,7 +39,7 @@ namespace Dead_By_Daylight_Companion {
         private void MinimizeHub_MouseLeave(object sender, EventArgs e) {
             MinimizeHub.ForeColor = Color.Silver;
         }
-        private void HubTitle_MouseDown(object sender, MouseEventArgs e) {
+        private void HubTitle_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e) {
             TitlePanel_MouseDown(sender, e);
         }
         private void HubForm_Activated(object sender, EventArgs e) {
@@ -77,9 +78,10 @@ namespace Dead_By_Daylight_Companion {
         private void ShowHookCounter_MouseLeave(object sender, EventArgs e) {
             ShowHookCounter.BackColor = Color.FromArgb(40,0,0);
         }
-
+          
         private void ShowHookCounter_Click(object sender, EventArgs e) {
             var t = new Thread(() => Application.Run(new Hook_Counter.Hook_Counter()));
+            t.SetApartmentState(ApartmentState.STA);
             t.Start();
         }
 
@@ -90,7 +92,8 @@ namespace Dead_By_Daylight_Companion {
         
         //FORM
         private void HubForm_Load(object sender, EventArgs e) {
-            
+            this.Location = new Point(800, 400);
+            Position_Timer.Start();
         }
         //DISCORD
         private void Discord_MouseEnter(object sender, EventArgs e) {
@@ -141,6 +144,21 @@ namespace Dead_By_Daylight_Companion {
 
         private void DonationPicBox_Click(object sender, EventArgs e) {
             Process.Start("https://donate.stripe.com/fZe7u9gU72wQ6hG6oo");
+        }
+
+        private int Increment_S(int s) {
+            if (s == 0) s = 1;
+            else if (s == 1) s = 2;
+            else if (s == 2) s = 0;
+
+            return s;
+        }
+
+        private void Position_Timer_Tick(object sender, EventArgs e) {
+            if (this.Location.X <= Screen.PrimaryScreen.Bounds.Width / 5) {
+                this.Location = new Point(Screen.PrimaryScreen.Bounds.Width / 5 + 1, this.Location.Y);
+                ReleaseCapture();
+            }
         }
     }
 }

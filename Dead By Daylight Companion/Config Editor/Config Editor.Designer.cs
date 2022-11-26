@@ -75,6 +75,8 @@
             this.FPSInfoLabel = new System.Windows.Forms.Label();
             this.Misc2Panel = new System.Windows.Forms.Panel();
             this.OneToOneSensCB = new System.Windows.Forms.CheckBox();
+            this.one2one_TB = new System.Windows.Forms.TrackBar();
+            this.one2one_label = new System.Windows.Forms.Label();
             this.TitleBarPanel.SuspendLayout();
             this.MiscPanel.SuspendLayout();
             this.ConfigPanel.SuspendLayout();
@@ -82,6 +84,7 @@
             this.MainPanel.SuspendLayout();
             this.InfoPanel.SuspendLayout();
             this.Misc2Panel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.one2one_TB)).BeginInit();
             this.SuspendLayout();
             // 
             // TitleBarPanel
@@ -811,10 +814,12 @@
             // Misc2Panel
             // 
             this.Misc2Panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.Misc2Panel.Controls.Add(this.one2one_label);
+            this.Misc2Panel.Controls.Add(this.one2one_TB);
             this.Misc2Panel.Controls.Add(this.OneToOneSensCB);
             this.Misc2Panel.Location = new System.Drawing.Point(12, 275);
             this.Misc2Panel.Name = "Misc2Panel";
-            this.Misc2Panel.Size = new System.Drawing.Size(242, 339);
+            this.Misc2Panel.Size = new System.Drawing.Size(366, 339);
             this.Misc2Panel.TabIndex = 9;
             // 
             // OneToOneSensCB
@@ -829,6 +834,30 @@
             this.OneToOneSensCB.Text = "1:1 Sensitivity";
             this.OneToOneSensCB.UseVisualStyleBackColor = true;
             this.OneToOneSensCB.CheckedChanged += new System.EventHandler(this.OneToOneSensCB_CheckedChanged);
+            // 
+            // one2one_TB
+            // 
+            this.one2one_TB.AutoSize = false;
+            this.one2one_TB.Location = new System.Drawing.Point(96, 40);
+            this.one2one_TB.Maximum = 500;
+            this.one2one_TB.Minimum = 25;
+            this.one2one_TB.Name = "one2one_TB";
+            this.one2one_TB.Size = new System.Drawing.Size(253, 26);
+            this.one2one_TB.TabIndex = 1;
+            this.one2one_TB.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.one2one_TB.Value = 25;
+            this.one2one_TB.Scroll += new System.EventHandler(this.one2one_TB_Scroll);
+            // 
+            // one2one_label
+            // 
+            this.one2one_label.AutoSize = true;
+            this.one2one_label.Font = new System.Drawing.Font("Ebrima", 8F, System.Drawing.FontStyle.Bold);
+            this.one2one_label.ForeColor = System.Drawing.Color.Silver;
+            this.one2one_label.Location = new System.Drawing.Point(9, 45);
+            this.one2one_label.Name = "one2one_label";
+            this.one2one_label.Size = new System.Drawing.Size(21, 13);
+            this.one2one_label.TabIndex = 20;
+            this.one2one_label.Text = "(x)";
             // 
             // Config_Editor
             // 
@@ -861,6 +890,7 @@
             this.InfoPanel.PerformLayout();
             this.Misc2Panel.ResumeLayout(false);
             this.Misc2Panel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.one2one_TB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -918,5 +948,7 @@
         private System.Windows.Forms.Button BackToHub;
         private System.Windows.Forms.Panel Misc2Panel;
         private System.Windows.Forms.CheckBox OneToOneSensCB;
+        private System.Windows.Forms.Label one2one_label;
+        private System.Windows.Forms.TrackBar one2one_TB;
     }
 }

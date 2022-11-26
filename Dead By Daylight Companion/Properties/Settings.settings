@@ -8,28 +8,37 @@
     <Setting Name="IGUIScale" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="FontName" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="FontSize" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">16</Value>
-    </Setting>
-    <Setting Name="HookedText" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="CountStages" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="S1_BIND" Type="System.Windows.Input.Key" Scope="User">
+    <Setting Name="bPlaySound" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="sSoundLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="S2_BIND" Type="System.Windows.Input.Key" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="iSoundVolume" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="S3_BIND" Type="System.Windows.Input.Key" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="f_one2onemultiplier" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.25</Value>
     </Setting>
-    <Setting Name="S4_BIND" Type="System.Windows.Input.Key" Scope="User">
+    <Setting Name="b_one2one" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="BIND_S1" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">112</Value>
+    </Setting>
+    <Setting Name="BIND_S2" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">113</Value>
+    </Setting>
+    <Setting Name="BIND_S3" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">114</Value>
+    </Setting>
+    <Setting Name="BIND_S4" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">115</Value>
+    </Setting>
+    <Setting Name="sSoundName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

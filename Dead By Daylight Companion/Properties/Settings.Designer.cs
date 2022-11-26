@@ -49,42 +49,6 @@ namespace Dead_By_Daylight_Companion.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string FontName {
-            get {
-                return ((string)(this["FontName"]));
-            }
-            set {
-                this["FontName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("16")]
-        public int FontSize {
-            get {
-                return ((int)(this["FontSize"]));
-            }
-            set {
-                this["FontSize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string HookedText {
-            get {
-                return ((string)(this["HookedText"]));
-            }
-            set {
-                this["HookedText"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool CountStages {
             get {
@@ -97,45 +61,121 @@ namespace Dead_By_Daylight_Companion.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Windows.Forms.Keys S1_BIND {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool bPlaySound {
             get {
-                return ((global::System.Windows.Forms.Keys)(this["S1_BIND"]));
+                return ((bool)(this["bPlaySound"]));
             }
             set {
-                this["S1_BIND"] = value;
+                this["bPlaySound"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Windows.Forms.Keys S2_BIND {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string sSoundLocation {
             get {
-                return ((global::System.Windows.Forms.Keys)(this["S2_BIND"]));
+                return ((string)(this["sSoundLocation"]));
             }
             set {
-                this["S2_BIND"] = value;
+                this["sSoundLocation"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Windows.Forms.Keys S3_BIND {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public float iSoundVolume {
             get {
-                return ((global::System.Windows.Forms.Keys)(this["S3_BIND"]));
+                return ((float)(this["iSoundVolume"]));
             }
             set {
-                this["S3_BIND"] = value;
+                this["iSoundVolume"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Windows.Forms.Keys S4_BIND {
+        [global::System.Configuration.DefaultSettingValueAttribute("0.25")]
+        public float f_one2onemultiplier {
             get {
-                return ((global::System.Windows.Forms.Keys)(this["S4_BIND"]));
+                return ((float)(this["f_one2onemultiplier"]));
             }
             set {
-                this["S4_BIND"] = value;
+                this["f_one2onemultiplier"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool b_one2one {
+            get {
+                return ((bool)(this["b_one2one"]));
+            }
+            set {
+                this["b_one2one"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("112")]
+        public int BIND_S1 {
+            get {
+                return ((int)(this["BIND_S1"]));
+            }
+            set {
+                this["BIND_S1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("113")]
+        public int BIND_S2 {
+            get {
+                return ((int)(this["BIND_S2"]));
+            }
+            set {
+                this["BIND_S2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("114")]
+        public int BIND_S3 {
+            get {
+                return ((int)(this["BIND_S3"]));
+            }
+            set {
+                this["BIND_S3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("115")]
+        public int BIND_S4 {
+            get {
+                return ((int)(this["BIND_S4"]));
+            }
+            set {
+                this["BIND_S4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string sSoundName {
+            get {
+                return ((string)(this["sSoundName"]));
+            }
+            set {
+                this["sSoundName"] = value;
             }
         }
     }
