@@ -50,6 +50,7 @@ No. Nothing in the DBD Companion Is Bannable and 100% safe
 Head to my [discord](https://discord.gg/vKjjS8yazu) and go to the #faq channel for instructions
 
 # Social
+[YouTube](https://youtube.com/@rrarksy) |
 [Twitch](https://twitch.tv/rarksy) |
 [Discord](https://discord.gg/vKjjS8yazu) |
 [Donate](https://donate.stripe.com/fZe7u9gU72wQ6hG6oo) |
